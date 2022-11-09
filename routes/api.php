@@ -18,6 +18,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/something', function () {
-    return json_encode(["msg" => "success"]);
+Route::get('/login', function () {
+  return response()->json(["msg" => "success"]);
 });
