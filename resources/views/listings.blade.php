@@ -1,21 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout')
 
-<head>
-  <title></title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="css/style.css" rel="stylesheet">
-</head>
+@section('content')
 
-<body>
+@include('partials._hero')
+@include('partials._search')
 
-    @foreach ($listings as $item)
-      <p>{{ $item['id'] }}</p>
-      <p>{{ $item['title'] }} <a href="/listing/{{ $item['id'] }}">come</a></p>
-      <p>{{ $item['description'] }}</p>
-    @endforeach
+<x-card class="p-4">
 
-</body>
+  @foreach ($listings as $item)
+  <x-listing-card :listing="$item" />
+  @endforeach
 
-</html>
+</x-card>
+
+@endsection
