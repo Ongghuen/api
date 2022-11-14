@@ -19,7 +19,7 @@
       },
     };
   </script>
-  <title>LaraGigs | Find Laravel Jobs & Projects</title>
+  <title>Sori</title>
 </head>
 
 <body class="mb-48">
@@ -37,7 +37,7 @@
   </nav>
 
   <main>
-    @yield('content')
+      {{ $slot }}
   </main>
 
   {{--
