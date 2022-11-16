@@ -23,3 +23,7 @@ Route::get('/', function () {
 Route::get('/listings',[ListingController::class, 'index']);
 
 Route::get('/listing/{listing}', [ListingController::class, 'show']);
+
+Route::get('/test', function () {
+  return view('test');
+});
