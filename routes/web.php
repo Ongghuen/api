@@ -20,10 +20,6 @@ Route::get('/', function () {
   return redirect('/listings');
 });
 
-Route::get('/listings',[ListingController::class, 'index']);
-
+Route::get('/listings', [ListingController::class, 'index']);
+Route::get('/listings/create', [ListingController::class, 'create']);
 Route::get('/listing/{listing}', [ListingController::class, 'show']);
-
-Route::get('/test', function () {
-  return view('test');
-});

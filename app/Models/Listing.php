@@ -7,5 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Listing extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  public function scopeFilter($query, array $filters) {
+    # code...
+    /* dd($filters['tag']); */
+    if($filters['tag'] ?? false){
+      $query->where('tags', 'like', "%" . $filters['tag'] ."%" );
+    }
+
+    if($filters['search'] ?? false){
+      $query->where('title', 'like', "%" . $filters['search'] ."%" )
+        ->orWhere('company', 'like', "%" . $filters['search'] ."%" )
+        ->orWhere('tags', 'like', "%" . $filters['search'] ."%" );
+    }
+  }
+
 }
