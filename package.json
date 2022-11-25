@@ -3,8 +3,9 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "serve": "php artisan serve --host LOCAL_IP_MU --port=8000",
-        "servehost": "npm run dev & npm run serve "
+        "servewh": "php artisan serve --host 192.168.43.18 --port=8000",
+        "servehost": "npm run dev & npm run servewh",
+        "serve": "php artisan serve & npm run dev"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.13",
