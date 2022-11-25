@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
     //   'password' => bcrypt("sayaganteng"),
     // ]);
 
-    Listing::factory(6)->create();
+    Listing::factory(5)->create();
 
     // \App\Models\User::factory()->create([
     //     'name' => 'Test User',

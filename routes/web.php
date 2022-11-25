@@ -20,6 +20,11 @@ Route::get('/', function () {
   return redirect('/listings');
 });
 
+# semua listing
 Route::get('/listings', [ListingController::class, 'index']);
+# show form create
 Route::get('/listings/create', [ListingController::class, 'create']);
+# store data buat listing
+Route::post('/listings', [ListingController::class, 'store']);
+# single listing
 Route::get('/listing/{listing}', [ListingController::class, 'show']);
