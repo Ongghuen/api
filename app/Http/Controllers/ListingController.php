@@ -44,6 +44,8 @@ class ListingController extends Controller
       $formField['logo'] = $request->file('logo')->store('logos', 'public');
     }
 
+    $formField['user_id'] = auth()->id();
+
     Listing::create($formField);
 
     /* Session::flash('message', 'Listing Created'); */
@@ -59,6 +61,12 @@ class ListingController extends Controller
 
   public function update(Request $request, Listing $listing)
   {
+
+    // biar aman yg login aja
+    if ($listing->user_id != auth()->id()) {
+      abort(403, 'Gak boleh brow');
+    }
+
     $formField = $request->validate([
       'title' => 'required',
       'company' => ['required'],
@@ -79,5 +87,21 @@ class ListingController extends Controller
 
     /* dd($request->all()); */
     return back()->with('message', 'Listing updated Successfully');
+  }
+
+  public function destroy(Listing $listing)
+  {
+    // biar aman yg login aja
+    if ($listing->user_id != auth()->id()) {
+      abort(403, 'Gak boleh brow');
+    }
+
+    $listing->delete();
+    return redirect('/listings')->with('message', 'Listing deleted successfully');
+  }
+
+  public function manage()
+  {
+    return view('listings.manage', ['listings' => auth()->user()->listings()->get()]);
   }
 }
