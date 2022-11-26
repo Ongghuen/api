@@ -6,10 +6,11 @@ Backend buat front end [web](https://github.com/ongghuen/web-frontend) dan akses
 ##### Initial Setup
 - Setup Laravel Project
   ```bash
-  composer install && php artisan key:generate && npm install
+  composer install && php artisan key:generate && php artisan storage:link && npm install
   ```
   - composer install
   - php artisan key:generate
+  - php artisan storage:link
   - npm install
 
 - Setup .env
