@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 100);
-            $table->string('desc', 255);
-            $table->timestamps();
+        Schema::table('transactions', function (Blueprint $table) {
+          $table->enum('status', ['Pending', 'Belum_Bayar','Dikirim', 'Selesai'])->default('Pending')->after('id');
         });
     }
 
@@ -28,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::table('transactions', function (Blueprint $table) {
+            //
+        });
     }
 };
