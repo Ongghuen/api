@@ -3,7 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Listing;
+
+use App\Models\TransactionDetail;
+use App\Models\Product;
+use App\Models\Role;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -17,15 +21,39 @@ class DatabaseSeeder extends Seeder
   public function run()
   {
     // User::factory(10)->create();
-    $user = User::factory()->create([
-      'name' => "Raihan Achmad",
-      'email' => "raihan@gmail.com",
-      'password' => bcrypt("hahaha"),
+    Role::create([
+      'name' => "Admin"
     ]);
 
-    Listing::factory(5)->create([
-      'user_id' => $user->id
+    User::factory()->create([
+      'name' => "Raihan Achmad",
+      'email' => "r@r.com",
+      'password' => bcrypt("hahaha"),
+      'role_id' => 1,
     ]);
+
+    User::factory()->create([
+      'name' => "Daffa",
+      'email' => "d@d.com",
+      'password' => bcrypt("hahaha"),
+      'role_id' => 1,
+    ]);
+
+    Product::factory(5)->create();
+
+    Transaction::create([
+      'user_id' => 1,
+    ]);
+
+    TransactionDetail::create([
+      'transaction_id' => 1,
+      'product_id' => 1,
+    ]);
+    TransactionDetail::create([
+      'transaction_id' => 1,
+      'product_id' => 2,
+    ]);
+    
 
     // \App\Models\User::factory()->create([
     //     'name' => 'Test User',

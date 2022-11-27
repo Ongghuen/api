@@ -7,29 +7,51 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'products';
-    protected $fillable = [
-        'name',
-        'category_id',
-        'desc'
-    ];
+  protected $fillable = [
+    'name',
+    'category_id',
+    'desc'
+  ];
 
-    public function categories()
-    {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+  public function scopeFilter($query, array $filters)
+  {
+    # code...
+    /* dd($filters['tag']); */
+    if ($filters['tag'] ?? false) {
+      $query->where('tags', 'like', "%" . $filters['tag'] . "%");
     }
 
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'wishlists', 'product_id',
-        'user_id');
+    if ($filters['search'] ?? false) {
+      $query->where('title', 'like', "%" . $filters['search'] . "%")
+        ->orWhere('company', 'like', "%" . $filters['search'] . "%")
+        ->orWhere('tags', 'like', "%" . $filters['search'] . "%");
     }
+  }
 
-    public function transactions()
-    {
-        return $this->belongsToMany(Transaction::class, 'transaction_details', 'product_id',
-        'transaction_id');
-    }
+  public function user()
+  {
+    return $this->belongsTo(User::class, 'user_id');
+  }
+
+  public function transactions()
+  {
+    return $this->belongsToMany(
+      Transaction::class,
+      'transaction_details',
+      'product_id',
+      'transaction_id'
+    );
+  }
+
+  /* public function users() */
+  /* { */
+  /*   return $this->belongsToMany( */
+  /*     User::class, */
+  /*     'wishlists', */
+  /*     'product_id', */
+  /*     'user_id' */
+  /*   ); */
+  /* } */
 }

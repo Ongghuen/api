@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Listing;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class ListingController extends Controller
+class ProductController extends Controller
 {
 
   public function index()
   {
-    return view('listings.index', [
-      'listings' => Listing::latest()->filter(request(['tag', 'search']))->simplePaginate(6),
+    return view('dashboard.product', [
+      'listings' => Product::latest()->filter(request(['tag', 'search']))->simplePaginate(6),
     ]);
   }
 
-  public function show(Listing $listing)
+  public function show(Product $listing)
   {
     return view('listings.show', [
       'listing' => $listing,
@@ -46,20 +46,20 @@ class ListingController extends Controller
 
     $formField['user_id'] = auth()->id();
 
-    Listing::create($formField);
+    Product::create($formField);
 
-    /* Session::flash('message', 'Listing Created'); */
+    /* Session::flash('message', 'Product Created'); */
 
     /* dd($request->all()); */
-    return redirect('/listings')->with('message', 'Listing Created Successfully');
+    return redirect('/listings')->with('message', 'Product Created Successfully');
   }
 
-  public function edit(Listing $listing)
+  public function edit(Product $listing)
   {
     return view('listings.edit', ['listing' => $listing]);
   }
 
-  public function update(Request $request, Listing $listing)
+  public function update(Request $request, Product $listing)
   {
 
     // biar aman yg login aja
@@ -83,13 +83,13 @@ class ListingController extends Controller
 
     $listing->update($formField);
 
-    /* Session::flash('message', 'Listing Created'); */
+    /* Session::flash('message', 'Product Created'); */
 
     /* dd($request->all()); */
-    return back()->with('message', 'Listing updated Successfully');
+    return back()->with('message', 'Product updated Successfully');
   }
 
-  public function destroy(Listing $listing)
+  public function destroy(Product $listing)
   {
     // biar aman yg login aja
     if ($listing->user_id != auth()->id()) {
@@ -97,7 +97,7 @@ class ListingController extends Controller
     }
 
     $listing->delete();
-    return redirect('/listings')->with('message', 'Listing deleted successfully');
+    return redirect('/listings')->with('message', 'Product deleted successfully');
   }
 
   public function manage()
