@@ -17,14 +17,21 @@
     <div class="rightBox">
       <div class="formBox">
         <h2>Login</h2>
-        <form action="../core/process/login.php" method="post">
+        <form action="/login" method="post">
+          @csrf
           <div class="inputBox">
-            <span>Username</span>
-            <input type="text" name="username" required>
+            <span>Email</span>
+            <input type="email" class="border border-gray-200 rounded p-2 w-full" name="email" value="{{ old('email') }} "/>
+            @error('email')
+            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
           </div>
           <div class="inputBox">
             <span>Password</span>
-            <input type="password" name="password" required>
+            <input type="password" class="border border-gray-200 rounded p-2 w-full" name="password" value="{{ old('password') }}"/>
+            @error('password')
+            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
           </div>
           <div class="remember">
             <label for="remember">

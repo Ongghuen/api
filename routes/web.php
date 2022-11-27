@@ -53,7 +53,7 @@ Route::get('/user', function () {
   return view('dashboard.user');
 });
 
-Route::get('/login', function () {
+Route::get('/logintes', function () {
   return view('login');
 });
 
