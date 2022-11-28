@@ -130,7 +130,7 @@
             <div class="d-flex align-items-center">
                 <h6>Users table</h6>
                 <button class="btn btn-success btn-sm ms-auto " data-modal-target="">
-                Add User
+                New User
                 </button>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -154,40 +154,39 @@
                                 Email
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Username
-                            </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Actions
                             </th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($userList as $data)
                         <tr>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">1</span>
+                                <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $userList->firstItem() - 1}}</span>
                             </td>
                             <td class="align-middle text-center">
                                 <img src="" class="avatar avatar-sm me-2" alt="user1" />
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">Ragnar Lothbrok</span>
+                                <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">082938199222</span>
+                                <span class="text-secondary text-xs font-weight-bold">{{$data->phone}}</span>
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">ragnarok@gmail.com</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">ragnarok123</span>
+                                <span class="text-secondary text-xs font-weight-bold">{{$data->email}}</span>
                             </td>
                             <td class="align-middle text-center">
                                 <button class="btn btn-dark btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Edit</button>
                                 <button class="btn btn-danger btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Delete</button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
+                </div>
+                <div class="my-4 ms-2 me-2">
+                    {{$userList->withQueryString()->links('pagination::bootstrap-5')}}
                 </div>
             </div>
             </div>

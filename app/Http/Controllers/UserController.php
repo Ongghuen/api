@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB; 
+use App\Http\Requests\UserCreateRequest;
 
 class UserController extends Controller
 {
   public function index(){
-    return view('dashboard.user');
-}
+    $user = User::paginate(10);
+    return view('dashboard.user', ['userList' => $user]);
+  }
 
   // public function create() {
   //   return view('users.register');
