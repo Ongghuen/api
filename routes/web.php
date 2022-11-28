@@ -5,6 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CustomController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,11 +43,8 @@ Route::get('/product', [ProductController::class, 'index']);
 # ========================== USER =========================
 Route::get('/user', [UserController::class, 'index']);
 
-# ========================== REPORT =========================
-
-# ========================== TRANSACTION =========================
-
 # ========================== CUSTOM =========================
+Route::get('/custom', [CustomController::class, 'index']);
 
 # ======================== LISTING ========================
 # to register

@@ -27,15 +27,7 @@
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-cart text-warning text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Oders</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/transaction">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tag text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Transaksi</span>
+                        <span class="nav-link-text ms-1">Orders</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -60,14 +52,6 @@
                             <i class="ni ni-circle-08 text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Users</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/report">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-chart-bar-32 text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Report</span>
                     </a>
                 </li>
                 <li class="nav-item mt-3">
@@ -145,7 +129,7 @@
             <div class="card-header pb-0">
             <div class="d-flex align-items-center">
                 <h6>Users table</h6>
-                <button class="btn btn-success btn-sm ms-auto " data-modal-target="#modal-add">
+                <button class="btn btn-success btn-sm ms-auto " data-modal-target="">
                 Add User
                 </button>
             </div>
@@ -173,7 +157,7 @@
                                 Username
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Actions
+                            Actions
                             </th>
                         </tr>
                     </thead>
@@ -186,457 +170,30 @@
                                 <img src="" class="avatar avatar-sm me-2" alt="user1" />
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">daffafifi</span>
+                                <span class="text-secondary text-xs font-weight-bold">Ragnar Lothbrok</span>
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">089536829288</span>
+                                <span class="text-secondary text-xs font-weight-bold">082938199222</span>
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">daffafifi@gmail.com</span>
+                                <span class="text-secondary text-xs font-weight-bold">ragnarok@gmail.com</span>
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">Daffa Afifi</span>
+                                <span class="text-secondary text-xs font-weight-bold">ragnarok123</span>
                             </td>
                             <td class="align-middle text-center">
-                                <button class="btn btn-dark btn-sm ms-auto" data-modal-target="#modal-edit">Edit</button>
-                                <button class="btn btn-danger btn-sm ms-auto" data-modal-target="#modal-delete">Delete</button>
+                                <button class="btn btn-dark btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Edit</button>
+                                <button class="btn btn-danger btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Delete</button>
                             </td>
                         </tr>
-
-                        <!-- Pop up Edit -->
-                        <div class="modal-edit" id="modal-edit">
-                            <div class="modal-header-edit">
-                                <h2 class="edit">Edit Form</h2>
-                                <div class="modal-body-edit">
-                                    <form action="edit_user.php" method="post" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">Name</label>
-                                            <input class="form-control" name="nama" type="text" value="" maxlength="30" placeholder="Enter Name" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="custom-file-label" for="customFileLang">Upload Avatar</label>
-                                            <input type="file" class="form-control" name="foto">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">No Hp</label>
-                                            <input class="form-control" name="nohp" type="text" value="" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="12" placeholder="Enter No Hp" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">Email</label>
-                                            <input class="form-control" name="email" type="email" value="" maxlength="30" placeholder="Enter Email" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">Username</label>
-                                            <input class="form-control" name="username" type="text" value="" maxlength="30" placeholder="Enter Username" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="example-text-input" class="form-control-label">Password</label>
-                                            <input class="form-control" name="password" type="password" value="" maxlength="30" placeholder="Enter Password" required />
-                                        </div>
-                                        <div class="align-middle text-center">
-                                            <button class="btn btn-success btn-sm ms-auto" name="submit">Edit</button>
-                                            <button class="btn btn-danger btn-sm ms-auto" name="close" data-close-button-edit>Close</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <style>
-                        .modal-edit {
-                            position: fixed;
-                            left: 0;
-                            top: 0;
-                            background: rgb(0, 0, 0, 0.6);
-                            height: 100%;
-                            width: 100%;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            opacity: 0;
-                            pointer-events: none;
-                            transition: all 0.3s ease-in-out;
-                            z-index: 10000;
-                        }
-
-                        .modal-body-edit {
-                            padding: 10px;
-                            bottom: 10px;
-                        }
-
-                        .modal-header-edit {
-                            background: white;
-                            width: 560px;
-                            max-width: 90%;
-                            padding: 20px;
-                            border-radius: 4x;
-                            position: relative;
-                            transform: translateY(-100);
-                            transition: all 0.3s ease-in-out;
-                        }
-
-                        .btn-open-edit {
-                            background: black;
-                            padding: 10px 40px;
-                            color: white;
-                            border-radius: 5px;
-                            font-size: 15px;
-                            cursor: pointer;
-                        }
-
-                        p.edit {
-                            line-height: 1.6;
-                            margin-bottom: 20px;
-                        }
-
-                        h2.edit {
-                            text-align: center;
-                            /* padding-bottom: 15px;
-                            font-weight: 200; */
-                        }
-
-                        .modal-header-edit button.close-btn-edit {
-                            position: absolute;
-                            right: 10px;
-                            top: 10px;
-                            font-size: 32px;
-                            background: none;
-                            outline: none;
-                            border: none;
-                            cursor: pointer;
-                        }
-
-                        .modal-header-edit button.close-btn-edit:hover {
-                            color: #6b46c1;
-                        }
-
-                        .active-edit {
-                            opacity: 1;
-                            pointer-events: auto;
-                        }
-
-                        .modal-edit.active-edit .modal-header-edit {
-                            transform: translateY(0px);
-                        }
-                        </style>
-                        <script>
-                        const openModalButtons = document.querySelectorAll("[data-modal-target]");
-                        const closeModalButtons = document.querySelectorAll(
-                            "[data-close-button-edit]"
-                        );
-
-                        openModalButtons.forEach((button) => {
-                            button.addEventListener("click", () => {
-                            const modal = document.querySelector(button.dataset.modalTarget);
-                            openModal(modal);
-                            });
-                        });
-
-                        closeModalButtons.forEach((button) => {
-                            button.addEventListener("click", () => {
-                            const modal = button.closest(".modal-edit");
-                            closeModal(modal);
-                            });
-                        });
-
-                        function openModal(modal) {
-                            if (modal == null) return;
-                            modal.classList.add("active-edit");
-                        }
-
-                        function closeModal(modal) {
-                            if (modal == null) return;
-                            modal.classList.remove("active-edit");
-                        }
-                        </script>
-                    <!-- end Pop up Edit -->
-
-                    <!-- Pop up Delete -->
-                    <div class="modal-delete" id="modal-delete">
-                        <div class="modal-header-delete">
-                            <h2 class="delete">Warning</h2>
-                            <div class="modal-body-delete">
-                            <div class="row">
-                                <p class="delete">
-                                Yakin dek mau ngehapus data orang? dosah loh dek
-                                </p>
-                            </div>
-                            <div></div>
-                            <div></div>
-                            <form class="yayyay" action="hapus_user.php" method="post">
-                                <div class="align-middle text-center">
-                                <a class="btn btn-danger btn-sm ms-auto" href="">Delete</a>
-                                <button class="btn btn-success btn-sm ms-auto" name="submit" data-close-delete>Close</button>
-                            </form>
-                            </div>
-                        </div>
-                    </div>
+                    </tbody>
+                </table>
                 </div>
-
-                <style>
-                .modal-delete {
-                    position: fixed;
-                    left: 0;
-                    top: 0;
-                    background: rgb(0, 0, 0, 0.6);
-                    height: 100%;
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    opacity: 0;
-                    pointer-events: none;
-                    transition: all 0.3s ease-in-out;
-                    z-index: 10000;
-
-                }
-
-                .modal-body-delete {
-                    padding: 10px;
-                    bottom: 10px;
-                }
-
-                .modal-header-delete {
-                    background: white;
-                    width: 560px;
-                    max-width: 90%;
-                    padding: 20px;
-                    border-radius: 4x;
-                    position: relative;
-                    transform: translateY(-100);
-                    transition: all 0.3s ease-in-out;
-                }
-
-                .btn-open {
-                    background: black;
-                    padding: 10px 40px;
-                    color: white;
-                    border-radius: 5px;
-                    font-size: 15px;
-                    cursor: pointer;
-                }
-
-                p.delete {
-                    line-height: 1.6;
-                    margin-bottom: 20px;
-                    text-align: center;
-                }
-
-                h2.delete {
-                    text-align: center;
-                    /* padding-bottom: 15px;
-                    font-weight: 200; */
-                }
-
-                .modal-header-delete button.close-btn-delete {
-                    position: absolute;
-                    right: 10px;
-                    top: 10px;
-                    font-size: 32px;
-                    background: none;
-                    outline: none;
-                    border: none;
-                    cursor: pointer;
-                }
-
-                .modal-header-delete button.close-btn-delete:hover {
-                    color: #6b46c1;
-                }
-
-                .active-delete {
-                    opacity: 1;
-                    pointer-events: auto;
-                }
-
-                .modal-delete.active-delete .modal-header-delete {
-                    transform: translateY(0px);
-                }
-                </style>
-                <script>
-                const openModalDelete = document.querySelectorAll("[data-modal-target]");
-                const closeModalDelete = document.querySelectorAll(
-                    "[data-close-delete]"
-                );
-
-                openModalDelete.forEach((button) => {
-                    button.addEventListener("click", () => {
-                    const modal = document.querySelector(button.dataset.modalTarget);
-                    openModal(modal);
-                    });
-                });
-
-                closeModalDelete.forEach((button) => {
-                    button.addEventListener("click", () => {
-                    const modal = button.closest(".modal-delete");
-                    closeModal(modal);
-                    });
-                });
-
-                function openModal(modal) {
-                    if (modal == null) return;
-                    modal.classList.add("active-delete");
-                }
-
-                function closeModal(modal) {
-                    if (modal == null) return;
-                    modal.classList.remove("active-delete");
-                }
-                </script>
-                <!-- end Pop up Delete -->
-            </tbody>
-            </table>
             </div>
             </div>
         </div>
         </div>
     </div>
-
-    <!-- Pop up Add -->
-    <div class="modal-add" id="modal-add">
-        <div class="modal-header-add">
-        <h2 class="add">Add Form</h2>
-        <div class="modal-body-add">
-            <form action="users" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Name</label>
-                    <input class="form-control" id="nama" type="text" value="" placeholder="Enter Name" maxlength="30" name="txt_nama" id="txt_nama" required />
-                </div>
-                <div class="form-group">
-                    <label class="custom-file-label" for="customFileLang">Upload Avatar</label>
-                    <input type="file" class="form-control" id="foto" name="foto" id="foto" required>
-                </div>
-                <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">No Hp</label>
-                    <input class="form-control" id="nohp" type="text" value="" placeholder="Enter No Hp" oninput="this.value = this.value.replace(/[^\d]+/, '').replace(/(\..*?)\..*/g, '$1');" maxlength="12" name="txt_nohp" id="txt_nohp" required />
-                </div>
-                <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Email</label>
-                    <input class="form-control" id="email" type="email" value="" placeholder="Enter Email" maxlength="30" name="txt_mail" id="txt_mail" required />
-                </div>
-                <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Username</label>
-                    <input class="form-control" id="username" type="text" value="" placeholder="Enter Username" maxlength="30" name="txt_user" id="txt_user" required />
-                </div>
-                <div class="form-group">
-                    <label for="example-text-input" class="form-control-label">Password</label>
-                    <input class="form-control" id="password" type="password" value="" placeholder="Enter Password" maxlength="30" name="txt_pw" id="txt_pw" required />
-                </div>
-                <div class="align-middle text-center">
-                    <button class="btn btn-success btn-sm ms-auto" id="add-user" name="add-user">Add</button>
-                    <button class="btn btn-danger btn-sm ms-auto" data-close-add>Close</button>
-                </div>
-            </form>
-        </div>
-        </div>
-    </div>
-    <style>
-        .modal-add {
-        position: fixed;
-        left: 0;
-        top: 0;
-        background: rgb(0, 0, 0, 0.6);
-        height: 100%;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.3s ease-in-out;
-        z-index: 10000;
-        }
-
-        .modal-body-add {
-        padding: 10px;
-        bottom: 10px;
-        }
-
-        .modal-header-add {
-        background: white;
-        width: 560px;
-        max-width: 90%;
-        padding: 20px;
-        border-radius: 4px;
-        position: relative;
-        transform: translateY(-100);
-        transition: all 0.3s ease-in-out;
-        }
-
-        .btn-open {
-        background: black;
-        padding: 10px 40px;
-        color: white;
-        border-radius: 5px;
-        font-size: 15px;
-        cursor: pointer;
-        }
-
-        p.add {
-        line-height: 1.6;
-        margin-bottom: 20px;
-        }
-
-        h2.add {
-        text-align: center;
-        /* padding-bottom: 15px;
-        font-weight: 200; */
-        }
-
-        .modal-header-add button.close-btn-add {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        font-size: 32px;
-        background: none;
-        outline: none;
-        border: none;
-        cursor: pointer;
-        }
-
-        .modal-header-add button.close-btn-add:hover {
-        color: #6b46c1;
-        }
-
-        .active-add {
-        opacity: 1;
-        pointer-events: auto;
-        }
-
-        .modal-add.active-add .modal-header-add {
-        transform: translateY(0px);
-        }
-    </style>
-    <script>
-        const openModalAdd = document.querySelectorAll("[data-modal-target]");
-        const closeModalAdd = document.querySelectorAll(
-        "[data-close-add]"
-        );
-
-        openModalAdd.forEach((button) => {
-        button.addEventListener("click", () => {
-            const modal = document.querySelector(button.dataset.modalTarget);
-            openModal(modal);
-        });
-        });
-
-        closeModalAdd.forEach((button) => {
-        button.addEventListener("click", () => {
-            const modal = button.closest(".modal-add");
-            closeModal(modal);
-        });
-        });
-
-        function openModal(modal) {
-        if (modal == null) return;
-        modal.classList.add("active-add");
-        }
-
-        function closeModal(modal) {
-        if (modal == null) return;
-        modal.classList.remove("active-add");
-        }
-    </script>
-    <!-- end Pop up Add -->
 @endsection
 
 @section('javascript')

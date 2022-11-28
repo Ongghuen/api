@@ -54,8 +54,8 @@
                             </a>
                         </li>
                         <li class="nav-item px-3 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-                            <span class="d-sm-inline d-none">Halo, {{Auth::user()->name}}</span>
+                            <a href="javascript:;" class="nav-link text-white font-weight-bold px-0" id="dropdownMenuButton">
+                                <span class="d-sm-inline d-none">Halo, {{Auth::user()->name}}</span>
                             </a>
                         </li>
                         <li class="nav-item dropdown pe-2 d-flex align-items-center">
@@ -67,19 +67,25 @@
                                     <a href="javascript:;" class="nav-link text-black px-2">
                                         <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
                                     </a>
-                                    Setting
+                                    <a href="/setting" class="ps-2">
+                                        Setting
+                                    </a>
                                 </li>
                                 <li class="dropdown-item d-flex align-items-center">
-                                    <a href="./profile.view.php" class="nav-link text-black">
+                                    <a href="/profile" class="nav-link text-black">
                                         <i class="fa fa-user fixed-plugin-button-nav cursor-pointer"></i>
                                     </a>
-                                    Profile
+                                    <a href="/profile" class="ps-2">
+                                        Profile
+                                    </a>
                                 </li>
                                 <li class="dropdown-item d-flex align-items-center">
-                                    <a href="../core/process/logout.php" class="nav-link text-black">
+                                    <a href="/logout" class="nav-link text-black">
                                         <i class="fa fa-sign-out cursor-pointer"></i>
                                     </a>
-                                    Logout
+                                    <a href="/logout" class="ps-2">
+                                        Logout
+                                    </a>
                                 </li>
                             </ul>
                         </li>
