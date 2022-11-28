@@ -13,7 +13,13 @@
     <link id="pagestyle" href="{{asset('css/argon-dashboard.css')}}" rel="stylesheet" />
 </head>
 <body class="g-sidenav-show bg-gray-100">
-    
+    {{-- @if (session()->has('status'))
+        <div x-data="{show: true}" x-init="setTimeout(() => show = false, 3000)" x-show="show" class="fixed top-0 left-1/2 transform -translate-x-1/2 bg-laravel text-white px-48 py-3">
+            <p>
+                {{ session('message') }}
+            </p>
+        </div>
+    @endif --}}
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
 
     <!-- Sidebar -->
@@ -49,7 +55,7 @@
                         </li>
                         <li class="nav-item px-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-white font-weight-bold px-0">
-                            <span class="d-sm-inline d-none">Halo, Ragnar Lothbrok</span>
+                            <span class="d-sm-inline d-none">Halo, {{Auth::user()->name}}</span>
                             </a>
                         </li>
                         <li class="nav-item dropdown pe-2 d-flex align-items-center">

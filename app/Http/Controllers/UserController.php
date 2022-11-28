@@ -8,52 +8,55 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+  public function index(){
+    return view('dashboard.user');
+}
 
-  public function create() {
-    return view('users.register');
-  }
+  // public function create() {
+  //   return view('users.register');
+  // }
 
-  public function store(Request $request) {
-    $formField = $request->validate([
-      'name' => ['required', 'min:3'],
-      'email' => ['required', 'email', Rule::unique('users', 'email')],
-      'password' => 'required|confirmed|min:6'
-    ]);
+  // public function store(Request $request) {
+  //   $formField = $request->validate([
+  //     'name' => ['required', 'min:3'],
+  //     'email' => ['required', 'email', Rule::unique('users', 'email')],
+  //     'password' => 'required|confirmed|min:6'
+  //   ]);
 
-    // bcrypt
-    $formField['password'] = bcrypt($formField['password']);
+  //   // bcrypt
+  //   $formField['password'] = bcrypt($formField['password']);
 
-    $user = User::create($formField);
-    auth()->login($user);
+  //   $user = User::create($formField);
+  //   auth()->login($user);
 
-    return redirect('/listings')->with('message', 'User created and logged in');
-  }
+  //   return redirect('/listings')->with('message', 'User created and logged in');
+  // }
 
-  public function logout(Request $request) {
-    auth()->logout();
+  // public function logout(Request $request) {
+  //   auth()->logout();
 
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
+  //   $request->session()->invalidate();
+  //   $request->session()->regenerateToken();
 
-    return redirect('/listings')->with('message', 'You have been logged out');
-  }
+  //   return redirect('/login')->with('message', 'You have been logged out');
+  // }
 
-  public function show() {
-    return view('users.login');
-  }
+  // public function show() {
+  //   return view('users.login');
+  // }
 
-  public function authenticate() {
-    $formField = request()->validate([
-      'email' => ['required', 'email'],
-      'password' => 'required'
-    ]);
+  // public function authenticate() {
+  //   $formField = request()->validate([
+  //     'email' => ['required', 'email'],
+  //     'password' => 'required'
+  //   ]);
 
-    if (auth()->attempt($formField)) {
-      request()->session()->regenerate();
+  //   if (auth()->attempt($formField)) {
+  //     request()->session()->regenerate();
 
-      return redirect('/dashboard')->with('message', 'You are now logged in');
-    }
+  //     return redirect('/dashboard')->with('message', 'You are now logged in');
+  //   }
 
-    return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
-  }
+  //   return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
+  // }
 }
