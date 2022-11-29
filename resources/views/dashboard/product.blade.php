@@ -119,9 +119,9 @@
                 <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                     <div class="nav-wrapper position-relative end-0">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                        <form class="input-group" action="" method="post">
+                        <form class="input-group" action="" method="get">
                             <div class="input-group">
-                            <input type="text" class="form-control ms-4" name="data" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
+                            <input type="text" class="form-control ms-4" name="keyword" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
                             <button class="btn bg-gradient-dark  mb-0" name="caridata" type="submit" id="button-addon2">
                                 <i class="fas fa-search" aria-hidden="true"></i>
                             </button>

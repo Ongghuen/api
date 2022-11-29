@@ -31,7 +31,7 @@ class Transaction extends Model
 
     public function customs()
     {
-        return $this->belongsToMany(Custom::class, 'transaction_details', 'transaction_id',
+        return $this->belongsToMany(Custom::class, 'custom_details', 'transaction_id',
         'custom_id');
     }
 }
