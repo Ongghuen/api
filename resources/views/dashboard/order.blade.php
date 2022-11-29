@@ -198,8 +198,12 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
                             </td>
                             <td class="align-middle text-center text-sm ms-auto">
-                                <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                                <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
+                                <button type="button" class="btn btn-info btn-sm px-3 py-1 me-1 mt-3">
+                                    <i class="fa fa-info" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-success btn-sm px-3 py-1 mt-3">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </button>
                             </td>
                         </tr>
                         @endforeach

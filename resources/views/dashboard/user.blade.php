@@ -177,8 +177,12 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->email}}</span>
                             </td>
                             <td class="align-middle text-center">
-                                <button class="btn btn-dark btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Edit</button>
-                                <button class="btn btn-danger btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Delete</button>
+                                <button class="btn btn-success btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
                             </td>
                         </tr>
                         @endforeach

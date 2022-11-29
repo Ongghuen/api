@@ -143,9 +143,8 @@
             <div class="d-flex align-items-center">
                 <h6>Products table</h6>
                 <button class="btn btn-success btn-sm ms-auto " data-modal-target="#modal-add">
-                Add Product
+                New Product
                 </button>
-            </div>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -171,47 +170,54 @@
                             Kategori
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Deskripsi
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Actions
                         </th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($productList as $data)
                     <tr>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">1</span>
+                            <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $productList->firstItem() - 1}}</span>
                         </td>
                         <td class="align-middle text-center">
                             <img src="" class="avatar avatar-sm me-2" alt="user1" />
                         </td>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Kursi bolong</span>
+                            <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Rp. 1.200.000</span>
+                            <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->harga, 0, ".", '.')}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">8</span>
+                            <span class="text-secondary text-xs font-weight-bold">{{$data->qty}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Kursi</span>
+                            <span class="text-secondary text-xs font-weight-bold">{{$data->categories}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <button class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Deskripsi</button>
-                        </td>
-                        <td class="align-middle text-center">
-                            <button class="btn btn-dark btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Edit</button>
-                            <button class="btn btn-danger btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Delete</button>
+                            <button class="btn btn-info btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">
+                                <i class="fa fa-info" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-success btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                            </button>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
                 </table>
             </div>
+            <div class="my-4 ms-2 me-2">
+                {{$productList->withQueryString()->links('pagination::bootstrap-5')}}
+            </div>
             </div>
         </div>
         </div>
+    </div>
     </div>
 @endsection
 
