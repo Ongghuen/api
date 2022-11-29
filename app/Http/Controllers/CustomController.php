@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Custom;
 
 class CustomController extends Controller
 {
     public function index(){
-        return view('dashboard.custom');
+        $custom = Custom::with('transactions')->paginate(15);
+        return view('dashboard.custom', ['customList' => $custom]);
     }
 }

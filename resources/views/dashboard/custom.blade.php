@@ -152,66 +152,90 @@
                 Add Custom
                 </button>
             </div>
-            </div>
             <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                 <thead>
                     <tr>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            No
+                            Custom No.
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Image
+                            Status
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Nama
+                            Customer
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Kategori
+                            Jenis Custom
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Bahan
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Detail
+                            Total Harga
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Actions
+                            Action
                         </th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($customList as $data)
                     <tr>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">1</span>
+                            <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
+                        </td>
+                        @if ($data->status == "Pending")
+                            <td class="align-middle text-center text-sm">
+                                <span class="badge badge-sm bg-gradient-warning px-3">Pending</span>
+                            </td>
+                        @elseif ($data->status == "Belum_Bayar")
+                            <td class="align-middle text-center text-sm">
+                                <span class="badge badge-sm bg-gradient-danger px-3">B. Bayar</span>
+                            </td>
+                        @elseif ($data->status == "Pengerjaan")
+                            <td class="align-middle text-center text-sm">
+                                <span class="badge badge-sm bg-gradient-primary px-3">Pengerjaan</span>
+                            </td>
+                        @elseif ($data->status == "Dikirim")
+                            <td class="align-middle text-center text-sm">
+                                <span class="badge badge-sm bg-gradient-info px-3">Dikirim</span>
+                            </td>
+                        @elseif ($data->status == "Selesai")
+                            <td class="align-middle text-center text-sm">
+                                <span class="badge badge-sm bg-gradient-success px-3">Selesai</span>
+                            </td>
+                        @endif
+                        <td class="align-middle text-center">
+                            <span class="text-secondary text-xs font-weight-bold">{{$data->transactions->users['name']}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <img src="" class="avatar avatar-sm me-2" alt="user1" />
+                            <span class="text-secondary text-xs font-weight-bold text-truncate">{{$data->jenis_custom}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Asbak kontol</span>
+                            <span class="text-secondary text-xs font-weight-bold">{{$data->bahan}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Asbak</span>
+                            <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
                         </td>
-                        <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">Kayu jati</span>
-                        </td>
-                        <td class="align-middle text-center">
-                            <button class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Detail</button>
-                        </td>
-                        <td class="align-middle text-center">
-                            <button class="btn btn-dark btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Edit</button>
-                            <button class="btn btn-danger btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">Delete</button>
+                        <td class="align-middle text-center text-sm ms-auto">
+                            <button type="button" class="btn btn-info btn-sm px-3 py-1 me-1 mt-3">
+                                <i class="fa fa-info" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-success btn-sm px-3 py-1 mt-3">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
                 </table>
             </div>
             </div>
         </div>
         </div>
+    </div>
     </div>
 @endsection
 

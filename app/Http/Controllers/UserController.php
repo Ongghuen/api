@@ -11,8 +11,14 @@ use App\Http\Requests\UserCreateRequest;
 
 class UserController extends Controller
 {
-  public function index(){
-    $user = User::paginate(20);
+  public function index(Request $request){
+    $keyword = $request->keyword;
+
+    $user = User::where('name', 'LIKE', '%'.$keyword.'%')
+              ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
+              ->orWhere('address', 'LIKE', '%'.$keyword.'%')
+              ->orWhere('email', 'LIKE', '%'.$keyword.'%')
+              ->paginate(15);
     return view('dashboard.user', ['userList' => $user]);
   }
 

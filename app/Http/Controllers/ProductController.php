@@ -11,9 +11,14 @@ use App\Http\Requests\UserCreateRequest;
 
 class ProductController extends Controller
 {
-    public function index(){
-        $product = Product::paginate(15);
-        return view('dashboard.product', ['productList' => $product]);
+    public function index(Request $request){
+      $keyword = $request->keyword;
+      $product = Product::where('name', 'LIKE', '%'.$keyword.'%')
+                  ->orWhere('harga', $keyword)
+                  ->orWhere('qty', 'LIKE', '%'.$keyword.'%')
+                  ->orWhere('categories', 'LIKE', '%'.$keyword.'%')
+                  ->paginate(15);
+      return view('dashboard.product', ['productList' => $product]);
     }
 
     // public function index()
