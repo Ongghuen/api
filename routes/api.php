@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiProductController;
 use App\Models\Listing;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +27,17 @@ Route::get('/login', function () {
   return response()->json(["results" => User::all(), "msg" => "success"]);
 });
 
-Route::get('/listings', function () {
-  return response()->json(["results" => Listing::all(), "msg" => "success"]);
+/* Route::resource('products', ApiProductController::class); */
+
+Route::post('/login', [ApiAuthController::class, 'login']);
+Route::post('/register', [ApiAuthController::class, 'register']);
+Route::get('/products', [ApiProductController::class, 'index']);
+Route::get('/products/search', [ApiProductController::class, 'search']);
+Route::get('/products/{id}', [ApiProductController::class, 'show']);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+  Route::post('/products', [ApiProductController::class, 'store']);
+  Route::put('/products/{id}', [ApiProductController::class, 'update']);
+  Route::delete('/products/{id}', [ApiProductController::class, 'destroy']);
+  Route::post('/logout', [ApiAuthController::class, 'logout']);
 });

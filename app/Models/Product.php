@@ -10,24 +10,28 @@ class Product extends Model
   use HasFactory;
 
   protected $fillable = [
+    'image',
     'name',
-    'category_id',
+    'categories',
+    'harga',
     'desc'
   ];
 
   public function scopeFilter($query, array $filters)
   {
     # code...
-    /* dd($filters['tag']); */
-    if ($filters['tag'] ?? false) {
-      $query->where('tags', 'like', "%" . $filters['tag'] . "%");
+    if ($filters['categories'] ?? false) {
+      $query->where('categories', 'like', "%" . $filters['categories'] . "%");
     }
 
-    if ($filters['search'] ?? false) {
-      $query->where('title', 'like', "%" . $filters['search'] . "%")
-        ->orWhere('company', 'like', "%" . $filters['search'] . "%")
-        ->orWhere('tags', 'like', "%" . $filters['search'] . "%");
+    if ($filters['name'] ?? false) {
+      $query->where('name', 'like', "%" . $filters['name'] . "%")
+        ->orWhere('desc', 'like', "%" . $filters['name'] . "%");
     }
+
+
+    /* dd($filters); */
+
   }
 
   public function user()
