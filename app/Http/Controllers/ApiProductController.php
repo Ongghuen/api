@@ -112,6 +112,6 @@ class ApiProductController extends Controller
    */
   public function search()
   {
-    return Product::latest()->filter(request(['name', 'categories']))->get();
+    return Product::latest()->filter(request(['search', 'categories']))->get();
   }
 }

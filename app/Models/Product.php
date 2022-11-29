@@ -24,9 +24,9 @@ class Product extends Model
       $query->where('categories', 'like', "%" . $filters['categories'] . "%");
     }
 
-    if ($filters['name'] ?? false) {
-      $query->where('name', 'like', "%" . $filters['name'] . "%")
-        ->orWhere('desc', 'like', "%" . $filters['name'] . "%");
+    if ($filters['search'] ?? false) {
+      $query->where('name', 'like', "%" . $filters['search'] . "%")
+        ->orWhere('desc', 'like', "%" . $filters['search'] . "%");
     }
 
 
