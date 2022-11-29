@@ -14,7 +14,8 @@ class Transaction extends Model
         'user_id',
         'total_harga',
         'tgl_transaksi',
-        'tgl_selesai'
+        'tgl_selesai',
+        'status'
     ];
 
     public function users()
@@ -26,5 +27,11 @@ class Transaction extends Model
     {
         return $this->belongsToMany(Product::class, 'transaction_details', 'transaction_id',
         'product_id');
+    }
+
+    public function customs()
+    {
+        return $this->belongsToMany(Custom::class, 'transaction_details', 'transaction_id',
+        'custom_id');
     }
 }

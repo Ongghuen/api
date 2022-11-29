@@ -5549,7 +5549,7 @@ fieldset:disabled .btn {
   --bs-pagination-focus-color: #233dd2;
   --bs-pagination-focus-bg: #e9ecef;
   --bs-pagination-focus-box-shadow: 0 0 0 0.2rem rgba(94, 114, 228, 0.25);
-  --bs-pagination-active-color: white;
+  --bs-pagination-active-color: #fff;
   --bs-pagination-active-bg: black;
   --bs-pagination-active-border-color: white;
   --bs-pagination-disabled-color: #6c757d;
@@ -24345,7 +24345,7 @@ hr.horizontal.gray-light {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #8392ab;
+  color: var(--bs-gray-500);
   padding: 0;
   margin: 0 3px;
   border-radius: 50% !important;

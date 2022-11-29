@@ -149,7 +149,7 @@
                             Customer
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Location
+                            Total Cost
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Start Date
@@ -163,128 +163,51 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">#00001</span>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-danger">Cancelled</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Daffa Afifi Syahrony</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Sumbersari, Jember</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">19-11-2022</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">20-11-2022</span>
-                        </td>
-                        <td class="align-middle text-center text-sm ms-auto">
-                        <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                        <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">#00002</span>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-warning px-3">Pending</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Ilham Ibnu Ahmad</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Texas, Probolinggo</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">20-11-2022</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">21-11-2022</span>
-                        </td>
-                        <td class="align-middle text-center text-sm ms-auto">
-                        <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                        <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">#00003</span>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-info px-4">Move</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Raihan Achmad</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Tokyo, Bondowoso</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">21-11-2022</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">22-11-2022</span>
-                        </td>
-                        <td class="align-middle text-center text-sm ms-auto">
-                        <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                        <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">#00004</span>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-success px-4">Done</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Shilmia Madina</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Besuki, Situbondo</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">22-11-2022</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23-11-2022</span>
-                        </td>
-                        <td class="align-middle text-center text-sm ms-auto">
-                        <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                        <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">#00005</span>
-                        </td>
-                        <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm bg-gradient-warning px-3">Pending</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Babylina Vindarosita</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">Denver, Sumenep</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23-11-2022</span>
-                        </td>
-                        <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">24-11-2022</span>
-                        </td>
-                        <td class="align-middle text-center text-sm ms-auto">
-                        <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
-                        <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
-                        </td>
-                    </tr>
+                        @foreach ($orderList as $data)
+                        <tr>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $orderList->firstItem() - 1}}</span>
+                            </td>
+                            @if ($data->status == "Pending")
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-warning px-3">Pending</span>
+                                </td>
+                            @elseif ($data->status == "Belum_Bayar")
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-danger px-3">B. Bayar</span>
+                                </td>
+                            @elseif ($data->status == "Dikirim")
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-info px-3">Dikirim</span>
+                                </td>
+                            @elseif ($data->status == "Selesai")
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-success px-3">Selesai</span>
+                                </td>
+                            @endif
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
+                            </td>
+                            <td class="align-middle text-center text-sm ms-auto">
+                                <button type="button" class="btn btn-secondary btn-sm px-3 py-1 me-1 mt-3">Detail</button>
+                                <button type="button" class="btn btn-secondary btn-sm px-3 py-1 mt-3">Update</button>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
+                </div>
+                <div class="my-4 ms-2 me-2">
+                    {{$orderList->withQueryString()->links('pagination::bootstrap-5')}}
                 </div>
             </div>
             </div>
