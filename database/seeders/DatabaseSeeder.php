@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
       'transaction_id' => 1,
       'product_id' => 1,
     ]);
+
     TransactionDetail::create([
       'transaction_id' => 1,
       'product_id' => 2,

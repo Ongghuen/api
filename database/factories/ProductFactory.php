@@ -20,6 +20,7 @@ class ProductFactory extends Factory
             //
             'name' => $this->faker->company(),
             'desc' => $this->faker->sentence(),
+            'harga' => $this->faker->numberBetween($min = 1500, $max = 6000),
             'categories' => "kursi, jelek",
         ];
     }

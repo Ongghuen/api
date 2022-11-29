@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->unsignedBigInteger('transaction_id');
-            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('restrict');
+            $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 
