@@ -26,7 +26,7 @@ class Transaction extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class, 'transaction_details', 'transaction_id',
-        'product_id');
+        'product_id')->withPivot(['qty', 'sub_total']);
     }
 
     public function customs()

@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
     public function index(Request $request){
         $keyword = $request->keyword;
 
-        $order = Transaction::with('users')
+        $order = Transaction::with(['users', 'products'])
                     ->where('status', $keyword)
                     ->orWhereHas('users', function($query) use($keyword){
                         $query->where('name', 'LIKE', '%'.$keyword.'%');

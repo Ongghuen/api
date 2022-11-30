@@ -198,14 +198,17 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
                             </td>
                             <td class="align-middle text-center text-sm ms-auto">
-                                <button type="button" class="btn btn-info btn-sm px-3 py-1 me-1 mt-3">
-                                    <i class="fa fa-info" aria-hidden="true"></i>
-                                </button>
-                                <button type="button" class="btn btn-success btn-sm px-3 py-1 mt-3">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                </button>
+                                <form action="dtOrder/{{$data->id}}" method="get">
+                                    <a data-bs-toggle="modal" data-bs-target="#exampleModal{{$data->id}}">
+                                        <i class="fas fa-eye text-gray-300"></i>
+                                    </a>
+                                    <a class="text-secondary ps-2" data-toggle="modal" id="mediumButton" data-target="#mediumModal"
+                                        data-attr="upOrder/{{$data->id}}">
+                                        <i class="fas fa-edit text-gray-300"></i>
+                                    </a>
+                                </form>
                             </td>
-                        </tr>
+                        </tr> 
                         @endforeach
                     </tbody>
                 </table>
@@ -214,10 +217,50 @@
                     {{$orderList->withQueryString()->links('pagination::bootstrap-5')}}
                 </div>
             </div>
+            @foreach ($orderList as $item)
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Detail Order {{$item->users->name}}</h5>
+                        <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <b>X</b>
+                        </a>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Harga</th>
+                                        <th>Qty</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($item->products as $list)
+                                    <tr>
+                                        <td>{{$list->name}}</td>
+                                        <td>{{$list->harga}}</td>
+                                        <td>{{$list->pivot->qty}}</td>
+                                        <td>{{$list->pivot->sub_total}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            Total Harga : {{$item->total_harga}}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- End Modal -->
+            @endforeach
             </div>
         </div>
     </div>
     </div>
+
 @endsection
 
 @section('javascript')
