@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
     User::factory()->create([
       'name' => "Raihan Achmad",
       'email' => "r@r.com",
+      'username' => "rehan",
       'password' => bcrypt("hahaha"),
       'role_id' => 1,
     ]);
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
     User::factory()->create([
       'name' => "Daffa",
       'email' => "d@d.com",
+      'username' => "daffa",
       'password' => bcrypt("hahaha"),
       'role_id' => 1,
     ]);

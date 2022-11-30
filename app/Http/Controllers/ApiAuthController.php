@@ -13,12 +13,12 @@ class ApiAuthController extends Controller
   public function login(Request $request)
   {
     $formField = $request->validate([
-      'email' => 'required|email',
+      'username' => 'required',
       'password' => 'required'
     ]);
 
     if (auth()->attempt($formField)) {
-      $user = User::where('email', $formField['email'])->first();
+      $user = User::where('username', $formField['username'])->first();
       $token = $user->createToken('suki')->plainTextToken;
 
       return response([
@@ -37,6 +37,7 @@ class ApiAuthController extends Controller
   {
     $formField = $request->validate([
       'name' => ['required', 'min:3'],
+      'username' => 'required|unique:users,username',
       'email' => 'required|email|unique:users,email',
       'password' => 'required|confirmed|min:6'
     ]);
