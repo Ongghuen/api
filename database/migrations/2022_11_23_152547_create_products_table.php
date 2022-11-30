@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('desc', 255);
             $table->integer('harga')->default(0);
+            $table->integer('qty');
             $table->string('categories');
             $table->timestamps();
         });

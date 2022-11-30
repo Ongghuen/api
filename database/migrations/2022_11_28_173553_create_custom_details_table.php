@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('restrict');
             $table->unsignedBigInteger('custom_id');
             $table->foreign('custom_id')->references('id')->on('customs')->onDelete('restrict');
+            $table->integer('qty')->nullable();
+            $table->integer('sub_total')->nullable();
         });
     }
 
