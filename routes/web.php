@@ -39,6 +39,9 @@ Route::get('/order', [OrderController::class, 'index']);
 
 # ========================== PRODUCT =========================
 Route::get('/product', [ProductController::class, 'index']);
+Route::put('/product/{id}', [ProductController::class, 'update']);
+Route::post('/product', [ProductController::class, 'store']);
+Route::delete('/product-destroy/{id}', [ProductController::class, 'destroy']);
 
 # ========================== USER =========================
 Route::get('/user', [UserController::class, 'index']);

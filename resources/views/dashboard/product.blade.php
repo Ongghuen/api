@@ -142,11 +142,16 @@
             <div class="card-header pb-0">
             <div class="d-flex align-items-center">
                 <h6>Products table</h6>
-                <button class="btn btn-success btn-sm ms-auto " data-modal-target="#modal-add">
+                <button class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#createModal">
                 New Product
                 </button>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
+            @if(Session::has('status'))
+                <div class="alert alert-success ms-1 my-3" role="alert">
+                    {{Session::get('message')}}
+                </div>
+            @endif
             <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                 <thead>
@@ -196,15 +201,15 @@
                             <span class="text-secondary text-xs font-weight-bold">{{$data->categories}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <button class="btn btn-info btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-success btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </button>
-                            <button class="btn btn-danger btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">
-                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                            </button>
+                            <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
+                                <i class="fas fa-eye text-green-300"></i>
+                            </a>
+                            <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
+                                <i class="fas fa-edit text-green-300 px-2"></i>
+                            </a>
+                            <a data-bs-toggle="modal" data-bs-target="#deleteModal{{$data->id}}">
+                                <i class="fas fa-trash text-green-300"></i>
+                            </a>
                         </td>
                     </tr>
                     @endforeach
@@ -215,6 +220,153 @@
                 {{$productList->withQueryString()->links('pagination::bootstrap-5')}}
             </div>
             </div>
+            @foreach ($productList as $item)
+
+                <!-- Detail Modal -->
+                <div class="modal fade" id="detailModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Detail Product</h4>
+                        <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <b>X</b>
+                        </a>
+                        </div>
+                        <div class="modal-body">
+                            Nama product : {{$item->name}} <br>
+                            Deskripsi product : <br>
+                            {{$item->desc}}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- End Detail Modal -->
+
+                <!-- Update Modal -->
+                <div class="modal fade" id="updateModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit Product</h4>
+                                <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                    <b>X</b>
+                                </a>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/product/{{$item->id}}" method="POST">
+                                    @method('PUT')
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="name">Nama Product</label>
+                                        <input class="form-control" type="text" name="name" id="name" value="{{$item->name}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="harga">Harga</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                              <div class="input-group-text">Rp. </div>
+                                            </div>
+                                            <input type="text" class="form-control" name="harga" id="harga" value="{{$item->harga}}" required>
+                                          </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="qty">Qty</label>
+                                        <input class="form-control" type="text" name="qty" id="qty" value="{{$item->qty}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="categories">Kategory</label>
+                                        <input class="form-control" type="text" name="categories" id="categories" value="{{$item->categories}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="desc">Deskripsi</label>
+                                        <textarea class="form-control" type="text" name="desc" id="desc" rows="3" required>{{$item->desc}}</textarea>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Update Modal -->
+
+                <!-- Delete Modal -->
+                <div class="modal fade" id="deleteModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">Delete Product</h4>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-danger font-weight-bold" role="alert">Are you sure you want to delete {{$item->name}}?</div>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="/product-destroy/{{$item->id}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger" >Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- End Delete Modal -->
+            @endforeach
+
+            <!-- Create Modal -->
+            <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">New Product</h4>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <form action="product" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">Nama Product</label>
+                                    <input class="form-control" type="text" name="name" id="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="harga">Harga</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">Rp. </div>
+                                        </div>
+                                        <input type="text" class="form-control" name="harga" id="harga" required>
+                                      </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="qty">Qty</label>
+                                    <input class="form-control" type="text" name="qty" id="qty" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="categories">Kategory</label>
+                                    <input class="form-control" type="text" name="categories" id="categories" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="desc">Deskripsi</label>
+                                    <textarea class="form-control" type="text" name="desc" id="desc" rows="3" required></textarea>
+                                </div>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Create Modal -->
         </div>
         </div>
     </div>
