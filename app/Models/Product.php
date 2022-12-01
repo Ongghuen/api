@@ -14,7 +14,8 @@ class Product extends Model
     'name',
     'categories',
     'harga',
-    'desc'
+    'desc',
+    'qty'
   ];
 
   public function scopeFilter($query, array $filters)
