@@ -15,20 +15,7 @@ class ApiWishlistController extends Controller
    */
   public function index()
   {
-      /* return auth()->user()->wishlists()->get(); */
-      /* echo auth()->user()->wishlists; */
-      /* return auth()->user()->wishlists()->attach(1); */
-      return auth()->user()->wishlists()->detach(1);
-  }
-
-  /**
-   * Show the form for creating a new resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function create()
-  {
-    //
+    return auth()->user()->wishlists()->get();
   }
 
   /**
@@ -39,41 +26,7 @@ class ApiWishlistController extends Controller
    */
   public function store(Request $request)
   {
-    //
-  }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-    //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-    //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-    //
+    return auth()->user()->wishlists()->attach($request->product_id);
   }
 
   /**
@@ -84,8 +37,6 @@ class ApiWishlistController extends Controller
    */
   public function destroy($id)
   {
-    //
-    $product = Product::find($id);
-    return $product->users();
+    return auth()->user()->wishlists()->detach($id);
   }
 }

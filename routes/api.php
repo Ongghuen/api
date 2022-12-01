@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
   Route::get('/wishlists', [ApiWishlistController::class, 'index']);
+  Route::post('/wishlists', [ApiWishlistController::class, 'store']);
   Route::delete('/wishlists/{product_id}', [ApiWishlistController::class, 'destroy']);
 
   Route::post('/logout', [ApiAuthController::class, 'logout']);
