@@ -3,23 +3,66 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB; 
 use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
   public function index(Request $request){
     $keyword = $request->keyword;
 
-    $user = User::where('name', 'LIKE', '%'.$keyword.'%')
+    $user = User::with('roles')
+              ->where('name', 'LIKE', '%'.$keyword.'%')
               ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
               ->orWhere('address', 'LIKE', '%'.$keyword.'%')
               ->orWhere('email', 'LIKE', '%'.$keyword.'%')
               ->paginate(15);
     return view('dashboard.user', ['userList' => $user]);
+  }
+
+  public function update(UserUpdateRequest $request, $id){
+    $user = User::findOrFail($id);
+
+    $user->update($request->all());
+    if($user){
+      Session::flash('status','failed');
+      Session::flash('message', 'update data pengguna success!');
+    }
+    return redirect('/user');
+  }
+
+  public function store(UserCreateRequest $request){
+    $newUser = new User;
+    $newUser->name = $request->name;
+    $newUser->email = $request->email;
+    $newUser->phone = $request->phone;
+    $newUser->address = $request->address;
+    $newUser->role_id = 2;
+    $newUser->password = bcrypt($request->password);
+    $newUser->save();
+
+    if($newUser){
+        Session::flash('status','success');
+        Session::flash('message', 'tambah pengguna baru sukses!');
+    }
+    return redirect('/user');
+  }
+
+  public function destroy($id){
+    $delete = User::findOrFail($id);
+    $delete->delete();
+
+    if($delete){
+        Session::flash('status','success');
+        Session::flash('message', 'hapus data pengguna sukses.');
+    }
+
+    return redirect('/user');
   }
 
   // public function create() {

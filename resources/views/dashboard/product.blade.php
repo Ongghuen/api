@@ -148,7 +148,7 @@
             </div>
             <div class="card-body px-0 pt-0 pb-2">
             @if(Session::has('status'))
-                <div class="alert alert-success ms-1 my-3" role="alert">
+                <div class="alert alert-success ms-1 my-3 font-weight-bold" role="alert">
                     {{Session::get('message')}}
                 </div>
             @endif
@@ -253,6 +253,15 @@
                                 </a>
                             </div>
                             <div class="modal-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li><b>{{$error}}</b></li>
+                                            @endforeach
+                                        </ul>
+                                    </div>    
+                                @endif
                                 <form action="/product/{{$item->id}}" method="POST">
                                     @method('PUT')
                                     @csrf
@@ -303,7 +312,7 @@
                             </a>
                         </div>
                         <div class="modal-body">
-                            <div class="alert alert-danger font-weight-bold" role="alert">Are you sure you want to delete {{$item->name}}?</div>
+                            <div class="alert alert-danger font-weight-bold" role="alert">Apakah anda yakin akan menghapus data produk {{$item->name}}?</div>
                         </div>
                         <div class="modal-footer">
                             <form action="/product-destroy/{{$item->id}}" method="POST">
@@ -330,6 +339,15 @@
                             </a>
                         </div>
                         <div class="modal-body">
+                            @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li><b>{{$error}}</b></li>
+                                            @endforeach
+                                        </ul>
+                                    </div>    
+                                @endif
                             <form action="product" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">

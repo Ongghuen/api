@@ -45,6 +45,9 @@ Route::delete('/product-destroy/{id}', [ProductController::class, 'destroy']);
 
 # ========================== USER =========================
 Route::get('/user', [UserController::class, 'index']);
+Route::put('/user/{id}', [UserController::class, 'update']);
+Route::post('/user', [UserController::class, 'store']);
+Route::delete('/user-destroy/{id}', [UserController::class, 'destroy']);
 
 # ========================== CUSTOM =========================
 Route::get('/custom', [CustomController::class, 'index']);

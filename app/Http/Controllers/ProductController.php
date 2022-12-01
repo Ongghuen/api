@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB; 
-use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -21,19 +21,23 @@ class ProductController extends Controller
       return view('dashboard.product', ['productList' => $product]);
     }
 
-    public function update(Request $request, $id){
+    public function update(ProductRequest $request, $id){
       $product = Product::findOrFail($id);
 
       $product->update($request->all());
+      if($product){
+        Session::flash('status','success');
+        Session::flash('message', 'update data produk sukses!');
+      }
       return redirect('/product');
     }
 
-    public function store(Request $request){
+    public function store(ProductRequest $request){
       $newProduct = new Product;
       $newProduct->create($request->all());
         if($newProduct){
             Session::flash('status','success');
-            Session::flash('message', 'add new product success!');
+            Session::flash('message', 'tambah produk baru sukses!');
         }
         return redirect('/product');
     }
@@ -44,7 +48,7 @@ class ProductController extends Controller
 
       if($delete){
           Session::flash('status','success');
-          Session::flash('message', 'delete student succes.');
+          Session::flash('message', 'hapus produk sukses.');
       }
 
       return redirect('/product');

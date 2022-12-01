@@ -129,11 +129,16 @@
             <div class="card-header pb-0">
             <div class="d-flex align-items-center">
                 <h6>Users table</h6>
-                <button class="btn btn-success btn-sm ms-auto " data-modal-target="">
+                <button class="btn btn-success btn-sm ms-auto " data-bs-toggle="modal" data-bs-target="#createModal">
                 New User
                 </button>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
+                @if(Session::has('status'))
+                    <div class="alert alert-success ms-1 my-3 font-weight-bold" role="alert">
+                        {{Session::get('message')}}
+                    </div>
+                @endif
                 <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                     <thead>
@@ -177,12 +182,15 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->email}}</span>
                             </td>
                             <td class="align-middle text-center">
-                                <button class="btn btn-success btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">
-                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm px-3 py-1 me-1 mt-3" data-modal-target="">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                </button>
+                                <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
+                                    <i class="fas fa-eye text-green-300"></i>
+                                </a>
+                                <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
+                                    <i class="fas fa-edit text-green-300 px-2"></i>
+                                </a>
+                                <a data-bs-toggle="modal" data-bs-target="#deleteModal{{$data->id}}">
+                                    <i class="fas fa-trash text-green-300"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -193,6 +201,162 @@
                     {{$userList->withQueryString()->links('pagination::bootstrap-5')}}
                 </div>
             </div>
+            @foreach ($userList as $item)
+
+                <!-- Detail Modal -->
+                <div class="modal fade" id="detailModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Detail Pengguna</h4>
+                        <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <b>X</b>
+                        </a>
+                        </div>
+                        <div class="modal-body">
+                            Nama pengguna : {{$item->name}} <br>
+                            Role : {{$item->roles->name}} <br>
+                            Alamat : {{$item->address}}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- End Detail Modal -->
+
+                <!-- Update Modal -->
+                <div class="modal fade" id="updateModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit User</h4>
+                                <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                    <b>X</b>
+                                </a>
+                            </div>
+                            <div class="modal-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li><b>{{$error}}</b></li>
+                                            @endforeach
+                                        </ul>
+                                    </div>    
+                                @endif
+                                <form action="/user/{{$item->id}}" method="POST">
+                                    @method('PUT')
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="name">Nama User</label>
+                                        <input class="form-control" type="text" name="name" id="name" value="{{$item->name}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input class="form-control" type="email" name="email" id="email" value="{{$item->email}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">No. Telepon</label>
+                                        <input class="form-control" type="text" name="phone" id="phone" value="{{$item->phone}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Alamat</label>
+                                        <textarea class="form-control" type="text" name="address" id="address" rows="3" required>{{$item->address}}</textarea>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Update Modal -->
+
+                <!-- Delete Modal -->
+                <div class="modal fade" id="deleteModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">Hapus Pengguna</h4>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-danger font-weight-bold" role="alert">Apakah anda yakin akan menghapus data pengguna {{$item->name}}?</div>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="/user-destroy/{{$item->id}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger" >Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- End Delete Modal -->
+            @endforeach
+
+            <!-- Create Modal -->
+            <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <script type="text/javascript">
+                            @if (count($errors) > 0)
+                                $('#createModal').modal('show');
+                            @endif
+                        </script>
+                        <div class="modal-header">
+                            <h4 class="modal-title">Pengguna Baru</h4>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li><b>{{$error}}</b></li>
+                                        @endforeach
+                                    </ul>
+                                </div>    
+                            @endif
+                            <form action="user" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">Nama Pengguna</label>
+                                    <input class="form-control" type="text" name="name" id="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" type="email" name="email" id="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input class="form-control" type="text" name="password" id="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">No. Telepon</label>
+                                    <input class="form-control" type="text" name="phone" id="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Alamat</label>
+                                    <textarea class="form-control" type="text" name="address" id="address" rows="3" required></textarea>
+                                </div>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Create Modal -->
             </div>
         </div>
         </div>
