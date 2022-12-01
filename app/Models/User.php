@@ -43,8 +43,8 @@ class User extends Authenticatable
     'email_verified_at' => 'datetime',
   ];
 
-  public function listings()
+  public function wishlists()
   {
-    return $this->hasMany(Listing::class);
+    return $this->belongsToMany(Product::class, 'wishlists', 'user_id', 'product_id');
   }
 }

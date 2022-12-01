@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Role;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\Wishlist;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -58,6 +59,16 @@ class DatabaseSeeder extends Seeder
 
     TransactionDetail::create([
       'transaction_id' => 1,
+      'product_id' => 2,
+    ]);
+
+    Wishlist::create([
+      'user_id' => 1,
+      'product_id' => 3,
+    ]);
+
+    Wishlist::create([
+      'user_id' => 1,
       'product_id' => 2,
     ]);
     

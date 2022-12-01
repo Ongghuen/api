@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ApiProductController extends Controller
+class ApiWishlistController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -14,8 +15,10 @@ class ApiProductController extends Controller
    */
   public function index()
   {
-    //
-    return response()->json(Product::all());
+      /* return auth()->user()->wishlists()->get(); */
+      /* echo auth()->user()->wishlists; */
+      /* return auth()->user()->wishlists()->attach(1); */
+      return auth()->user()->wishlists()->detach(1);
   }
 
   /**
@@ -36,18 +39,7 @@ class ApiProductController extends Controller
    */
   public function store(Request $request)
   {
-    $formField = $request->validate([
-      'name' => 'required',
-      'desc' => 'required',
-      'harga' => 'required',
-      'categories' => 'required',
-    ]);
-
-    if ($request->hasFile('image')) {
-      $formField['image'] = $request->file('image')->store('image', 'public');
-    }
-
-    return Product::create($formField);
+    //
   }
 
   /**
@@ -59,7 +51,6 @@ class ApiProductController extends Controller
   public function show($id)
   {
     //
-    return Product::find($id);
   }
 
   /**
@@ -82,16 +73,7 @@ class ApiProductController extends Controller
    */
   public function update(Request $request, $id)
   {
-    $product = Product::find($id);
-
-    $product->update($request->validate([
-      'name' => 'required',
-      'desc' => 'required',
-      'harga' => 'required',
-      'categories' => 'required',
-    ]));
-
-    return $product;
+    //
   }
 
   /**
@@ -102,16 +84,8 @@ class ApiProductController extends Controller
    */
   public function destroy($id)
   {
-    return Product::destroy($id);
-  }
-
-  /**
-   * Requestttt Search
-   *
-   * @return \Illuminate\Http\Response
-   */
-  public function search()
-  {
-    return Product::latest()->filter(request(['search', 'categories']))->get();
+    //
+    $product = Product::find($id);
+    return $product->users();
   }
 }

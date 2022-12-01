@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\ApiAuthController;
 use App\Http\Controllers\ApiProductController;
-use App\Models\Listing;
-use App\Models\Product;
+use App\Http\Controllers\ApiWishlistController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,8 +35,14 @@ Route::get('/products/search', [ApiProductController::class, 'search']);
 Route::get('/products/{id}', [ApiProductController::class, 'show']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+
   Route::post('/products', [ApiProductController::class, 'store']);
   Route::put('/products/{id}', [ApiProductController::class, 'update']);
   Route::delete('/products/{id}', [ApiProductController::class, 'destroy']);
+
+
+  Route::get('/wishlists', [ApiWishlistController::class, 'index']);
+  Route::delete('/wishlists/{product_id}', [ApiWishlistController::class, 'destroy']);
+
   Route::post('/logout', [ApiAuthController::class, 'logout']);
 });
