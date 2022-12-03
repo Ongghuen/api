@@ -155,7 +155,7 @@
                 <tbody>
                     @foreach ($productList as $data)
                     <tr>
-                        <td class="align-middle text-center">
+                        <td class="align-middle text-center py-4">
                             <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $productList->firstItem() - 1}}</span>
                         </td>
                         <td class="align-middle text-center">

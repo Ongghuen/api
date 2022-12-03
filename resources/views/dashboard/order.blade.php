@@ -165,7 +165,7 @@
                     <tbody>
                         @foreach ($orderList as $data)
                         <tr>
-                            <td class="align-middle text-center">
+                            <td class="align-middle text-center py-4">
                                 <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $orderList->firstItem() - 1}}</span>
                             </td>
                             @if ($data->status == "Pending")

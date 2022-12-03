@@ -80,16 +80,6 @@
                 <div class="dropdown col-auto">
                     <form action="" method="post">
                         <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Sort
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item" name="urutnama" type="submit">Name</button>
-                        </ul>
-                    </form>
-                </div>
-                <div class="dropdown col-auto">
-                    <form action="" method="post">
-                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         Kategori
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -111,23 +101,12 @@
                         </ul>
                     </form>
                 </div>
-                <div class="dropdown col-auto">
-                    <form action="" method="post">
-                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        By
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item" name="urutasc" type="submit">Asc (A-Z)</button>
-                            <button class="dropdown-item" name="urutdesc" type="submit">Desc (Z-A)</button>
-                    </form>
-                </ul>
-                </div>
                 <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                     <div class="nav-wrapper position-relative end-0">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                            <form class="input-group" action="" method="post">
+                            <form class="input-group" action="" method="get">
                                 <div class="input-group">
-                                <input type="text" class="form-control ms-4" name="data" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
+                                <input type="text" class="form-control ms-4" name="keyword" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
                                 <button class="btn bg-gradient-dark  mb-0" type="submit" name="caridata" id="button-addon2">
                                     <i class="fas fa-search" aria-hidden="true"></i>
                                 </button>
@@ -148,9 +127,6 @@
             <div class="card-header pb-0">
             <div class="d-flex align-items-center">
                 <h6>Custom table</h6>
-                <button class="btn btn-success btn-sm ms-auto " data-modal-target="#modal-add">
-                Add Custom
-                </button>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -161,19 +137,19 @@
                             Custom No.
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Status
+                            @sortablelink('status', 'Status')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Customer
+                            @sortablelink('name', 'Nama Custom')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Jenis Custom
+                            @sortablelink('jenis_custom', 'Jenis Custom')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Bahan
+                            @sortablelink('bahan', 'Bahan')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Total Harga
+                            @sortablelink('total_harga', 'Total Harga')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Action
@@ -183,7 +159,7 @@
                 <tbody>
                     @foreach ($customList as $data)
                     <tr>
-                        <td class="align-middle text-center">
+                        <td class="align-middle text-center py-4">
                             <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
                         </td>
                         @if ($data->status == "Pending")
@@ -208,31 +184,58 @@
                             </td>
                         @endif
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">{{$data->transactions->users['name']}}</span>
+                            <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
                         </td>
                         <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold text-truncate">{{$data->jenis_custom}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">{{$data->bahan}}</span>
+                            <span class="text-secondary text-xs font-weight-bold text-truncate">{{$data->bahan}}</span>
                         </td>
                         <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
                         </td>
                         <td class="align-middle text-center text-sm ms-auto">
-                            <button type="button" class="btn btn-info btn-sm px-3 py-1 me-1 mt-3">
-                                <i class="fa fa-info" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" class="btn btn-success btn-sm px-3 py-1 mt-3">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </button>
+                            <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
+                                <i class="fas fa-eye text-green-300 pe-2"></i>
+                            </a>
+                            <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
+                                <i class="fas fa-edit text-green-300"></i>
+                            </a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
                 </table>
             </div>
+            <div class="my-4 ms-2 me-2">
+                {!! $customList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
             </div>
+            </div>
+            @foreach ($customList as $item)
+                <!-- Detail Modal -->
+                <div class="modal fade" id="detailModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Detail Custom</h4>
+                        <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <b>X</b>
+                        </a>
+                        </div>
+                        <div class="modal-body">
+                            Customer : {{$item->transactions->users['name']}} <br>
+                            Tanggal transaksi : {{$item->transactions->tgl_transaksi}} <br>
+                            Deskripsi : {{$item->desc}} <br>
+                            DP : {{$item->dp}} <br>
+                            Total Harga : {{"Rp " . number_format($item->total_harga, 0, ".", '.')}} <br>
+                            Alamat pengiriman : {{$item->transactions->users['address']}}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- End Detail Modal -->
+            @endforeach
         </div>
         </div>
     </div>
