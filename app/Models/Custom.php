@@ -23,11 +23,6 @@ class Custom extends Model
 
     public function transactions()
   {
-    return $this->belongsToMany(
-      Transaction::class,
-      'custom_details',
-      'custom_id',
-      'transaction_id'
-    );
+    return $this->belongsTo(Transaction::class, 'transaction_id', 'id');
   }
 }

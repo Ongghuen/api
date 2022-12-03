@@ -18,6 +18,7 @@ return new class extends Migration
       $table->integer('total_harga')->nullable();
       $table->date('tgl_transaksi')->nullable();
       $table->date('tgl_selesai')->nullable();
+      $table->enum('categories', ['Product', 'Custom'])->default('Product');
       $table->timestamps();
     });
   }

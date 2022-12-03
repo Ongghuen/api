@@ -19,6 +19,7 @@ class UserController extends Controller
     $user = User::with('roles')
               ->where('name', 'LIKE', '%'.$keyword.'%')
               ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
+              ->orWhere('username', 'LIKE', '%'.$keyword.'%')
               ->orWhere('address', 'LIKE', '%'.$keyword.'%')
               ->orWhere('email', 'LIKE', '%'.$keyword.'%')
               ->sortable()

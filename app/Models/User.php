@@ -24,11 +24,12 @@ class User extends Authenticatable
     'password',
     'role_id',
     'address',
-    'phone'
+    'phone',
+    'username'
   ];
 
   public $sortable =[
-    'name', 'email', 'phone',
+    'name', 'email', 'phone', 'username',
   ];
 
   /**

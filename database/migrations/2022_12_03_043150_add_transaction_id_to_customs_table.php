@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('custom_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('transaction_id');
+        Schema::table('customs', function (Blueprint $table) {
+            $table->unsignedBigInteger('transaction_id')->after('total_harga');
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('restrict');
-            $table->unsignedBigInteger('custom_id');
-            $table->foreign('custom_id')->references('id')->on('customs')->onDelete('restrict');
-            $table->integer('qty')->nullable();
-            $table->integer('sub_total')->nullable();
         });
     }
 
@@ -30,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('custom_details');
+        Schema::table('customs', function (Blueprint $table) {
+            $table->dropForeign(['transaction_id']);
+            $table->dropColumn('transaction_id');
+        });
     }
 };
