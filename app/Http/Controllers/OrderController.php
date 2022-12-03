@@ -19,6 +19,7 @@ class OrderController extends Controller
                     ->orWhere('total_harga', $keyword)
                     ->orWhere('tgl_transaksi', $keyword)
                     ->orWhere('tgl_transaksi', $keyword)
+                    ->sortable()
                     ->paginate(15);
         return view('dashboard.order', ['orderList' => $order]);
     }

@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Transaction extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     protected $table = 'transactions';
     protected $fillable = [
@@ -16,6 +17,10 @@ class Transaction extends Model
         'tgl_transaksi',
         'tgl_selesai',
         'status'
+    ];
+
+    public $sortable =[
+        'status', 'total_harga', 'tgl_transaksi', 'tgl_selesai'
     ];
 
     public function users()

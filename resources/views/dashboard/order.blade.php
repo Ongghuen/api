@@ -143,19 +143,19 @@
                             Order No.
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Status
+                            @sortablelink('status', 'Status')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Customer
+                            @sortablelink('users.name', 'Customer')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Total Cost
+                            @sortablelink('total_harga', 'Total Harga')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Start Date
+                            @sortablelink('tgl_transaksi', 'Tanggal Transaksi')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Delivery Date
+                            @sortablelink('tgl_selesai', 'Tanggal Selesai')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Action
@@ -213,7 +213,7 @@
                 </table>
                 </div>
                 <div class="my-4 ms-2 me-2">
-                    {{$orderList->withQueryString()->links('pagination::bootstrap-5')}}
+                    {!! $orderList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
                 </div>
             </div>
             @foreach ($orderList as $item)

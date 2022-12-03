@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends Model
 {
-  use HasFactory;
+  use HasFactory, Sortable;
 
   protected $fillable = [
     'image',
@@ -16,6 +17,10 @@ class Product extends Model
     'harga',
     'desc',
     'qty'
+  ];
+
+  public $sortable =[
+    'name', 'harga', 'qty', 'categories'
   ];
 
   public function scopeFilter($query, array $filters)

@@ -17,6 +17,7 @@ class ProductController extends Controller
                   ->orWhere('harga', $keyword)
                   ->orWhere('qty', 'LIKE', '%'.$keyword.'%')
                   ->orWhere('categories', 'LIKE', '%'.$keyword.'%')
+                  ->sortable()
                   ->paginate(15);
       return view('dashboard.product', ['productList' => $product]);
     }

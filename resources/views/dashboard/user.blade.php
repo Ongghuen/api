@@ -76,33 +76,6 @@
 <div class="card shadow-lg mx-4 mt-3">
     <div class="card-body">
         <div class="row gx-4">
-            <div class="dropdown col-auto">
-                <form class="" action="" method="post">
-                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sort
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" name="urutnama" type="submit">Name</button>
-                        <button class="dropdown-item" name="urutharga" type="submit">Harga</button>
-                        <button class="dropdown-item" name="urutqty" type="submit">Qty</button>
-                    </ul>
-                </form>
-            </div>
-            <form class="row gx-4 dropdown col-auto" action="" method="post">
-                <div class="dropdown col-auto">
-                    <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                    By
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" name="namaasc" type="submit"> Nama Asc (A-Z)</button>
-                        <button class="dropdown-item" name="namadesc" type="submit"> Nama Desc (Z-A)</button>
-                        <button class="dropdown-item" name="hargaasc" type="submit">Harga Asc (A-Z)</button>
-                        <button class="dropdown-item" name="hargadesc" type="submit">Harga Desc (Z-A)</button>
-                        <button class="dropdown-item" name="qtyasc" type="submit">Qty Asc (A-Z)</button>
-                        <button class="dropdown-item" name="qtydesc" type="submit">Qty Desc (Z-A)</button>
-                    </ul>
-                </div>
-            </form>
             <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                 <div class="nav-wrapper position-relative end-0">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -150,13 +123,13 @@
                                 Avatar
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Name
+                                @sortablelink('name', 'Nama')
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                No Hp
+                                @sortablelink('phone', 'No. Telepon')
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Email
+                                @sortablelink('email', 'Email')
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Actions
@@ -198,7 +171,7 @@
                 </table>
                 </div>
                 <div class="my-4 ms-2 me-2">
-                    {{$userList->withQueryString()->links('pagination::bootstrap-5')}}
+                    {!! $userList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
                 </div>
             </div>
             @foreach ($userList as $item)

@@ -21,6 +21,7 @@ class UserController extends Controller
               ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
               ->orWhere('address', 'LIKE', '%'.$keyword.'%')
               ->orWhere('email', 'LIKE', '%'.$keyword.'%')
+              ->sortable()
               ->paginate(15);
     return view('dashboard.user', ['userList' => $user]);
   }
