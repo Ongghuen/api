@@ -15,7 +15,7 @@ class ApiWishlistController extends Controller
    */
   public function index()
   {
-    return auth()->user()->wishlists()->get();
+    return response()->json(['results' => auth()->user()->wishlists()->get()]);
   }
 
   /**
