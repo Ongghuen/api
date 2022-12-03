@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 
 class Custom extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     protected $fillable = [
         'name',
@@ -19,6 +20,10 @@ class Custom extends Model
         'desc',
         'dp',
         'total_harga'
+    ];
+
+    public $sortable =[
+      'status', 'name', 'jenis_custom', 'total_harga'
     ];
 
     public function transactions()
