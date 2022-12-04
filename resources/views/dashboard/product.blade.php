@@ -159,7 +159,7 @@
                             <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $productList->firstItem() - 1}}</span>
                         </td>
                         <td class="align-middle text-center">
-                            <img src="" class="avatar avatar-sm me-2" alt="user1" />
+                            <img src="{{ $data->image ? asset('storage/' . $data->image) : asset('/images/box.png') }}" class="avatar avatar-sm me-2" alt="{{$data->name}}" />
                         </td>
                         <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
@@ -206,9 +206,15 @@
                         </a>
                         </div>
                         <div class="modal-body">
-                            Nama product : {{$item->name}} <br>
-                            Deskripsi product : <br>
-                            {{$item->desc}}
+                            <div class="row d-flex">
+                                <div class="col-4">
+                                    <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('/images/box.png') }}" class="rounded" width="150px" alt="{{$item->name}}" />
+                                </div>
+                                <div class="col-8">
+                                    <span class="font-weight-bold">Nama produk :</span> {{$item->name}} <br>
+                                    <span class="font-weight-bold">Deskripsi produk :</span> {{$item->desc}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     </div>
@@ -235,12 +241,19 @@
                                         </ul>
                                     </div>    
                                 @endif
-                                <form action="/product/{{$item->id}}" method="POST">
+                                <form action="/product/{{$item->id}}" method="POST" enctype="multipart/form-data">
                                     @method('PUT')
                                     @csrf
                                     <div class="form-group">
                                         <label for="name">Nama Product</label>
                                         <input class="form-control" type="text" name="name" id="name" value="{{$item->name}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image">Upload Foto</label> <br>
+                                        <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('/images/box.png') }}" class="rounded pb-3" width="100px" alt="{{$item->name}}" /> <br>
+                                        <div class="input-group">
+                                            <input type="file" name="image" class="form-control" id="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" value="{{$item->image}}">
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="harga">Harga</label>
@@ -264,7 +277,7 @@
                                         <textarea class="form-control" type="text" name="desc" id="desc" rows="3" required>{{$item->desc}}</textarea>
                                     </div>
                                     <div class="d-flex justify-content-between mt-2">
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-success">Update</button>
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </form>
@@ -328,6 +341,12 @@
                                     <input class="form-control" type="text" name="name" id="name" required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="image">Upload Foto</label>
+                                    <div class="input-group">
+                                        <input type="file" name="image" class="form-control" id="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="harga">Harga</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend">
@@ -349,7 +368,7 @@
                                     <textarea class="form-control" type="text" name="desc" id="desc" rows="3" required></textarea>
                                 </div>
                                 <div class="d-flex justify-content-between mt-2">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-success">Save</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </form>

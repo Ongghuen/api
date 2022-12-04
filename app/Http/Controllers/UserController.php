@@ -40,7 +40,13 @@ class UserController extends Controller
 
   public function store(UserCreateRequest $request){
     $newUser = new User;
+
+    if($request->image){
+      $newUser->image = $request->image->store('user_image', 'public');
+    }
+
     $newUser->name = $request->name;
+    $newUser->username = $request->username;
     $newUser->email = $request->email;
     $newUser->phone = $request->phone;
     $newUser->address = $request->address;

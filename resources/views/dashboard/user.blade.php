@@ -146,7 +146,7 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $userList->firstItem() - 1}}</span>
                             </td>
                             <td class="align-middle text-center">
-                                <img src="" class="avatar avatar-sm me-2" alt="user1" />
+                                <img src="{{ $data->image ? asset('storage/' . $data->image) : asset('/images/profile.jpg') }}" class="avatar avatar-sm me-2" alt="{{$data->name}}" />
                             </td>
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
@@ -193,9 +193,16 @@
                         </a>
                         </div>
                         <div class="modal-body">
-                            Nama pengguna : {{$item->name}} <br>
-                            Role : {{$item->roles->name}} <br>
-                            Alamat : {{$item->address}}
+                            <div class="row d-flex">
+                                <div class="col-4">
+                                    <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('/images/profile.jpg') }}" class="rounded" width="150px" alt="{{$item->name}}" />
+                                </div>
+                                <div class="col-8">
+                                    <span class="font-weight-bold">Nama pengguna :</span> {{$item->name}} <br>
+                                    <span class="font-weight-bold">Role :</span> {{$item->roles->name}} <br>
+                                    <span class="font-weight-bold">Alamat :</span> {{$item->address}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     </div>
@@ -242,7 +249,7 @@
                                         <textarea class="form-control" type="text" name="address" id="address" rows="3" required>{{$item->address}}</textarea>
                                     </div>
                                     <div class="d-flex justify-content-between mt-2">
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-success">Update</button>
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                     </div>
                                 </form>
@@ -289,7 +296,7 @@
                             @endif
                         </script>
                         <div class="modal-header">
-                            <h4 class="modal-title">Pengguna Baru</h4>
+                            <h4 class="modal-title pe-1">Pengguna Baru</h4>
                             <a type="button" data-bs-dismiss="modal" aria-label="Close">
                                 <b>X</b>
                             </a>
@@ -304,15 +311,25 @@
                                     </ul>
                                 </div>    
                             @endif
-                            <form action="user" method="POST" enctype="multipart/form-data">
+                            <form action="user" method="POST" enctype="multipart/form-data" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Nama Pengguna</label>
                                     <input class="form-control" type="text" name="name" id="name" required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="image">Upload Foto</label>
+                                    <div class="input-group">
+                                        <input type="file" name="image" class="form-control" id="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="email">Email</label>
                                     <input class="form-control" type="email" name="email" id="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input class="form-control" type="text" name="username" id="username" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
@@ -327,7 +344,7 @@
                                     <textarea class="form-control" type="text" name="address" id="address" rows="3" required></textarea>
                                 </div>
                                 <div class="d-flex justify-content-between mt-2">
-                                    <button type="submit" class="btn btn-primary">Save</button>
+                                    <button type="submit" class="btn btn-success">Save</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </form>

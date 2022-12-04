@@ -25,6 +25,7 @@ class UserCreateRequest extends FormRequest
     {
         return [
             'name' => 'max:50|required',
+            'image' => 'image|file|max:1024',
             'email' => 'unique:users|required',
             'phone' => 'max:13|required',
             'address' => 'max:100|required',
@@ -43,7 +44,9 @@ class UserCreateRequest extends FormRequest
             'phone.max' => 'No. Telepon maksimal :max karakter.',
             'address.max' => 'Alamat maksimal :max karakter.',
             'password.min' => 'Password minimal :min karakter.',
-            'email.unique' => 'Email sudah terdaftar.'
+            'email.unique' => 'Email sudah terdaftar.',
+            'image.image' => 'File yang anda upload bukan gambar',
+            'image.file' => 'Ukuran maksimal foto ada 1 MB'
         ];
     }
 }

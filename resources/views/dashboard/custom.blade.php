@@ -224,12 +224,12 @@
                         </a>
                         </div>
                         <div class="modal-body">
-                            Customer : {{$item->transactions->users['name']}} <br>
-                            Tanggal transaksi : {{$item->transactions->tgl_transaksi}} <br>
-                            Deskripsi : {{$item->desc}} <br>
-                            DP : {{$item->dp}} <br>
-                            Total Harga : {{"Rp " . number_format($item->total_harga, 0, ".", '.')}} <br>
-                            Alamat pengiriman : {{$item->transactions->users['address']}}
+                            <span class="font-weight-bold">Customer :</span> {{$item->transactions->users['name']}} <br>
+                            <span class="font-weight-bold">Tanggal transaksi :</span> {{$item->transactions->tgl_transaksi}} <br>
+                            <span class="font-weight-bold">Deskripsi :</span> {{$item->desc}} <br>
+                            <span class="font-weight-bold">DP :</span> {{$item->dp}} <br>
+                            <span class="font-weight-bold">Total Harga :</span> {{"Rp " . number_format($item->total_harga, 0, ".", '.')}} <br>
+                            <span class="font-weight-bold">Alamat pengiriman :</span> {{$item->transactions->users['address']}}
                         </div>
                     </div>
                     </div>

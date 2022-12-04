@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB; 
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductUpdateRequest;
 
 class ProductController extends Controller
 {
@@ -22,10 +23,19 @@ class ProductController extends Controller
       return view('dashboard.product', ['productList' => $product]);
     }
 
-    public function update(ProductRequest $request, $id){
+    public function update(ProductUpdateRequest $request, $id){
       $product = Product::findOrFail($id);
 
-      $product->update($request->all());
+      if($request->image){
+        $product->image = $request->image->store('product_image', 'public');
+      }
+
+      $product->name = $request->name;
+      $product->desc = $request->desc;
+      $product->harga = $request->harga;
+      $product->qty = $request->qty;
+      $product->categories = $request->categories;
+      $product->update();
       if($product){
         Session::flash('status','success');
         Session::flash('message', 'update data produk sukses!');
@@ -35,7 +45,18 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request){
       $newProduct = new Product;
-      $newProduct->create($request->all());
+
+      if($request->image){
+        $newProduct->image = $request->image->store('product_image', 'public');
+      }
+
+      $newProduct->name = $request->name;
+      $newProduct->desc = $request->desc;
+      $newProduct->harga = $request->harga;
+      $newProduct->qty = $request->qty;
+      $newProduct->categories = $request->categories;
+      $newProduct->save();
+
         if($newProduct){
             Session::flash('status','success');
             Session::flash('message', 'tambah produk baru sukses!');

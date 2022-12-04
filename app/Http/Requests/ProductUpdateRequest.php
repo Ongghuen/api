@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'unique:products|max:50|required',
+            'name' => 'max:50|required',
             'harga' => 'max:11|required',
             'qty' => 'max:4|required',
             'categories' => 'max:100|required',
@@ -42,8 +42,7 @@ class ProductRequest extends FormRequest
             'name.max' => 'Nama Produk maksimal :max karakter.',
             'harga.max' => 'Harga maksimal :max karakter.',
             'qty.max' => 'Qty maksimal :max karakter.',
-            'categories.max' => 'Kategori maksimal :max karakter.',
-            'name.unique' => 'Nama ini sudah terdaftar.'
+            'categories.max' => 'Kategori maksimal :max karakter.'
         ];
     }
 }
