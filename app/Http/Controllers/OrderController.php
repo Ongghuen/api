@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Product;
+use App\Models\Custom;
 
 class OrderController extends Controller
 {
@@ -12,15 +13,33 @@ class OrderController extends Controller
         $keyword = $request->keyword;
 
         $order = Transaction::with(['users', 'products'])
-                    ->where('status', $keyword)
-                    ->orWhereHas('users', function($query) use($keyword){
-                        $query->where('name', 'LIKE', '%'.$keyword.'%');
+                    ->where(function ($query) use($keyword){
+                        $query->where('status', $keyword)
+                            ->orWhereHas('users', function($query) use($keyword){
+                                $query->where('name', 'LIKE', '%'.$keyword.'%');
+                            })
+                            ->orWhere('total_harga', $keyword)
+                            ->orWhere('tgl_transaksi', $keyword)
+                            ->orWhere('tgl_transaksi', $keyword);
                     })
-                    ->orWhere('total_harga', $keyword)
-                    ->orWhere('tgl_transaksi', $keyword)
-                    ->orWhere('tgl_transaksi', $keyword)
+                    ->where('categories', 'Product')
                     ->sortable()
-                    ->paginate(15);
-        return view('dashboard.order', ['orderList' => $order]);
+                    ->paginate(10);
+
+        $custom = Transaction::with(['users', 'customs'])
+                    ->where(function ($query) use($keyword){
+                        $query->where('status', $keyword)
+                            ->orWhereHas('users', function($query) use($keyword){
+                                $query->where('name', 'LIKE', '%'.$keyword.'%');
+                            })
+                            ->orWhere('total_harga', $keyword)
+                            ->orWhere('tgl_transaksi', $keyword)
+                            ->orWhere('tgl_transaksi', $keyword);
+                    })
+                    ->where('categories', 'Custom')
+                    ->sortable()
+                    ->paginate(10);
+
+        return view('dashboard.order', ['orderList' => $order, 'customList' => $custom]);
     }
 }

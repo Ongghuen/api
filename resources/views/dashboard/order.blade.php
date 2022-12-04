@@ -132,7 +132,7 @@
         <div class="card mb-4">
             <div class="card-header pb-0">
             <div class="d-flex align-items-center">
-                <h6>Orders table</h6>
+                <h6>Transactions product table</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -246,6 +246,142 @@
                                         <td>{{"Rp " . number_format($list->harga, 0, ".", '.')}}</td>
                                         <td>{{$list->pivot->qty}}</td>
                                         <td>{{"Rp " . number_format($list->pivot->sub_total, 0, ".", '.')}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            Total Harga : {{"Rp " . number_format($item->total_harga, 0, ".", '.')}} <br>
+                            Alamat pengiriman : {{$item->users->address}}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- End Detail Modal -->
+            @endforeach
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+            <div class="d-flex align-items-center">
+                <h6>Transactions custom table</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                    <tr>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Order No.
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            @sortablelink('status', 'Status')
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            @sortablelink('users.name', 'Customer')
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            @sortablelink('total_harga', 'Total Harga')
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            @sortablelink('tgl_transaksi', 'Tanggal Transaksi')
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            @sortablelink('tgl_selesai', 'Tanggal Selesai')
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Action
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($customList as $data)
+                        <tr>
+                            <td class="align-middle text-center py-4">
+                                <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
+                            </td>
+                            @if ($data->status == "Pending")
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-warning px-3">Pending</span>
+                                </td>
+                            @elseif ($data->status == "Belum_Bayar")
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-danger px-3">B. Bayar</span>
+                                </td>
+                            @elseif ($data->status == "Dikirim")
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-info px-3">Dikirim</span>
+                                </td>
+                            @elseif ($data->status == "Selesai")
+                                <td class="align-middle text-center text-sm">
+                                    <span class="badge badge-sm bg-gradient-success px-3">Selesai</span>
+                                </td>
+                            @endif
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
+                            </td>
+                            <td class="align-middle text-center text-sm ms-auto">
+                                <form action="dtOrder/{{$data->id}}" method="get">
+                                    <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
+                                        <i class="fas fa-eye text-green-300 pe-2"></i>
+                                    </a>
+                                    <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
+                                        <i class="fas fa-edit text-green-300"></i>
+                                    </a>
+                                </form>
+                            </td>
+                        </tr> 
+                        @endforeach
+                    </tbody>
+                </table>
+                </div>
+                <div class="my-4 ms-2 me-2">
+                    {!! $customList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
+                </div>
+            </div>
+            @foreach ($customList as $item)
+                <!-- Detail Modal -->
+                <div class="modal fade bd-example-modal-lg" id="detailModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Detail Order</h4>
+                        <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <b>X</b>
+                        </a>
+                        </div>
+                        <div class="modal-body">
+                            Customer : {{$item->users->name}} <br>
+                            Tanggal transaksi : {{$item->tgl_transaksi}} <br><br>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Status</th>
+                                        <th>DP</th>
+                                        <th>Harga Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($item->customs as $list)
+                                    <tr>
+                                        <td>{{$list->name}}</td>
+                                        <td>{{$list->status}}</td>
+                                        <td>{{"Rp " . number_format($list->dp, 0, ".", '.')}}</td>
+                                        <td>{{"Rp " . number_format($list->total_harga, 0, ".", '.')}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

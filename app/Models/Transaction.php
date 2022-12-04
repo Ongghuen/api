@@ -36,6 +36,6 @@ class Transaction extends Model
 
     public function customs()
     {
-        return $this->hasOne(Custom::class);
+        return $this->hasMany(Custom::class);
     }
 }

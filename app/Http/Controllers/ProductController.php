@@ -83,17 +83,17 @@ class ProductController extends Controller
     //   ]);
     // }
   
-    public function show(Product $listing)
-    {
-      return view('listings.show', [
-        'listing' => $listing,
-      ]);
-    }
+    // public function show(Product $listing)
+    // {
+    //   return view('listings.show', [
+    //     'listing' => $listing,
+    //   ]);
+    // }
   
-    public function create()
-    {
-      return view('listings.create');
-    }
+    // public function create()
+    // {
+    //   return view('listings.create');
+    // }
   
     // public function store(Request $request)
     // {
@@ -121,10 +121,10 @@ class ProductController extends Controller
     //   return redirect('/listings')->with('message', 'Product Created Successfully');
     // }
   
-    public function edit(Product $listing)
-    {
-      return view('listings.edit', ['listing' => $listing]);
-    }
+    // public function edit(Product $listing)
+    // {
+    //   return view('listings.edit', ['listing' => $listing]);
+    // }
   
     // public function update(Request $request, Product $listing)
     // {
@@ -167,8 +167,8 @@ class ProductController extends Controller
     //   return redirect('/listings')->with('message', 'Product deleted successfully');
     // }
   
-    public function manage()
-    {
-      return view('listings.manage', ['listings' => auth()->user()->listings()->get()]);
-    }
+    // public function manage()
+    // {
+    //   return view('listings.manage', ['listings' => auth()->user()->listings()->get()]);
+    // }
 }
