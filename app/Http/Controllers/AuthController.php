@@ -35,14 +35,14 @@ class AuthController extends Controller
                 Session::flash('status','failed');
                 Session::flash('message', 'Maaf hanya admin yang boleh masuk!');
 
-                return redirect('/login');
+                return back();
             }
         }
 
         Session::flash('status','failed');
-        Session::flash('message', 'login wrong!');
+        Session::flash('message', 'Login gagal!');
 
-        return redirect('/login');
+        return back();
     }
 
     public function logout(Request $request){

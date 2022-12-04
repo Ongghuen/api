@@ -27,30 +27,30 @@ Route::get('/', function () {
 });
 
 # ========================== AUTH =========================
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/login', [AuthController::class, 'authenticating']);
-Route::get('/logout', [AuthController::class, 'logout']);
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'authenticating'])->middleware('guest');
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth');
 
 # ========================== DASHBOARD =========================
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 # ========================== ORDER =========================
-Route::get('/order', [OrderController::class, 'index']);
+Route::get('/order', [OrderController::class, 'index'])->middleware('auth');
 
 # ========================== PRODUCT =========================
-Route::get('/product', [ProductController::class, 'index']);
-Route::put('/product/{id}', [ProductController::class, 'update']);
-Route::post('/product', [ProductController::class, 'store']);
-Route::delete('/product-destroy/{id}', [ProductController::class, 'destroy']);
+Route::get('/product', [ProductController::class, 'index'])->middleware('auth');
+Route::put('/product/{id}', [ProductController::class, 'update'])->middleware('auth');
+Route::post('/product', [ProductController::class, 'store'])->middleware('auth');
+Route::delete('/product-destroy/{id}', [ProductController::class, 'destroy'])->middleware('auth');
 
 # ========================== USER =========================
-Route::get('/user', [UserController::class, 'index']);
-Route::put('/user/{id}', [UserController::class, 'update']);
-Route::post('/user', [UserController::class, 'store']);
-Route::delete('/user-destroy/{id}', [UserController::class, 'destroy']);
+Route::get('/user', [UserController::class, 'index'])->middleware('auth');
+Route::put('/user/{id}', [UserController::class, 'update'])->middleware('auth');
+Route::post('/user', [UserController::class, 'store'])->middleware('auth');
+Route::delete('/user-destroy/{id}', [UserController::class, 'destroy'])->middleware('auth');
 
 # ========================== CUSTOM =========================
-Route::get('/custom', [CustomController::class, 'index']);
+Route::get('/custom', [CustomController::class, 'index'])->middleware('auth');
 
 # ======================== LISTING ========================
 # to register
