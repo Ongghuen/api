@@ -7,7 +7,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href="./dashboard">
-                <img src="../assets/images/icon.png" class="navbar-brand-img h-100" alt="main_logo" />
+                <img src="{{asset('/images/icon.png')}}" class="navbar-brand-img h-100" alt="main_logo" />
                 <span class="ms-1 font-weight-bold">Suki Dashboard</span>
             </a>
         </div>
@@ -17,7 +17,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/dashboard">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-television text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
@@ -25,15 +25,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/order">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-cart text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-shopping-cart text-warning text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Orders</span>
+                        <span class="nav-link-text ms-1">Transactions</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/product">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bag-17 text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-shopping-bag text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Products</span>
                     </a>
@@ -41,7 +41,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/custom">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-archive text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Customs</span>
                     </a>
@@ -49,9 +49,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/user">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-circle-08 text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-user-circle text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/report">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-pie-chart text-warning text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Report</span>
                     </a>
                 </li>
                 <li class="nav-item mt-3">
@@ -62,7 +70,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/profile">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-user text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Profile</span>
                     </a>
@@ -126,7 +134,7 @@
         <div class="card mb-4">
             <div class="card-header pb-0">
             <div class="d-flex align-items-center">
-                <h6>Custom table</h6>
+                <h6>Customs table</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -162,27 +170,17 @@
                         <td class="align-middle text-center py-4">
                             <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
                         </td>
+                        <td class="align-middle text-center text-sm">
                         @if ($data->status == "Pending")
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-sm bg-gradient-warning px-3">Pending</span>
-                            </td>
-                        @elseif ($data->status == "Belum_Bayar")
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-sm bg-gradient-danger px-3">B. Bayar</span>
-                            </td>
+                                <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
+        
                         @elseif ($data->status == "Pengerjaan")
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-sm bg-gradient-primary px-3">Pengerjaan</span>
-                            </td>
-                        @elseif ($data->status == "Dikirim")
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-sm bg-gradient-info px-3">Dikirim</span>
-                            </td>
+                                <span class="badge badge-sm bg-gradient-primary w-100">Pengerjaan</span>
+                            
                         @elseif ($data->status == "Selesai")
-                            <td class="align-middle text-center text-sm">
-                                <span class="badge badge-sm bg-gradient-success px-3">Selesai</span>
-                            </td>
+                                <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>
                         @endif
+                        </td>
                         <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
                         </td>

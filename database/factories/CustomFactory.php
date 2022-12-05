@@ -20,7 +20,7 @@ class CustomFactory extends Factory
     {
         return [
             'name' => $this->faker->company(),
-            'status' => Arr::random(['Pending', 'Belum_Bayar','Pengerjaan', 'Dikirim', 'Selesai']),
+            'status' => Arr::random(['Pending','Pengerjaan', 'Selesai']),
             'jenis_custom' => Arr::random(['Kursi', 'Meja', 'Pagar', 'Pintu', 'Rak']),
             'bahan' => Arr::random(['Kayu Jati', 'Kayu Mahoni', 'Kaca', 'Besi', 'Alumunium']),
             'desc' => $this->faker->paragraph($nb =2),

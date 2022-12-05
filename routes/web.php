@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +52,9 @@ Route::delete('/user-destroy/{id}', [UserController::class, 'destroy'])->middlew
 
 # ========================== CUSTOM =========================
 Route::get('/custom', [CustomController::class, 'index'])->middleware('auth');
+
+# ======================== REPORT ========================
+Route::get('/report', [ReportController::class, 'index'])->middleware('auth');
 
 # ======================== LISTING ========================
 # to register

@@ -7,7 +7,7 @@
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href="/dashboard">
-                <img src="../assets/images/icon.png" class="navbar-brand-img h-100" alt="main_logo" />
+                <img src="{{asset('/images/icon.png')}}" class="navbar-brand-img h-100" alt="main_logo" />
                 <span class="ms-1 font-weight-bold">Suki Dashboard</span>
             </a>
         </div>
@@ -17,7 +17,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/dashboard">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-tv-2 text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-television text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
@@ -25,15 +25,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/order">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-cart text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-shopping-cart text-warning text-sm opacity-10"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Orders</span>
+                        <span class="nav-link-text ms-1">Transactions</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="/product">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-bag-17 text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-shopping-bag text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Products</span>
                     </a>
@@ -41,7 +41,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/custom">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-app text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-archive text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Customs</span>
                     </a>
@@ -49,9 +49,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/user">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-circle-08 text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-user-circle text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/report">
+                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-pie-chart text-warning text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Report</span>
                     </a>
                 </li>
                 <li class="nav-item mt-3">
@@ -62,7 +70,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/profile">
                         <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
+                            <i class="fa fa-user text-warning text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Profile</span>
                     </a>
@@ -261,12 +269,12 @@
                                             <div class="input-group-prepend">
                                               <div class="input-group-text">Rp. </div>
                                             </div>
-                                            <input type="text" class="form-control" name="harga" id="harga" value="{{$item->harga}}" required>
+                                            <input type="number" class="form-control" name="harga" id="harga" value="{{$item->harga}}" required>
                                           </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="qty">Qty</label>
-                                        <input class="form-control" type="text" name="qty" id="qty" value="{{$item->qty}}" required>
+                                        <input class="form-control" type="number" name="qty" id="qty" value="{{$item->qty}}" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="categories">Kategory</label>
@@ -352,12 +360,12 @@
                                         <div class="input-group-prepend">
                                           <div class="input-group-text">Rp. </div>
                                         </div>
-                                        <input type="text" class="form-control" name="harga" id="harga" required>
+                                        <input type="number" class="form-control" name="harga" id="harga" required>
                                       </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="qty">Qty</label>
-                                    <input class="form-control" type="text" name="qty" id="qty" required>
+                                    <input class="form-control" type="number" name="qty" id="qty" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="categories">Kategory</label>

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB; 
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use Illuminate\Support\Facades\File; 
+
 
 class ProductController extends Controller
 {
@@ -27,6 +29,7 @@ class ProductController extends Controller
       $product = Product::findOrFail($id);
 
       if($request->image){
+        File::delete(storage_path('app/public/' . Product::find($id)->image));
         $product->image = $request->image->store('product_image', 'public');
       }
 
@@ -65,6 +68,7 @@ class ProductController extends Controller
     }
 
     public function destroy($id){
+      File::delete(storage_path('app/public/' . Product::find($id)->image));
       $delete = Product::findOrFail($id);
       $delete->delete();
 
