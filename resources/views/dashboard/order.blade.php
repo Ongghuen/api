@@ -220,8 +220,8 @@
             </div>
             @foreach ($orderList as $item)
                 <!-- Detail Modal -->
-                <div class="modal fade" id="detailModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                <div class="modal fade bd-example-modal-lg" id="detailModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                         <h4 class="modal-title" id="exampleModalLabel">Detail Order</h4>

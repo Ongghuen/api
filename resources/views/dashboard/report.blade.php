@@ -84,7 +84,19 @@
     <div class="card shadow-lg mx-4 mt-3">
         <div class="card-body">
             <div class="row gx-4">
-                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                <form class="row gx-4 col-auto" action="">
+                    <div class="dropdown col-auto">
+                        <div class="form-group">
+                            <input class="form-control btn btn-sm bg-gradient-dark mb-1 px-3" value="" type="date" name="from_date" />
+                        </div>
+                    </div>
+                    <div class="dropdown col-auto">
+                        <div class="form-group">
+                            <input class="form-control btn btn-sm bg-gradient-dark mb-1 px-3" value="" type="date" name="to_date" />
+                        </div>
+                    </div>
+                </form>
+                <div class="col-lg-4 col-md-6 me-sm-0 mx-auto">
                     <div class="nav-wrapper position-relative end-0">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         <form class="input-group" action="" method="get">
@@ -133,6 +145,9 @@
             <div class="card-header pb-0">
             <div class="d-flex align-items-center">
                 <h6>Report product table</h6>
+                <button class="btn bg-gradient-dark btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#createModal">
+                    Export
+                </button>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -143,22 +158,25 @@
                             Order No.
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            @sortablelink('status', 'Status')
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             @sortablelink('users.name', 'Customer')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            @sortablelink('tgl_transaksi', 'Tgl. Transaksi')
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            @sortablelink('tgl_selesai', 'Tgl. Selesai')
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Daftar Produk
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Qty
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Subtotal
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             @sortablelink('total_harga', 'Total Harga')
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            @sortablelink('tgl_transaksi', 'Tanggal Transaksi')
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            @sortablelink('tgl_selesai', 'Tanggal Selesai')
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Action
                         </th>
                     </tr>
                     </thead>
@@ -168,28 +186,8 @@
                             <td class="align-middle text-center py-4">
                                 <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $orderList->firstItem() - 1}}</span>
                             </td>
-                            @if ($data->status == "Pending")
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-warning px-3">Pending</span>
-                                </td>
-                            @elseif ($data->status == "Belum_Bayar")
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-danger px-3">B. Bayar</span>
-                                </td>
-                            @elseif ($data->status == "Dikirim")
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-info px-3">Dikirim</span>
-                                </td>
-                            @elseif ($data->status == "Selesai")
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success px-3">Selesai</span>
-                                </td>
-                            @endif
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
                             </td>
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
@@ -197,15 +195,29 @@
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
                             </td>
-                            <td class="align-middle text-center text-sm ms-auto">
-                                <form action="dtOrder/{{$data->id}}" method="get">
-                                    <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
-                                        <i class="fas fa-eye text-green-300 pe-2"></i>
-                                    </a>
-                                    <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
-                                        <i class="fas fa-edit text-green-300"></i>
-                                    </a>
-                                </form>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
+                                    @foreach ($data->products as $item)
+                                        {{$item->name}}<br>
+                                    @endforeach
+                                </span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
+                                    @foreach ($data->products as $item)
+                                        {{$item->pivot->qty}}<br>
+                                    @endforeach
+                                </span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
+                                    @foreach ($data->products as $item)
+                                        {{"Rp " . number_format($item->pivot->sub_total, 0, ".", '.')}}<br>
+                                    @endforeach
+                                </span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
                             </td>
                         </tr> 
                         @endforeach
@@ -269,6 +281,9 @@
             <div class="card-header pb-0">
             <div class="d-flex align-items-center">
                 <h6>Report custom table</h6>
+                <button class="btn bg-gradient-dark btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#createModal">
+                    Export
+                </button>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -279,22 +294,25 @@
                             Order No.
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            @sortablelink('status', 'Status')
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             @sortablelink('users.name', 'Customer')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            @sortablelink('tgl_transaksi', 'Tgl. Transaksi')
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            @sortablelink('tgl_selesai', 'Tgl. Selesai')
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Daftar Produk
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Qty
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Subtotal
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             @sortablelink('total_harga', 'Total Harga')
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            @sortablelink('tgl_transaksi', 'Tanggal Transaksi')
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            @sortablelink('tgl_selesai', 'Tanggal Selesai')
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Action
                         </th>
                     </tr>
                     </thead>
@@ -304,28 +322,8 @@
                             <td class="align-middle text-center py-4">
                                 <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
                             </td>
-                            @if ($data->status == "Pending")
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-warning px-3">Pending</span>
-                                </td>
-                            @elseif ($data->status == "Belum_Bayar")
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-danger px-3">B. Bayar</span>
-                                </td>
-                            @elseif ($data->status == "Dikirim")
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-info px-3">Dikirim</span>
-                                </td>
-                            @elseif ($data->status == "Selesai")
-                                <td class="align-middle text-center text-sm">
-                                    <span class="badge badge-sm bg-gradient-success px-3">Selesai</span>
-                                </td>
-                            @endif
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
                             </td>
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
@@ -333,15 +331,29 @@
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
                             </td>
-                            <td class="align-middle text-center text-sm ms-auto">
-                                <form action="dtOrder/{{$data->id}}" method="get">
-                                    <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
-                                        <i class="fas fa-eye text-green-300 pe-2"></i>
-                                    </a>
-                                    <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
-                                        <i class="fas fa-edit text-green-300"></i>
-                                    </a>
-                                </form>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
+                                    @foreach ($data->customs as $item)
+                                        {{$item->name}}<br>
+                                    @endforeach
+                                </span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
+                                    @foreach ($data->customs as $item)
+                                        {{$item->qty}}<br>
+                                    @endforeach
+                                </span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
+                                    @foreach ($data->customs as $item)
+                                        {{"Rp " . number_format($item->total_harga*$item->qty, 0, ".", '.')}}<br>
+                                    @endforeach
+                                </span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
                             </td>
                         </tr> 
                         @endforeach

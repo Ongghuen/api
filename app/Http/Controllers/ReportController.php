@@ -18,6 +18,9 @@ class ReportController extends Controller
                             ->WhereHas('users', function($query) use($keyword){
                                 $query->where('name', 'LIKE', '%'.$keyword.'%');
                             })
+                            ->orWhereHas('products', function($query) use($keyword){
+                                $query->where('name', 'LIKE', '%'.$keyword.'%');
+                            })
                             ->orWhere('total_harga', $keyword)
                             ->orWhere('tgl_transaksi', $keyword)
                             ->orWhere('tgl_selesai', $keyword);
@@ -36,6 +39,9 @@ class ReportController extends Controller
                             ->WhereHas('users', function($query) use($keyword){
                                 $query->where('name', 'LIKE', '%'.$keyword.'%');
                             })
+                            ->orWhereHas('customs', function($query) use($keyword){
+                                $query->where('name', 'LIKE', '%'.$keyword.'%');
+                            })
                             ->orWhere('total_harga', $keyword)
                             ->orWhere('tgl_transaksi', $keyword)
                             ->orWhere('tgl_selesai', $keyword);
@@ -45,7 +51,7 @@ class ReportController extends Controller
                             ->where('categories', 'Custom');
                     })
                     ->where('Status', 'Selesai')
-                    ->sortable()
+                    ->sortable()    
                     ->paginate(10);
 
         return view('dashboard.report', ['orderList' => $order, 'customList' => $custom]);
