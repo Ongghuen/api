@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiOrderController;
 use App\Http\Controllers\ApiProductController;
 use App\Http\Controllers\ApiWishlistController;
 use App\Models\User;
@@ -44,6 +45,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::get('/wishlists', [ApiWishlistController::class, 'index']);
   Route::post('/wishlists', [ApiWishlistController::class, 'store']);
   Route::delete('/wishlists/{product_id}', [ApiWishlistController::class, 'destroy']);
+
+  Route::get('/orders', [ApiOrderController::class, 'index']);
 
   Route::post('/logout', [ApiAuthController::class, 'logout']);
 });
