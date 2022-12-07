@@ -45,14 +45,14 @@ class Product extends Model
     return $this->belongsToMany(User::class);
   }
 
-  public function transactionsDetails()
+  public function transactions()
   {
     return $this->belongsToMany(
       Transaction::class,
       'transaction_details',
       'product_id',
       'transaction_id'
-    )->withPivot(['qty','sub_total']);
+    );
   }
 
   /* public function users() */

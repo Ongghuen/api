@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiDetailOrderController;
 use App\Http\Controllers\ApiOrderController;
 use App\Http\Controllers\ApiProductController;
 use App\Http\Controllers\ApiWishlistController;
@@ -53,6 +54,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   // orders & details
   Route::get('/orders', [ApiOrderController::class, 'index']);
   Route::post('/orders/create', [ApiOrderController::class, 'store']);
+  Route::get('/orders/detail', [ApiDetailOrderController::class, 'index']);
+  Route::post('/orders/detail', [ApiDetailOrderController::class, 'store']);
+  Route::get('/orders/detail/{id}', [ApiDetailOrderController::class, 'show']);
 
   // logout
   Route::post('/logout', [ApiAuthController::class, 'logout']);

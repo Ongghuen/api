@@ -35,8 +35,8 @@ class ApiWishlistController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
+  public function destroy(Request $request)
   {
-    return auth()->user()->wishlists()->detach($id);
+    return auth()->user()->wishlists()->detach($request->product_id);
   }
 }

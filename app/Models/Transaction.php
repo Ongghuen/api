@@ -8,34 +8,38 @@ use Kyslik\ColumnSortable\Sortable;
 
 class Transaction extends Model
 {
-    use HasFactory, Sortable;
+  use HasFactory, Sortable;
 
-    protected $table = 'transactions';
-    protected $fillable = [
-        'user_id',
-        'total_harga',
-        'tgl_transaksi',
-        'tgl_selesai',
-        'status'
-    ];
+  protected $table = 'transactions';
+  protected $fillable = [
+    'user_id',
+    'total_harga',
+    'tgl_transaksi',
+    'tgl_selesai',
+    'status'
+  ];
 
-    public $sortable =[
-        'status', 'total_harga', 'tgl_transaksi', 'tgl_selesai'
-    ];
+  public $sortable = [
+    'status', 'total_harga', 'tgl_transaksi', 'tgl_selesai'
+  ];
 
-    public function users()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
+  public function users()
+  {
+    return $this->belongsTo(User::class, 'user_id', 'id');
+  }
 
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'transaction_details', 'transaction_id',
-        'product_id')->withPivot(['qty', 'sub_total']);
-    }
+  public function products()
+  {
+    return $this->belongsToMany(
+      Product::class,
+      'transaction_details',
+      'transaction_id',
+      'product_id'
+    );
+  }
 
-    public function customs()
-    {
-        return $this->hasMany(Custom::class);
-    }
+  public function customs()
+  {
+    return $this->hasMany(Custom::class);
+  }
 }
