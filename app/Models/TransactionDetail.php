@@ -14,4 +14,10 @@ class TransactionDetail extends Model
     'product_id',
   ];
   public $timestamps = false;
+
+  public function products()
+  {
+    return $this->belongsToMany(Product::class);
+  }
+
 }

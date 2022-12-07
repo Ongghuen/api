@@ -45,7 +45,7 @@ class Product extends Model
     return $this->belongsToMany(User::class);
   }
 
-  public function transactions()
+  public function transactionsDetails()
   {
     return $this->belongsToMany(
       Transaction::class,

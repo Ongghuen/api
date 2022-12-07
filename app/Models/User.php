@@ -57,6 +57,11 @@ class User extends Authenticatable
     return $this->belongsToMany(Product::class, 'wishlists', 'user_id', 'product_id');
   }
 
+  public function transactions()
+  {
+    return $this->hasMany(Transaction::class);
+  }
+
   public function roles()
     {
         return $this->belongsTo(Role::class, 'role_id', 'id');

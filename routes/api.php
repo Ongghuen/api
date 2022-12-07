@@ -29,24 +29,31 @@ Route::get('/login', function () {
 
 /* Route::resource('products', ApiProductController::class); */
 
+// auth
 Route::post('/login', [ApiAuthController::class, 'login']);
 Route::post('/register', [ApiAuthController::class, 'register']);
+
+// products
 Route::get('/products', [ApiProductController::class, 'index']);
 Route::get('/products/search', [ApiProductController::class, 'search']);
 Route::get('/products/{id}', [ApiProductController::class, 'show']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
+  // products manipulation
   Route::post('/products', [ApiProductController::class, 'store']);
   Route::put('/products/{id}', [ApiProductController::class, 'update']);
   Route::delete('/products/{id}', [ApiProductController::class, 'destroy']);
 
-
+  // wishlists
   Route::get('/wishlists', [ApiWishlistController::class, 'index']);
   Route::post('/wishlists', [ApiWishlistController::class, 'store']);
   Route::delete('/wishlists/{product_id}', [ApiWishlistController::class, 'destroy']);
 
+  // orders & details
   Route::get('/orders', [ApiOrderController::class, 'index']);
+  Route::post('/orders/create', [ApiOrderController::class, 'store']);
 
+  // logout
   Route::post('/logout', [ApiAuthController::class, 'logout']);
 });
