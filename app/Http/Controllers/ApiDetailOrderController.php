@@ -11,12 +11,11 @@ class ApiDetailOrderController extends Controller
   public function index()
   {
     return response()->json(['results' => Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->get()]);
-    // return response()->json(['results' => Transaction::all()->products()]);
   }
 
   public function store(Request $request)
   {
-    return auth()->user()->wishlists()->attach($request->product_id);
+    return response()->json(['results' => Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->attach($request->product_id)]);
   }
 
   public function show($id)
@@ -29,8 +28,8 @@ class ApiDetailOrderController extends Controller
     //
   }
 
-  public function destroy($id)
+  public function destroy(Request $request)
   {
-    //
+    return response()->json(['results' => Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->detach($request->product_id)]);
   }
 }
