@@ -84,20 +84,25 @@
     <div class="card shadow-lg mx-4 mt-3">
         <div class="card-body">
             <div class="row gx-4">
-                <form class="row gx-4 dropdown col-auto" action="" method="post">
+                <div class="dropdown col-auto">
+                    <a href="/product" class="btn bg-gradient-dark btn-sm ms-auto px-3 my-1" type="submit">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <form class="row gx-4 dropdown col-auto" action="" method="get">
                     <div class="dropdown col-auto">
-                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3 my-1" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         Kategori
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item" value="kasur" name="tampilkategori" type="submit">Kasur</button>
-                            <button class="dropdown-item" value="lemari" name="tampilkategori" type="submit">Lemari</button>
-                            <button class="dropdown-item" value="meja" name="tampilkategori" type="submit">Meja</button>
-                            <button class="dropdown-item" value="kursi" name="tampilkategori" type="submit">Kursi</button>
+                            <button class="dropdown-item" value="Kursi" name="keyword" type="submit">Kursi</button>
+                            <button class="dropdown-item" value="Pagar" name="keyword" type="submit">Pagar</button>
+                            <button class="dropdown-item" value="Meja" name="keyword" type="submit">Meja</button>
+                            <button class="dropdown-item" value="Pintu" name="keyword" type="submit">Pintu</button>
                         </ul>
                     </div>
                 </form>
-                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                <div class="col-lg-4 col-md-6 me-sm-0 mx-auto">
                     <div class="nav-wrapper position-relative end-0">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         <form class="input-group" action="" method="get">

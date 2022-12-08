@@ -85,37 +85,24 @@
         <div class="card-body">
             <div class="row gx-4">
                 <div class="dropdown col-auto">
-                    <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Month
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">January</a></li>
-                        <li><a class="dropdown-item" href="#">February</a></li>
-                        <li><a class="dropdown-item" href="#">March</a></li>
-                        <li><a class="dropdown-item" href="#">April</a></li>
-                        <li><a class="dropdown-item" href="#">May</a></li>
-                        <li><a class="dropdown-item" href="#">June</a></li>
-                        <li><a class="dropdown-item" href="#">July</a></li>
-                        <li><a class="dropdown-item" href="#">August</a></li>
-                        <li><a class="dropdown-item" href="#">September</a></li>
-                        <li><a class="dropdown-item" href="#">October</a></li>
-                        <li><a class="dropdown-item" href="#">November</a></li>
-                        <li><a class="dropdown-item" href="#">December</a></li>
-                    </ul>
-                    </div>
-                        <div class="dropdown col-auto">
-                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-4" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            Year
+                    <a href="/order" class="btn bg-gradient-dark btn-sm ms-auto px-3 my-1" type="submit">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <form class="row gx-4 dropdown col-auto" action="" method="get">
+                    <div class="dropdown col-auto">
+                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3 my-1" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Status
                         </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#">2020</a></li>
-                                <li><a class="dropdown-item" href="#">2021</a></li>
-                                <li><a class="dropdown-item" href="#">2022</a></li>
-                                <li><a class="dropdown-item" href="#">2023</a></li>
-                                <li><a class="dropdown-item" href="#">2024</a></li>
-                            </ul>
-                        </div>
-                    <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <button class="dropdown-item" value="Pending" name="keyword" type="submit">Pending</button>
+                            <button class="dropdown-item" value="Belum_Bayar" name="keyword" type="submit">Belum Bayar</button>
+                            <button class="dropdown-item" value="Dikirim" name="keyword" type="submit">Dikirim</button>
+                            <button class="dropdown-item" value="Selesai" name="keyword" type="submit">Selesai</button>
+                        </ul>
+                    </div>
+                </form>
+                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                     <div class="nav-wrapper position-relative end-0">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                             <form class="input-group" action="" method="get">

@@ -85,30 +85,47 @@
     <div class="card shadow-lg mx-4 mt-3">
         <div class="card-body">
             <div class="row gx-4">
-                <div class="dropdown col-auto">
-                    <form action="" method="post">
-                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Kategori
+                <div class="dropdown col-auto col-auto">
+                    <a href="/custom" class="btn bg-gradient-dark btn-sm ms-auto px-3 my-1" type="submit">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <form class="row gx-4 dropdown col-auto" action="" method="get">
+                    <div class="dropdown col-auto">
+                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3 my-1" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Status
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item" value="kasur" name="tampilkategori" type="submit">Kasur</button>
-                            <button class="dropdown-item" value="lemari" name="tampilkategori" type="submit">Lemari</button>
-                            <button class="dropdown-item" value="meja" name="tampilkategori" type="submit">Meja</button>
-                            <button class="dropdown-item" value="kursi" name="tampilkategori" type="submit">Kursi</button>
+                            <button class="dropdown-item" value="Pending" name="keyword" type="submit">Pending</button>
+                            <button class="dropdown-item" value="Pengerjaan" name="keyword" type="submit">Pengerjaan</button>
+                            <button class="dropdown-item" value="Selesai" name="keyword" type="submit">Selesai</button>
                         </ul>
-                    </form>
-                </div>
-                <div class="dropdown col-auto">
-                    <form action="" method="post">
-                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    </div>
+                    <div class="dropdown col-auto">
+                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3 my-1" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Jenis Custom
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <button class="dropdown-item" value="Kursi" name="keyword" type="submit">Kursi</button>
+                            <button class="dropdown-item" value="Pagar" name="keyword" type="submit">Pagar</button>
+                            <button class="dropdown-item" value="Meja" name="keyword" type="submit">Meja</button>
+                            <button class="dropdown-item" value="Pintu" name="keyword" type="submit">Pintu</button>
+                            <button class="dropdown-item" value="rak" name="keyword" type="submit">rak</button>
+                        </ul>
+                    </div>
+                    <div class="dropdown col-auto">
+                        <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3 my-1" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         Bahan
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button class="dropdown-item" value="kayu" name="tampilbahan" type="submit">Kayu</button>
-                        <button class="dropdown-item" value="besi" name="tampilbahan" type="submit">Besi</button>
+                            <button class="dropdown-item" value="Kayu Jati" name="keyword" type="submit">Kayu Jati</button>
+                            <button class="dropdown-item" value="Kayu Mahoni" name="keyword" type="submit">Kayu Mahoni</button>
+                            <button class="dropdown-item" value="Besi" name="keyword" type="submit">Besi</button>
+                            <button class="dropdown-item" value="Kaca" name="keyword" type="submit">Kaca</button>
+                            <button class="dropdown-item" value="Alumunium" name="keyword" type="submit">Alumunium</button>
                         </ul>
-                    </form>
-                </div>
+                    </div>
+                </form>
                 <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                     <div class="nav-wrapper position-relative end-0">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -170,16 +187,14 @@
                         <td class="align-middle text-center py-4">
                             <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
                         </td>
-                        <td class="align-middle text-center text-sm">
-                        @if ($data->status == "Pending")
-                                <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
-        
-                        @elseif ($data->status == "Pengerjaan")
-                                <span class="badge badge-sm bg-gradient-primary w-100">Pengerjaan</span>
-                            
-                        @elseif ($data->status == "Selesai")
-                                <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>
-                        @endif
+                        <td class="align-middle text-center text-sm pe-3">
+                            @if ($data->status == "Pending")
+                                    <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
+                            @elseif ($data->status == "Pengerjaan")
+                                    <span class="badge badge-sm bg-gradient-primary w-100">Pengerjaan</span>
+                            @elseif ($data->status == "Selesai")
+                                    <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>
+                            @endif
                         </td>
                         <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
