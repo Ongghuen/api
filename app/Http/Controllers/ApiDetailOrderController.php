@@ -23,9 +23,9 @@ class ApiDetailOrderController extends Controller
     return response()->json(['results' => TransactionDetail::where('transaction_id', $id)->get()]);
   }
 
-  public function update(Request $request, $id)
+  public function update(Request $request)
   {
-    //
+    return response()->json(['results' => Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->updateExistingPivot($request->product_id, ['qty' => $request->qty])]);
   }
 
   public function destroy(Request $request)

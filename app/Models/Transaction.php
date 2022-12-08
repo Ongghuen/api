@@ -35,7 +35,7 @@ class Transaction extends Model
       'transaction_details',
       'transaction_id',
       'product_id'
-    );
+    )->withPivot(['qty', 'sub_total']);
   }
 
   public function customs()

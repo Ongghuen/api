@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -48,9 +49,14 @@ class ApiAuthController extends Controller
     $user = User::create($formField);
     $token = $user->createToken('suki')->plainTextToken;
 
+    $new = Transaction::create([
+      'user_id' => $user->id,
+    ]);
+
     return response([
       'user' => $user,
-      'token' => $token
+      'token' => $token,
+      'cart' => $new
     ], 201);
   }
 
