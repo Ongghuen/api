@@ -25,7 +25,7 @@ class UserCreateRequest extends FormRequest
     {
         return [
             'name' => 'max:50|required',
-            'image' => 'image|file|max:1024',
+            'image' => 'image|file|max:2048|image|mimes:jpg,png,jpeg,gif,svg',
             'email' => 'unique:users|required',
             'phone' => 'max:13|required',
             'address' => 'max:100|required',
@@ -46,7 +46,8 @@ class UserCreateRequest extends FormRequest
             'password.min' => 'Password minimal :min karakter.',
             'email.unique' => 'Email sudah terdaftar.',
             'image.image' => 'File yang anda upload bukan gambar',
-            'image.file' => 'Ukuran maksimal foto ada 1 MB'
+            'image.file' => 'Ukuran maksimal foto ada 2 MB',
+            'image.mimes' => 'File harus bertipe: jpg,png,jpeg,gif,svg.'
         ];
     }
 }

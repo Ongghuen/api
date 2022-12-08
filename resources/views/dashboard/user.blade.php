@@ -62,19 +62,6 @@
                         <span class="nav-link-text ms-1">Report</span>
                     </a>
                 </li>
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
-                        Account pages
-                    </h6>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">
-                        <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fa fa-user text-warning text-sm opacity-10"></i>
-                        </div>
-                        <span class="nav-link-text ms-1">Profile</span>
-                    </a>
-                </li>
             </ul>
         </div>
     </aside>
@@ -242,12 +229,19 @@
                                         </ul>
                                     </div>    
                                 @endif
-                                <form action="/user/{{$item->id}}" method="POST">
+                                <form action="/user/{{$item->id}}" method="POST" enctype="multipart/form-data">
                                     @method('PUT')
                                     @csrf
                                     <div class="form-group">
                                         <label for="name">Nama User</label>
                                         <input class="form-control" type="text" name="name" id="name" value="{{$item->name}}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="image">Upload Foto</label> <br>
+                                        <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('/images/profile.jpg') }}" class="rounded pb-3" width="100px" alt="{{$item->name}}" /> <br>
+                                        <div class="input-group">
+                                            <input type="file" name="image" class="form-control" id="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" value="{{$item->image}}">
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Email</label>

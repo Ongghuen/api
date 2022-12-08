@@ -37,7 +37,16 @@ class UserController extends Controller
   public function update(UserUpdateRequest $request, $id){
     $user = User::findOrFail($id);
 
-    $user->update($request->all());
+    if($request->image){
+      File::delete(storage_path('app/public/' . User::find($id)->image));
+      $user->image = $request->image->store('product_image', 'public');
+    }
+
+    $user->name = $request->name;
+    $user->phone = $request->phone;
+    $user->email = $request->email;
+    $user->address = $request->address;
+    $user->update();
     if($user){
       Session::flash('status','failed');
       Session::flash('message', 'update data pengguna success!');
@@ -85,7 +94,7 @@ class UserController extends Controller
 
     if($request->image){
       File::delete(storage_path('app/public/' . User::find($id)->image));
-      $user->image = $request->image->store('product_image', 'public');
+      $user->image = $request->image->store('user_image', 'public');
     }
 
     $user->name = $request->name;

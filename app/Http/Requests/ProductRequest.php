@@ -28,7 +28,8 @@ class ProductRequest extends FormRequest
             'harga' => 'max:11|required',
             'qty' => 'max:4|required',
             'categories' => 'max:100|required',
-            'desc' => 'required'
+            'desc' => 'required',
+            'image' => 'image|file|max:2048|image|mimes:jpg,png,jpeg,gif,svg',
         ];
     }
 
@@ -43,7 +44,10 @@ class ProductRequest extends FormRequest
             'harga.max' => 'Harga maksimal :max karakter.',
             'qty.max' => 'Qty maksimal :max karakter.',
             'categories.max' => 'Kategori maksimal :max karakter.',
-            'name.unique' => 'Nama ini sudah terdaftar.'
+            'name.unique' => 'Nama ini sudah terdaftar.',
+            'image.image' => 'File yang anda upload bukan gambar',
+            'image.file' => 'Ukuran maksimal foto ada 2 MB',
+            'image.mimes' => 'File harus bertipe: jpg,png,jpeg,gif,svg.'
         ];
     }
 }
