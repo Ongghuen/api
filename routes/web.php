@@ -49,6 +49,7 @@ Route::get('/user', [UserController::class, 'index'])->middleware('auth');
 Route::put('/user/{id}', [UserController::class, 'update'])->middleware('auth');
 Route::post('/user', [UserController::class, 'store'])->middleware('auth');
 Route::delete('/user-destroy/{id}', [UserController::class, 'destroy'])->middleware('auth');
+Route::put('/profile/{id}', [UserController::class, 'profile'])->middleware('auth');
 
 # ========================== CUSTOM =========================
 Route::get('/custom', [CustomController::class, 'index'])->middleware('auth');

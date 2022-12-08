@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB; 
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
+use Illuminate\Support\Facades\File; 
 
 class UserController extends Controller
 {
@@ -17,11 +18,17 @@ class UserController extends Controller
     $keyword = $request->keyword;
 
     $user = User::with('roles')
-              ->where('name', 'LIKE', '%'.$keyword.'%')
-              ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
-              ->orWhere('username', 'LIKE', '%'.$keyword.'%')
-              ->orWhere('address', 'LIKE', '%'.$keyword.'%')
-              ->orWhere('email', 'LIKE', '%'.$keyword.'%')
+              ->where(function ($query) use($keyword){
+                $query
+                  ->where('name', 'LIKE', '%'.$keyword.'%')
+                  ->orWhere('phone', 'LIKE', '%'.$keyword.'%')
+                  ->orWhere('username', 'LIKE', '%'.$keyword.'%')
+                  ->orWhere('address', 'LIKE', '%'.$keyword.'%')
+                  ->orWhere('email', 'LIKE', '%'.$keyword.'%');
+              })
+              ->whereHas('roles', function($query) use($keyword){
+                $query->where('name', 'User');
+              })
               ->sortable()
               ->paginate(15);
     return view('dashboard.user', ['userList' => $user]);
@@ -71,6 +78,27 @@ class UserController extends Controller
     }
 
     return redirect('/user');
+  }
+
+  public function profile(UserUpdateRequest $request, $id){
+    $user = User::findOrFail($id);
+
+    if($request->image){
+      File::delete(storage_path('app/public/' . User::find($id)->image));
+      $user->image = $request->image->store('product_image', 'public');
+    }
+
+    $user->name = $request->name;
+    $user->phone = $request->phone;
+    $user->username = $request->username;
+    $user->email = $request->email;
+    $user->address = $request->address;
+    $user->update();
+    if($user){
+      Session::flash('status','success');
+      Session::flash('message', 'update data profile sukses!');
+    }
+    return back();
   }
 
   // public function create() {

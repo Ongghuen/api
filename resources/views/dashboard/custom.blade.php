@@ -189,11 +189,11 @@
                         </td>
                         <td class="align-middle text-center text-sm pe-3">
                             @if ($data->status == "Pending")
-                                    <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
+                                    <span class="badge badge-sm bg-gradient-warning w-80">Pending</span>
                             @elseif ($data->status == "Pengerjaan")
-                                    <span class="badge badge-sm bg-gradient-primary w-100">Pengerjaan</span>
+                                    <span class="badge badge-sm bg-gradient-primary w-80">Pengerjaan</span>
                             @elseif ($data->status == "Selesai")
-                                    <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>
+                                    <span class="badge badge-sm bg-gradient-success w-80">Selesai</span>
                             @endif
                         </td>
                         <td class="align-middle text-center">

@@ -13,10 +13,9 @@
     <link id="pagestyle" href="{{asset('css/argon-dashboard.css')}}" rel="stylesheet" />
 </head>
 <body class="g-sidenav-show bg-gray-100">
-    <div class="position-absolute w-100 min-height-300 top-0" style="
+    <div class="position-absolute w-100 min-height-300 top-0 position-fixed" style="
         background-image: url('../../images/nv-bg.jpg');
         background-position-y: 50%;">
-        
     </div>
 
     <!-- Sidebar -->
@@ -56,29 +55,31 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                            <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-chevron-circle-down cursor-pointer"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                                 <li class="dropdown-item d-flex align-items-center">
-                                    <a href="javascript:;" class="nav-link text-black px-2">
-                                        <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+                                    <a class="text-black px-2">
+                                        <i class="fa fa-info-circle fixed-plugin-button-nav cursor-pointer"></i>
                                     </a>
                                     <a href="/setting" class="ps-2">
-                                        Setting
+                                        About Us
                                     </a>
                                 </li>
+                                <div class="dropdown-divider"></div>
                                 <li class="dropdown-item d-flex align-items-center">
-                                    <a href="/profile" class="nav-link text-black">
-                                        <i class="fa fa-user fixed-plugin-button-nav cursor-pointer"></i>
+                                    <a href="/profile" class="text-black">
+                                        <i class="fa fa-user fixed-plugin-button-nav cursor-pointer px-2"></i>
                                     </a>
-                                    <a href="/profile" class="ps-2">
+                                    <a data-bs-toggle="modal" data-bs-target="#updateModal" class="ps-2">
                                         Profile
                                     </a>
                                 </li>
+                                <div class="dropdown-divider"></div>
                                 <li class="dropdown-item d-flex align-items-center">
-                                    <a href="/logout" class="nav-link text-black">
-                                        <i class="fa fa-sign-out cursor-pointer"></i>
+                                    <a href="/logout" class="text-black">
+                                        <i class="fa fa-sign-out cursor-pointer px-2"></i>
                                     </a>
                                     <a href="/logout" class="ps-2">
                                         Logout
@@ -113,22 +114,6 @@
                             for Sumber Rezeki II.
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                            </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </footer>
@@ -137,5 +122,68 @@
     </main>
     
     @yield('javascript')
+
+    <!-- Update Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Profile</h4>
+                    <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <b>X</b>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li><b>{{$error}}</b></li>
+                                @endforeach
+                            </ul>
+                        </div>    
+                    @endif
+                    <form action="/profile/{{Auth::user()->id}}" method="POST" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
+                        <div class="form-group">
+                            <label for="image">Update Foto</label> <br>
+                            <img src="{{ Auth::user()->image ? asset('storage/' . Auth::user()->image) : asset('/images/box.png') }}" class="rounded pb-3" width="100px" alt="{{Auth::user()->image}}" /> <br>
+                            <div class="input-group">
+                                <input type="file" name="image" class="form-control" id="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" value="{{Auth::user()->image}}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Nama</label>
+                            <input class="form-control" type="text" name="name" id="name" value="{{Auth::user()->name}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Alamat</label>
+                            <textarea class="form-control" type="text" name="address" id="address" rows="3" required>{{Auth::user()->address}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">No. Telepon</label>
+                            <input class="form-control" type="text" name="phone" id="phone" value="{{Auth::user()->phone}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Username</label>
+                            <input class="form-control" type="text" name="username" id="username" value="{{Auth::user()->username}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Email</label>
+                            <input class="form-control" type="text" name="email" id="email" value="{{Auth::user()->email}}" required>
+                        </div>
+                        <div class="d-flex justify-content-between mt-2">
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Update Modal -->
+
+
 </body>
 </html>
