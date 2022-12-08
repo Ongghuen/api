@@ -84,7 +84,12 @@
     <div class="card shadow-lg mx-4 mt-3">
         <div class="card-body">
             <div class="row gx-4">
-                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                <div class="dropdown col-auto">
+                    <a href="/user" class="btn bg-gradient-dark btn-sm ms-auto px-3 my-1" type="submit">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6 me-sm-0 mx-auto">
                     <div class="nav-wrapper position-relative end-0">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                         <form class="input-group" action="" method="get">

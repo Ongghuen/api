@@ -84,16 +84,22 @@
     <div class="card shadow-lg mx-4 mt-3">
         <div class="card-body">
             <div class="row gx-4">
-                <form class="row gx-4 col-auto" action="">
+                <div class="dropdown col-auto">
+                    <a href="/report" class="btn bg-gradient-dark btn-sm ms-auto px-3 my-1" type="submit">
+                        <i class="fa fa-refresh" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <form class="row gx-4 dropdown col-auto" action="/report-date" method="get">
                     <div class="dropdown col-auto">
-                        <div class="form-group">
-                            <input class="form-control btn btn-sm bg-gradient-dark mb-1 px-3" value="" type="date" name="from_date" />
-                        </div>
+                        <input class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date1" />
                     </div>
                     <div class="dropdown col-auto">
-                        <div class="form-group">
-                            <input class="form-control btn btn-sm bg-gradient-dark mb-1 px-3" value="" type="date" name="to_date" />
-                        </div>
+                        <input class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date2" />
+                    </div>
+                    <div class="dropdown col-auto">
+                        <button class="btn bg-gradient-dark btn-sm ms-auto my-1" type="submit">
+                            Cari
+                        </button>
                     </div>
                 </form>
                 <div class="col-lg-4 col-md-6 me-sm-0 mx-auto">
@@ -150,6 +156,11 @@
                 </button>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
+                @if(Session::has('status'))
+                    <div class="alert alert-danger ms-1 my-3 font-weight-bold" role="alert">
+                        {{Session::get('message')}}
+                    </div>
+                @endif
                 <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                     <thead>
