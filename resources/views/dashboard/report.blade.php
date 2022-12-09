@@ -69,51 +69,79 @@
 
 @section('action')
 <div class="card shadow-lg mx-4 mt-3">
-  <div class="card-body">
-    <div class="row gx-4">
-      <div class="dropdown col-auto">
-        <a href="/report" class="btn bg-gradient-dark btn-sm ms-auto px-3 my-1" type="submit">
-          <i class="fa fa-refresh" aria-hidden="true"></i>
-        </a>
-      </div>
-      <form class="row gx-4 dropdown col-auto" action="/report-date" method="get">
+    <div class="card-body">
+        <div class="row gx-4">
         <div class="dropdown col-auto">
-          <input class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date1" id="date1" />
+            <a href="/report" class="btn bg-gradient-dark btn-sm ms-auto px-3 my-1" type="submit">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+            </a>
         </div>
-        <div class="dropdown col-auto">
-          <input class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date2" id="date2" />
-        </div>
-        <div class="dropdown col-auto">
-          <button class="btn bg-gradient-dark btn-sm ms-auto my-1" type="submit">
-            Cari
-          </button>
-        </div>
-        <div class="dropdown col-auto">
-        </div>
-      </form>
-      <form action="/report-pdf" method="get">
-          <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate1" id="i-date1" />
-          <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate2" id="i-date2" />
-        <button type="submit" class="btn bg-gradient-dark btn-sm ms-auto my-1" onclick="getInputValue()">
-          PDF
-        </button>
-      </form>
-      <div class="col-lg-4 col-md-6 me-sm-0 mx-auto">
-        <div class="nav-wrapper position-relative end-0">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <form class="input-group" action="" method="get">
-              <div class="input-group">
-                <input type="text" class="form-control ms-4" name="keyword" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
-                <button class="btn bg-gradient-dark  mb-0" name="caridata" type="submit" id="button-addon2">
-                  <i class="fas fa-search" aria-hidden="true"></i>
+        <form class="row gx-4 dropdown col-auto" action="/report-date" method="get">
+            <div class="dropdown col-auto">
+                <input class="form-control btn btn-sm bg-gradient-dark mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date1" id="date1" />
+            </div>
+            <div class="dropdown col-auto">
+                <input class="form-control btn btn-sm bg-gradient-dark mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date2" id="date2" />
+            </div>
+            <div class="dropdown col-auto">
+                <button class="btn bg-gradient-dark btn-sm ms-auto my-1" type="submit">
+                    Cari
                 </button>
-              </div>
-            </form>
-          </div>
+            </div>
+        </form>
+        <div class="dropdown col-auto">
+            <button class="btn bg-gradient-dark btn-sm ms-auto my-1" data-bs-toggle="modal" data-bs-target="#exportModal">
+                Export
+            </button>
         </div>
-      </div>
+
+        <div class="modal fade bd-example-modal-sm" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Export Report</h5>
+                    <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                        <b>X</b>
+                    </a>
+                </div>
+                <div class="modal-body d-flex">
+                    <form class="mx-3" action="/report-pdf" method="get">
+                        <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate1" id="i-date1" />
+                        <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate2" id="i-date2" />
+                        <button type="submit" class="btn bg-gradient-dark btn-sm ms-auto my-1" onclick="getInputValue()">
+                            <i class="fa fa-file-pdf-o me-1" aria-hidden="true"></i>
+                            PDF
+                        </button>
+                    </form>
+                    <form class="mx-3" action="/report-pdf" method="get">
+                        <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate1" id="i-date1" />
+                        <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate2" id="i-date2" />
+                        <button type="submit" class="btn bg-gradient-dark btn-sm ms-auto my-1" onclick="getInputValue()">
+                            <i class="fa fa-file-excel-o me-1" aria-hidden="true"></i>
+                            Excel
+                        </button>
+                    </form>
+                </div>
+              </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6 me-sm-0 mx-auto">
+            <div class="nav-wrapper position-relative end-0">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <form class="input-group" action="" method="get">
+                <div class="input-group">
+                    <input type="text" class="form-control ms-4" name="keyword" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
+                    <button class="btn bg-gradient-dark  mb-0" name="caridata" type="submit" id="button-addon2">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        </div>
     </div>
-  </div>
 </div>
 @endsection
 
