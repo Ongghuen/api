@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ApiOrderController extends Controller
 {
@@ -27,7 +28,20 @@ class ApiOrderController extends Controller
     // buat "transaksi" baru buat keranjang
     $new = Transaction::create([
       'user_id' => auth()->user()->id,
+      'alamat' => auth()->user()->address
     ]);
     return response()->json(['results' => $new]);
+  }
+  public function upload(Request $request, $id)
+  {
+    $transaction = Transaction::find($id);
+
+    // update stuff di transaksi
+    if ($request->bukti_bayar) {
+      File::delete(storage_path('app/public/' . $transaction->image));
+      $transaction['bukti_bayar'] = $request->bukti_bayar->store('bukti_pembayaran', 'public');
+    }
+
+    return response()->json(['results' => $transaction->update()]);
   }
 }

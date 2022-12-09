@@ -15,6 +15,8 @@ return new class extends Migration
   {
     Schema::create('transactions', function (Blueprint $table) {
       $table->id();
+      $table->string('bukti_bayar')->nullable();
+      $table->string('alamat')->nullable();
       $table->integer('total_harga')->nullable();
       $table->date('tgl_transaksi')->nullable();
       $table->date('tgl_selesai')->nullable();
