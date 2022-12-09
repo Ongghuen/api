@@ -78,15 +78,20 @@
                 </div>
                 <form class="row gx-4 dropdown col-auto" action="/report-date" method="get">
                     <div class="dropdown col-auto">
-                        <input class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date1" />
+                        <input class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date1" id="date1" />
                     </div>
                     <div class="dropdown col-auto">
-                        <input class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date2" />
+                        <input class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date2" id="date2" />
                     </div>
                     <div class="dropdown col-auto">
                         <button class="btn bg-gradient-dark btn-sm ms-auto my-1" type="submit">
                             Cari
                         </button>
+                    </div>
+                    <div class="dropdown col-auto">
+                        <a class="btn bg-gradient-dark btn-sm ms-auto my-1" href="/report-pdf">
+                            PDF
+                        </a>
                     </div>
                 </form>
                 <div class="col-lg-4 col-md-6 me-sm-0 mx-auto">
@@ -138,9 +143,6 @@
             <div class="card-header pb-0">
             <div class="d-flex align-items-center">
                 <h6>Report product table</h6>
-                <button class="btn bg-gradient-dark btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#createModal">
-                    Export
-                </button>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 @if(Session::has('status'))
@@ -279,9 +281,6 @@
             <div class="card-header pb-0">
             <div class="d-flex align-items-center">
                 <h6>Report custom table</h6>
-                <button class="btn bg-gradient-dark btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#createModal">
-                    Export
-                </button>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
@@ -428,4 +427,13 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{asset('js/argon-dashboard.min.js')}}"></script>
+    {{-- <script>
+        function getInputValue(){
+            // Selecting the input element and get its value 
+            var date1 = document.getElementById("date1").value;
+            var date2 = document.getElementById("date2").value;
+            
+            return date1, date2;
+        }
+    </script> --}}
 @endsection
