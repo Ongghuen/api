@@ -23,12 +23,12 @@ class ApiOrderController extends Controller
     // check latest transaksi -> update ke belum bayar
     $orders = auth()->user()->transactions()->where('status', "Pending")->latest('id')->first();
     $orders->status = "Belum_Bayar";
+    $orders->alamat = auth()->user()->address;
     $orders->save();
 
     // buat "transaksi" baru buat keranjang
     $new = Transaction::create([
       'user_id' => auth()->user()->id,
-      'alamat' => auth()->user()->address
     ]);
     return response()->json(['results' => $new]);
   }

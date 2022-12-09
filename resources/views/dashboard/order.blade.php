@@ -227,7 +227,7 @@
                                 </tbody>
                             </table>
                             Total Harga : {{"Rp " . number_format($item->total_harga, 0, ".", '.')}} <br>
-                            Alamat pengiriman : {{$item->users->address}}
+                            Alamat pengiriman : {{$item->alamat}}
                         </div>
                     </div>
                     </div>
