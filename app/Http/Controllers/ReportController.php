@@ -10,6 +10,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TransactionsExport;
 
 class ReportController extends Controller
 {
@@ -102,19 +104,33 @@ class ReportController extends Controller
         ->where('categories', 'Product')
         ->where('Status', 'Selesai')
         ->sortable()
-        ->paginate(10);
+        ->paginate(100);
 
       $custom = Transaction::with(['users', 'customs'])
         ->whereBetween('tgl_selesai', [$date1, $date2])
         ->where('categories', 'Custom')
         ->where('Status', 'Selesai')
         ->sortable()
-        ->paginate(10);
+        ->paginate(100);
 
       view()->share(['orderList' => $order, 'customList' => $custom, 'date1' => $date1, 'date2' => $date2]);
       $pdf = PDF::loadview('dashboard.pdf')->setPaper('a4', 'landscape');
       return $pdf->download('report ' . date('Y-m-d') . '.pdf');
     } else {
+      Session::flash('status', 'failed');
+      Session::flash('message', 'Tanggal awal tidak boleh lebih besar dari tanggal akhir!');
+
+      return redirect('/report');
+    }
+  }
+
+  public function excel(Request $request){
+    $date1 = $request->iDate1;
+    $date2 = $request->iDate2;
+
+    if($date1 <= $date2){
+      return Excel::download(new TransactionsExport($date1, $date2), 'report ' . date('Y-m-d') . '.xlsx');
+    } else{
       Session::flash('status', 'failed');
       Session::flash('message', 'Tanggal awal tidak boleh lebih besar dari tanggal akhir!');
 
