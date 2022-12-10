@@ -61,6 +61,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::delete('/orders/detail', [ApiDetailOrderController::class, 'destroy']);
   Route::get('/orders/detail/{id}', [ApiDetailOrderController::class, 'show']);
 
+  // check token
+  Route::get('/checktoken', [ApiAuthController::class, 'token']);
   // logout
   Route::post('/logout', [ApiAuthController::class, 'logout']);
 });

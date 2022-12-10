@@ -68,4 +68,9 @@ class ApiAuthController extends Controller
       'message' => 'Logged Out'
     ];
   }
+
+  public function token()
+  {
+    return ['msg' => 'Token is valid'];
+  }
 }
