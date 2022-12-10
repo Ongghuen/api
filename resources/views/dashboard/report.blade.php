@@ -113,7 +113,7 @@
                             PDF
                         </button>
                     </form>
-                    <form class="mx-3" action="/report-pdf" method="get">
+                    <form class="mx-3" action="/report-excel" method="get">
                         <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate1" id="i-date1" />
                         <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate2" id="i-date2" />
                         <button type="submit" class="btn bg-gradient-dark btn-sm ms-auto my-1" onclick="getInputValue()">

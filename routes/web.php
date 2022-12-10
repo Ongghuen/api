@@ -58,6 +58,7 @@ Route::get('/custom', [CustomController::class, 'index'])->middleware('auth');
 Route::get('/report', [ReportController::class, 'index'])->middleware('auth');
 Route::get('/report-date', [ReportController::class, 'date'])->middleware('auth');
 Route::get('/report-pdf', [ReportController::class, 'pdf'])->middleware('auth');
+Route::get('/report-excel', [ReportController::class, 'excel'])->middleware('auth');
 
 # ======================== LISTING ========================
 # to register
