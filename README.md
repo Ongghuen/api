@@ -6,12 +6,11 @@ Backend buat front end [web](https://github.com/ongghuen/web-frontend) dan akses
 ##### Initial Setup
 - Setup Laravel Project
   ```bash
-  composer install && php artisan key:generate && php artisan storage:link && npm install
+  composer install && php artisan key:generate && php artisan storage:link
   ```
   - composer install
   - php artisan key:generate
   - php artisan storage:link
-  - npm install
 
 - Setup .env
   ```bash
@@ -22,14 +21,14 @@ Backend buat front end [web](https://github.com/ongghuen/web-frontend) dan akses
 
 <hr/>
 
-##### Serve Laravel & Vite (tailwind)
+##### Serve Laravel
 - Serve aja (no local network hosting):
   ```bash
-  php artisan serve & npm run dev
+  php artisan serve
   ```
 - Serve + local network hosting :
   ```bash
-  php artisan serve --host 192.168.106.112 --port=8000 & npm run dev
+  php artisan serve --host 192.168.106.112 --port=8000
   ```
 Ganti IP setelah `--host` pake local ipmu. biar app flutter (dari hp misal *satu network) bisa ngakses API Laravel. Referensi buat check command atau command di atas bisa dilihat di bawah.
 
@@ -45,7 +44,7 @@ Ganti IP setelah `--host` pake local ipmu. biar app flutter (dari hp misal *satu
   ip -o -4 addr list wlo1 | awk '{print $4}' | cut -d/ -f1
   ```
 
-- Windows (blom tau hehe)
+- Windows
   ```powershell
   (Get-NetIPAddress -AddressFamily IPv4 -InterfaceAlias "Local *").IPAddress
   ```
