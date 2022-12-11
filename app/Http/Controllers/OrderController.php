@@ -69,4 +69,80 @@ class OrderController extends Controller
     }
     return redirect('/order');
   }
+
+  public function confirmCustom(Request $request, $id){
+    $order = Transaction::findOrFail($id);
+    $custom = Custom::where('transaction_id', $id)->first();
+
+    $order->total_harga = $request->total_harga;
+    $order->update();
+
+    $custom->DP = $request->DP;
+    $custom->total_harga = $request->total_harga;
+    $custom->update();
+
+    if ($custom) {
+      Session::flash('statusCustom', 'success');
+      Session::flash('message', 'order custom berhasil disetujui!');
+    }
+    return redirect('/order');
+  }
+
+  public function tolakCustom($id){
+    $order = Transaction::findOrFail($id);
+
+    $order->status = 'Gagal';
+    $order->update();
+
+    if ($order) {
+      Session::flash('statusCustom', 'success');
+      Session::flash('message', 'order custom berhasil ditolak!');
+    }
+    return redirect('/order');
+  }
+
+  public function customConfirm($id){
+    $order = Transaction::findOrFail($id);
+    $custom = Custom::where('transaction_id', $id)->first();
+
+    $order->status = 'Terkonfirmasi';
+    $order->update();
+
+    $custom->status = 'Pengerjaan';
+    $custom->update();
+
+    if ($custom) {
+      Session::flash('statusCustom', 'success');
+      Session::flash('message', 'konfirmasi pembayaran berhasil!');
+    }
+    return redirect('/order');
+  }
+
+  public function customSend($id){
+    $order = Transaction::findOrFail($id);
+    $custom = Custom::where('transaction_id', $id)->first();
+
+    $order->status = 'Dikirim';
+    $order->update();
+
+    $custom->status = 'Selesai';
+    $custom->update();
+
+    if ($custom) {
+      Session::flash('statusCustom', 'success');
+      Session::flash('message', 'update status transaksi menjadi Dikirim berhasil.');
+    }
+    return redirect('/order');
+  }
+
+  public function customDelete($id){
+    $order = Transaction::findOrFail($id);
+    $order->delete();
+
+    if ($order) {
+      Session::flash('statusCustom', 'success');
+      Session::flash('message', 'Order custom berhasil dihapus');
+    }
+    return redirect('/order');
+  }
 }

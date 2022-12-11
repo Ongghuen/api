@@ -194,9 +194,15 @@
                         <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold text-truncate">{{$data->bahan}}</span>
                         </td>
-                        <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
-                        </td>
+                        @if ($data->total_harga == null)
+                            <td class="align-middle text-center">
+                                -
+                            </td>
+                        @else
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
+                            </td>
+                        @endif
                         <td class="align-middle text-center text-sm ms-auto">
                             <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
                                 <i class="fas fa-eye text-green-300 pe-2"></i>
