@@ -179,6 +179,8 @@
                                     <span class="badge badge-sm bg-gradient-warning w-80">Pending</span>
                             @elseif ($data->status == "Pengerjaan")
                                     <span class="badge badge-sm bg-gradient-primary w-80">Pengerjaan</span>
+                            @elseif ($data->status == "Disetujui")
+                                    <span class="badge badge-sm bg-gradient-info w-80">Disetujui</span>
                             @elseif ($data->status == "Selesai")
                                     <span class="badge badge-sm bg-gradient-success w-80">Selesai</span>
                             @endif
