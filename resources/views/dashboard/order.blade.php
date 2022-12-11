@@ -119,6 +119,11 @@
                 <h6>Transactions product table</h6>
             </div>
             <div class="card-body px-0 pt-0 pb-2">
+                @if(Session::has('statusOrder'))
+                    <div class="alert alert-success ms-1 my-3 font-weight-bold" role="alert">
+                        {{Session::get('message')}}
+                    </div>
+                @endif
                 <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                     <thead>
@@ -190,9 +195,31 @@
                                     <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
                                         <i class="fas fa-eye text-green-300 pe-2"></i>
                                     </a>
-                                    <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
-                                        <i class="fas fa-edit text-green-300"></i>
-                                    </a>
+                                    @if ($data->status == "Pending")
+                                        <a data-bs-toggle="modal" data-bs-target="#updateModalPending{{$data->id}}">
+                                            <i class="fas fa-edit text-green-300"></i>
+                                        </a>
+                                    @elseif ($data->status == "Belum_Bayar")
+                                        <a data-bs-toggle="modal" data-bs-target="#updateModalBB{{$data->id}}">
+                                            <i class="fas fa-edit text-green-300"></i>
+                                        </a>
+                                    @elseif ($data->status == "Menunggu_Konfirmasi")
+                                        <a data-bs-toggle="modal" data-bs-target="#updateModalMK{{$data->id}}">
+                                            <i class="fas fa-edit text-green-300"></i>
+                                        </a>
+                                    @elseif ($data->status == "Terkonfirmasi")
+                                        <a data-bs-toggle="modal" data-bs-target="#updateModalTerkonfirmasi{{$data->id}}">
+                                            <i class="fas fa-edit text-green-300"></i>
+                                        </a>
+                                    @elseif ($data->status == "Dikirim")
+                                        <a data-bs-toggle="modal" data-bs-target="#updateModalDikirim{{$data->id}}">
+                                            <i class="fas fa-edit text-green-300"></i>
+                                        </a>
+                                    @elseif ($data->status == "Selesai")
+                                        <a data-bs-toggle="modal" data-bs-target="#updateModalSelesai{{$data->id}}">
+                                            <i class="fas fa-edit text-green-300"></i>
+                                        </a>
+                                    @endif
                                 </form>
                             </td>
                         </tr> 
@@ -274,6 +301,130 @@
                     </div>
                 </div>
                 <!-- End Detail Modal -->
+
+                <!-- Update Modal Pending -->
+                <div class="modal fade bd-example-modal-md" id="updateModalPending{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-info font-weight-bold" role="alert">User belum melakukan checkout.</div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <!-- End Update Modal Pending -->
+
+                <!-- Update Modal BB -->
+                <div class="modal fade bd-example-modal-md" id="updateModalBB{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-info font-weight-bold" role="alert">User belum melakukan pembayaran.</div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <!-- End Update Modal BB -->
+
+                <!-- Update Modal MK -->
+                <div class="modal fade bd-example-modal-md" id="updateModalMK{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-success font-weight-bold" role="alert">Konfirmasi pembayaran?</div>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="/order-confirm/{{$item->id}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success" >Update</button>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <!-- End Update Modal MK -->
+
+                <!-- Update Modal Terkonfirmasi -->
+                <div class="modal fade bd-example-modal-md" id="updateModalTerkonfirmasi{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-success font-weight-bold" role="alert">Update status transaksi menjadi dikirim?</div>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="/order-send/{{$item->id}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success" >Update</button>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <!-- End Update Modal Terkonfirmasi -->
+
+                <!-- Update Modal Dikirim -->
+                <div class="modal fade bd-example-modal-md" id="updateModalDikirim{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-info font-weight-bold" role="alert">Produk sedang dikirim ke alamat user.</div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <!-- End Update Modal Dikirim -->
+
+                <!-- Update Modal Selesai -->
+                <div class="modal fade bd-example-modal-md" id="updateModalSelesai{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-info font-weight-bold" role="alert">Produk sudah diterima oleh user, proses transaksi selesai.</div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <!-- End Update Modal Selesai -->
             @endforeach
             </div>
         </div>

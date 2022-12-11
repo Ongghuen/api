@@ -37,6 +37,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 # ========================== ORDER =========================
 Route::get('/order', [OrderController::class, 'index'])->middleware('auth');
+Route::put('/order-confirm/{id}', [OrderController::class, 'confirm'])->middleware('auth');
+Route::put('/order-send/{id}', [OrderController::class, 'send'])->middleware('auth');
 
 # ========================== PRODUCT =========================
 Route::get('/product', [ProductController::class, 'index'])->middleware('auth');

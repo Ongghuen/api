@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Product;
 use App\Models\Custom;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -42,5 +44,29 @@ class OrderController extends Controller
       ->paginate(10);
 
     return view('dashboard.order', ['orderList' => $order, 'customList' => $custom]);
+  }
+
+  public function confirm($id){
+    $order = Transaction::findOrFail($id);
+
+    $order->status = 'Terkonfirmasi';
+    $order->update();
+    if ($order) {
+      Session::flash('statusOrder', 'success');
+      Session::flash('message', 'konfirmasi pembayaran berhasil!');
+    }
+    return redirect('/order');
+  }
+
+  public function send($id){
+    $order = Transaction::findOrFail($id);
+
+    $order->status = 'Dikirim';
+    $order->update();
+    if ($order) {
+      Session::flash('statusOrder', 'success');
+      Session::flash('message', 'update status transaksi menjadi Dikirim berhasil');
+    }
+    return redirect('/order');
   }
 }
