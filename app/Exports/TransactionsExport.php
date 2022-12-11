@@ -3,6 +3,8 @@
 namespace App\Exports;
 
 use App\Models\Transaction;
+use App\Models\User;
+use App\Models\Product;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
@@ -53,7 +55,7 @@ class TransactionsExport implements FromCollection, WithHeadings, WithMapping
 
         return [
             [
-                $order->i++,
+                $order->$loop->iteration + $order->firstItem() - 1,
                 $order->users->name,
                 $order->tgl_transaksi,
                 $order->tgl_selesai,

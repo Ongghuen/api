@@ -84,6 +84,8 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <button class="dropdown-item" value="Pending" name="keyword" type="submit">Pending</button>
                             <button class="dropdown-item" value="Belum_Bayar" name="keyword" type="submit">Belum Bayar</button>
+                            <button class="dropdown-item" value="Menunggu_Konfirmasi" name="keyword" type="submit">Menunggu Konfirmasi</button>
+                            <button class="dropdown-item" value="Terkonfirmasi" name="keyword" type="submit">Terkonfirmasi</button>
                             <button class="dropdown-item" value="Dikirim" name="keyword" type="submit">Dikirim</button>
                             <button class="dropdown-item" value="Selesai" name="keyword" type="submit">Selesai</button>
                         </ul>
@@ -152,13 +154,17 @@
                             </td>
                             <td class="align-middle text-center text-sm pe-3">
                                 @if ($data->status == "Pending")
-                                        <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
+                                        <span class="badge badge-sm bg-gradient-warning w-80">Pending</span>
                                 @elseif ($data->status == "Belum_Bayar")
-                                        <span class="badge badge-sm bg-gradient-danger w-100">B. Bayar</span>
+                                        <span class="badge badge-sm bg-gradient-danger w-80">B. Bayar</span>
+                                @elseif ($data->status == "Menunggu_Konfirmasi")
+                                        <span class="badge badge-sm bg-gradient-primary w-80">M. Konfirmasi</span>
+                                @elseif ($data->status == "Terkonfirmasi")
+                                        <span class="badge badge-sm bg-gradient-secondary w-80">Terkonfirmasi</span>
                                 @elseif ($data->status == "Dikirim")
-                                        <span class="badge badge-sm bg-gradient-info w-100">Dikirim</span>
+                                        <span class="badge badge-sm bg-gradient-info w-80">Dikirim</span>
                                 @elseif ($data->status == "Selesai")
-                                        <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>   
+                                        <span class="badge badge-sm bg-gradient-success w-80">Selesai</span>   
                                 @endif
                             </td>
                             <td class="align-middle text-center">
@@ -171,7 +177,13 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
+                                <span class="text-secondary text-xs font-weight-bold">
+                                    @if ($data->tgl_selesai != null)
+                                        {{$data->tgl_selesai}}
+                                    @else
+                                        -
+                                    @endif
+                                </span>
                             </td>
                             <td class="align-middle text-center text-sm ms-auto">
                                 <form action="dtOrder/{{$data->id}}" method="get">
@@ -204,12 +216,34 @@
                         </a>
                         </div>
                         <div class="modal-body">
-                            Customer : {{$item->users->name}} <br>
-                            Tanggal transaksi : {{$item->tgl_transaksi}} <br><br>
-                            <table class="table table-hover">
+                            <div class="row d-flex">
+                                <div class="col-10">
+                                    <span class="font-weight-bold">Customer :</span> {{$item->users->name}} <br>
+                                    <span class="font-weight-bold">Alamat pengiriman :</span> {{$item->alamat}} <br>
+                                    @if ($item->status == "Pending")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-warning">Pending</span>
+                                    @elseif ($item->status == "Belum_Bayar")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-danger">B. Bayar</span>
+                                    @elseif ($item->status == "Menunggu_Konfirmasi")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-primary">M. Konfirmasi</span>
+                                    @elseif ($item->status == "Terkonfirmasi")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-secondary">Terkonfirmasi</span>
+                                    @elseif ($item->status == "Dikirim")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-info">Dikirim</span>
+                                    @elseif ($item->status == "Selesai")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-success">Selesai</span>   
+                                    @endif
+                                </div>
+                                <div class="col-2">
+                                    {{$item->tgl_transaksi}}
+                                </div>
+                            </div>
+                            <br>
+                            <table class="table table-hover table-responsive table-sm text-center">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Produk</th>
                                         <th>Harga</th>
                                         <th>Qty</th>
                                         <th>Subtotal</th>
@@ -218,6 +252,7 @@
                                 <tbody>
                                     @foreach ($item->products as $list)
                                     <tr>
+                                        <td><img src="{{ $list->image ? asset('storage/' . $list->image) : asset('/images/box.png') }}" class="rounded" width="50px" alt="{{$list->name}}" /></td>
                                         <td>{{$list->name}}</td>
                                         <td>{{"Rp " . number_format($list->harga, 0, ".", '.')}}</td>
                                         <td>{{$list->pivot->qty}}</td>
@@ -226,8 +261,14 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            Total Harga : {{"Rp " . number_format($item->total_harga, 0, ".", '.')}} <br>
-                            Alamat pengiriman : {{$item->alamat}}
+                            <div class="row d-flex">
+                                <div class="col-8">
+
+                                </div>
+                                <div class="col-4">
+                                    <span class="font-weight-bold">Total Harga : </span> {{"Rp " . number_format($item->total_harga, 0, ".", '.')}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     </div>
@@ -282,13 +323,17 @@
                             </td>
                             <td class="align-middle text-center text-sm pe-3">
                                 @if ($data->status == "Pending")
-                                        <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
+                                        <span class="badge badge-sm bg-gradient-warning w-80">Pending</span>
                                 @elseif ($data->status == "Belum_Bayar")
-                                        <span class="badge badge-sm bg-gradient-danger w-100">B. Bayar</span>
+                                        <span class="badge badge-sm bg-gradient-danger w-80">B. Bayar</span>
+                                @elseif ($data->status == "Menunggu_Konfirmasi")
+                                        <span class="badge badge-sm bg-gradient-primary w-80">M. Konfirmasi</span>
+                                @elseif ($data->status == "Terkonfirmasi")
+                                        <span class="badge badge-sm bg-gradient-secondary w-80">Terkonfirmasi</span>
                                 @elseif ($data->status == "Dikirim")
-                                        <span class="badge badge-sm bg-gradient-info w-100">Dikirim</span>
+                                        <span class="badge badge-sm bg-gradient-info w-80">Dikirim</span>
                                 @elseif ($data->status == "Selesai")
-                                        <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>   
+                                        <span class="badge badge-sm bg-gradient-success w-80">Selesai</span>   
                                 @endif
                             </td>
                             <td class="align-middle text-center">
@@ -301,7 +346,13 @@
                                 <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
                             </td>
                             <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
+                                <span class="text-secondary text-xs font-weight-bold">
+                                    @if ($data->tgl_selesai != null)
+                                        {{$data->tgl_selesai}}
+                                    @else
+                                        -
+                                    @endif
+                                </span>
                             </td>
                             <td class="align-middle text-center text-sm ms-auto">
                                 <form action="dtOrder/{{$data->id}}" method="get">
@@ -334,12 +385,33 @@
                         </a>
                         </div>
                         <div class="modal-body">
-                            Customer : {{$item->users->name}} <br>
-                            Tanggal transaksi : {{$item->tgl_transaksi}} <br><br>
-                            <table class="table table-hover">
+                            <div class="row d-flex">
+                                <div class="col-10">
+                                    <span class="font-weight-bold">Customer :</span> {{$item->users->name}} <br>
+                                    <span class="font-weight-bold">Alamat pengiriman :</span> {{$item->alamat}} <br>
+                                    @if ($item->status == "Pending")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-warning">Pending</span>
+                                    @elseif ($item->status == "Belum_Bayar")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-danger">B. Bayar</span>
+                                    @elseif ($item->status == "Menunggu_Konfirmasi")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-primary">M. Konfirmasi</span>
+                                    @elseif ($item->status == "Terkonfirmasi")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-secondary">Terkonfirmasi</span>
+                                    @elseif ($item->status == "Dikirim")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-info">Dikirim</span>
+                                    @elseif ($item->status == "Selesai")
+                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-success">Selesai</span>   
+                                    @endif
+                                </div>
+                                <div class="col-2">
+                                    {{$item->tgl_transaksi}}
+                                </div>
+                            </div>
+                            <br>
+                            <table class="table table-hover table-responsive table-sm text-center">
                                 <thead>
                                     <tr>
-                                        <th>Nama</th>
+                                        <th>Custom</th>
                                         <th>Status</th>
                                         <th>DP</th>
                                         <th>Harga Total</th>
@@ -356,8 +428,14 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            Total Harga : {{"Rp " . number_format($item->total_harga, 0, ".", '.')}} <br>
-                            Alamat pengiriman : {{$item->users->address}}
+                            <div class="row d-flex">
+                                <div class="col-7">
+
+                                </div>
+                                <div class="col-5">
+                                    <span class="font-weight-bold">&emsp;&ensp;&ensp;&ensp;Total Harga :</span> {{"Rp " . number_format($item->total_harga, 0, ".", '.')}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     </div>
