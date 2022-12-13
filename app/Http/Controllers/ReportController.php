@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\TransactionsExport;
+use App\Exports\MultiTransactionExport;
 
 class ReportController extends Controller
 {
@@ -125,11 +125,11 @@ class ReportController extends Controller
   }
 
   public function excel(Request $request){
-    $date1 = $request->iDate1;
-    $date2 = $request->iDate2;
+    $date1 = $request->iDate3;
+    $date2 = $request->iDate4;
 
     if($date1 <= $date2){
-      return Excel::download(new TransactionsExport($date1, $date2), 'report ' . date('Y-m-d') . '.xlsx');
+      return Excel::download(new MultiTransactionExport($date1, $date2), 'report ' . date('Y-m-d') . '.xlsx');
     } else{
       Session::flash('status', 'failed');
       Session::flash('message', 'Tanggal awal tidak boleh lebih besar dari tanggal akhir!');

@@ -90,7 +90,7 @@
             </div>
         </form>
         <div class="dropdown col-auto">
-            <button class="btn bg-gradient-dark btn-sm ms-auto my-1" data-bs-toggle="modal" data-bs-target="#exportModal">
+            <button class="btn bg-gradient-dark btn-sm ms-auto my-1" onclick="getInputValue()" data-bs-toggle="modal" data-bs-target="#exportModal">
                 Export
             </button>
         </div>
@@ -108,17 +108,17 @@
                     <form class="mx-3" action="/report-pdf" method="get">
                         <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate1" id="i-date1" />
                         <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate2" id="i-date2" />
-                        <button type="submit" class="btn bg-gradient-dark btn-sm ms-auto my-1" onclick="getInputValue()">
+                        <button type="submit" class="btn bg-gradient-dark btn-sm ms-auto my-1">
                             <i class="fa fa-file-pdf-o me-1" aria-hidden="true"></i>
                             PDF
                         </button>
                     </form>
                     <form class="mx-3" action="/report-excel" method="get">
-                        <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate1" id="i-date1" />
-                        <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate2" id="i-date2" />
-                        <button type="submit" class="btn bg-gradient-dark btn-sm ms-auto my-1" onclick="getInputValue()">
-                            <i class="fa fa-file-excel-o me-1" aria-hidden="true"></i>
-                            Excel
+                        <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate3" id="i-date3" />
+                        <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate4" id="i-date4" />
+                        <button type="submit" class="btn bg-gradient-dark btn-sm ms-auto my-1">
+                          <i class="fa fa-file-excel-o me-1" aria-hidden="true"></i>
+                          Excel
                         </button>
                     </form>
                 </div>
@@ -332,7 +332,7 @@
                     @sortablelink('tgl_selesai', 'Tgl. Selesai')
                   </th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Daftar Produk
+                    Nama Custom
                   </th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                     Qty
@@ -466,10 +466,14 @@
     const date2 = document.getElementById("date2").value;
     const iDate1 = document.querySelector("#i-date1");
     const iDate2 = document.querySelector("#i-date2");
+    const iDate3 = document.querySelector("#i-date3");
+    const iDate4 = document.querySelector("#i-date4");
     console.log(iDate1)
 
     iDate1.value = date1
     iDate2.value = date2
+    iDate3.value = date1
+    iDate4.value = date2
   }
 </script>
 @endsection

@@ -186,7 +186,7 @@
                                     @if ($data->tgl_selesai != null)
                                         {{$data->tgl_selesai}}
                                     @else
-                                        -
+                                        On Progress
                                     @endif
                                 </span>
                             </td>
@@ -499,7 +499,7 @@
                             </td>
                             @if ($data->total_harga == null)
                                 <td class="align-middle text-center">
-                                    -
+                                    <span class="text-secondary text-xs font-weight-bold">On Progress</span>
                                 </td>
                             @else
                                 <td class="align-middle text-center">
@@ -514,7 +514,7 @@
                                     @if ($data->tgl_selesai != null)
                                         {{$data->tgl_selesai}}
                                     @else
-                                        -
+                                        On Progress
                                     @endif
                                 </span>
                             </td>

@@ -16,6 +16,7 @@ class CustomController extends Controller
                     ->orWhere('jenis_custom', 'LIKE', '%'.$keyword.'%')
                     ->orWhere('bahan', 'LIKE', '%'.$keyword.'%')
                     ->orWhere('total_harga', 'LIKE', '%'.$keyword.'%')
+                    ->orWhere('dp', 'LIKE', '%'.$keyword.'%')
                     ->sortable()
                     ->paginate(15);
         return view('dashboard.custom', ['customList' => $custom]);

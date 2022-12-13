@@ -84,6 +84,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <button class="dropdown-item" value="Pending" name="keyword" type="submit">Pending</button>
+                            <button class="dropdown-item" value="Disetujui" name="keyword" type="submit">Disetujui</button>
                             <button class="dropdown-item" value="Pengerjaan" name="keyword" type="submit">Pengerjaan</button>
                             <button class="dropdown-item" value="Selesai" name="keyword" type="submit">Selesai</button>
                         </ul>
@@ -161,6 +162,9 @@
                             @sortablelink('bahan', 'Bahan')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            @sortablelink('DP', 'Uang Muka')
+                        </th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             @sortablelink('total_harga', 'Total Harga')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -194,9 +198,18 @@
                         <td class="align-middle text-center">
                             <span class="text-secondary text-xs font-weight-bold text-truncate">{{$data->bahan}}</span>
                         </td>
+                        @if ($data->dp == null)
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate">On Progress</span>
+                            </td>
+                        @else
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->dp, 0, ".", '.')}}</span>
+                            </td>
+                        @endif
                         @if ($data->total_harga == null)
                             <td class="align-middle text-center">
-                                -
+                                <span class="text-secondary text-xs font-weight-bold text-truncate">On Progress</span>
                             </td>
                         @else
                             <td class="align-middle text-center">
@@ -206,9 +219,6 @@
                         <td class="align-middle text-center text-sm ms-auto">
                             <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
                                 <i class="fas fa-eye text-green-300 pe-2"></i>
-                            </a>
-                            <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
-                                <i class="fas fa-edit text-green-300"></i>
                             </a>
                         </td>
                     </tr>
@@ -234,10 +244,8 @@
                         <div class="modal-body">
                             <span class="font-weight-bold">Customer :</span> {{$item->transactions->users['name']}} <br>
                             <span class="font-weight-bold">Tanggal transaksi :</span> {{$item->transactions->tgl_transaksi}} <br>
-                            <span class="font-weight-bold">Deskripsi :</span> {{$item->desc}} <br>
-                            <span class="font-weight-bold">DP :</span> {{$item->dp}} <br>
-                            <span class="font-weight-bold">Total Harga :</span> {{"Rp " . number_format($item->total_harga, 0, ".", '.')}} <br>
-                            <span class="font-weight-bold">Alamat pengiriman :</span> {{$item->transactions->users['address']}}
+                            <span class="font-weight-bold">Alamat pengiriman :</span> {{$item->transactions->alamat}} <br>
+                            <span class="font-weight-bold">Deskripsi :</span> {{$item->desc}}
                         </div>
                     </div>
                     </div>
