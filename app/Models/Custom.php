@@ -22,7 +22,7 @@ class Custom extends Model
     ];
 
     public $sortable =[
-      'status', 'name', 'jenis_custom' 
+      'status', 'name', 'jenis_custom', 'total_harga', 'dp', 'bahan'
     ];
 
     public function transactions()
