@@ -10,7 +10,15 @@ class ApiDetailOrderController extends Controller
 {
   public function index()
   {
-    return response()->json(['results' => Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->get()]);
+    $id = auth()->user()->id;
+
+    $ongoing = Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->get();
+    $details = Transaction::with('products')->where('user_id', auth()->user()->id)->get();
+
+    return response()->json([
+      'results' => $ongoing,
+      'details' => $details
+    ]);
   }
 
   public function store(Request $request)
