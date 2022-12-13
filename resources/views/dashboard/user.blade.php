@@ -294,14 +294,9 @@
             @endforeach
 
             <!-- Create Modal -->
-            <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <script type="text/javascript">
-                            @if (count($errors) > 0)
-                                $('#createModal').modal('show');
-                            @endif
-                        </script>
                         <div class="modal-header">
                             <h4 class="modal-title pe-1">Pengguna Baru</h4>
                             <a type="button" data-bs-dismiss="modal" aria-label="Close">
@@ -384,4 +379,10 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{asset('js/argon-dashboard.min.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+          // Show the Modal on load
+          $("#createModal").modal("show");
+        });
+    </script>
 @endsection

@@ -335,12 +335,6 @@
                     Nama Custom
                   </th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Qty
-                  </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Subtotal
-                  </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                     @sortablelink('total_harga', 'Total Harga')
                   </th>
                 </tr>
@@ -364,20 +358,6 @@
                     <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
                       @foreach ($data->customs as $item)
                       {{$item->name}}<br>
-                      @endforeach
-                    </span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
-                      @foreach ($data->customs as $item)
-                      {{$item->qty}}<br>
-                      @endforeach
-                    </span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
-                      @foreach ($data->customs as $item)
-                      {{"Rp " . number_format($item->total_harga*$item->qty, 0, ".", '.')}}<br>
                       @endforeach
                     </span>
                   </td>

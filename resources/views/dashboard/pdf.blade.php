@@ -86,9 +86,7 @@
             <th>Customer</th>
             <th>Tgl. Transaksi</th>
             <th>Tgl. Selesai</th>
-            <th>Daftar Produk</th>
-            <th>Qty</th>
-            <th>Subtotal</th>
+            <th>Produk Custom</th>
             <th>Total Harga</th>
         </tr>
     </thead>
@@ -102,16 +100,6 @@
                 <td>
                     @foreach ($data->customs as $item)
                         {{$item->name}}<br>
-                    @endforeach
-                </td>
-                <td>
-                    @foreach ($data->customs as $item)
-                        {{$item->qty}}<br>
-                    @endforeach
-                </td>
-                <td>
-                    @foreach ($data->customs as $item)
-                        {{"Rp " . number_format($item->total_harga*$item->qty, 0, ".", '.')}}<br>
                     @endforeach
                 </td>
                 <td>{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</td>
