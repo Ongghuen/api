@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('customs', function (Blueprint $table) {
-            $table->unsignedBigInteger('transaction_id')->after('total_harga');
+            $table->unsignedBigInteger('transaction_id')->after('id');
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('restrict');
         });
     }
