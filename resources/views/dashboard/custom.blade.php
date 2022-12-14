@@ -165,9 +165,6 @@
                             @sortablelink('DP', 'Uang Muka')
                         </th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            @sortablelink('total_harga', 'Total Harga')
-                        </th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                             Action
                         </th>
                     </tr>
@@ -205,15 +202,6 @@
                         @else
                             <td class="align-middle text-center">
                                 <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->dp, 0, ".", '.')}}</span>
-                            </td>
-                        @endif
-                        @if ($data->total_harga == null)
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold text-truncate">On Progress</span>
-                            </td>
-                        @else
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
                             </td>
                         @endif
                         <td class="align-middle text-center text-sm ms-auto">
