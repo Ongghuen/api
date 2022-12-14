@@ -44,4 +44,15 @@ class ApiOrderController extends Controller
 
     return response()->json(['results' => $transaction->update()]);
   }
+  public function changeStatus(Request $req, $id)
+  {
+    $transaction = Transaction::find($id);
+
+    // update stuff di transaksi
+    if ($req->status) {
+      $transaction['status'] = $req->status;
+    }
+
+    return response()->json(['results' => $transaction->update()]);
+  }
 }

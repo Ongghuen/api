@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::get('/orders', [ApiOrderController::class, 'index']);
   Route::post('/orders/create', [ApiOrderController::class, 'store']);
   Route::post('/orders/upload/{id}', [ApiOrderController::class, 'upload']);
+  Route::post('/orders/status/{id}', [ApiOrderController::class, 'changeStatus']);
   Route::get('/orders/detail', [ApiDetailOrderController::class, 'index']);
   Route::post('/orders/detail', [ApiDetailOrderController::class, 'store']);
   Route::put('/orders/detail', [ApiDetailOrderController::class, 'update']);
