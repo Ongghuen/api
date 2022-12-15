@@ -76,7 +76,7 @@
                         <i class="fa fa-refresh" aria-hidden="true"></i>
                     </a>
                 </div>
-                <form class="row gx-4 dropdown col-auto" action="" method="get">
+                <form class="row gx-4 dropdown col-auto" action="/order" method="get">
                     <div class="dropdown col-auto">
                         <button class="btn btn-sm bg-gradient-dark dropdown-toggle mb-1 px-3 my-1" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         Status

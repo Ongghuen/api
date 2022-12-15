@@ -35,7 +35,12 @@ class DashboardController extends Controller
                 ->limit(5)
                 ->get();
 
+        $trxStatus = Transaction::groupBy('status')
+                ->selectRaw('count(*) as total, status')
+                ->get();
+
         return view('dashboard.dashboard', ['todaysMoney' => $tm, 'sales' => $sales, 
-        'todaysUser' => $users, 'todaysProduct' => $products, 'topProducts' => $topProduct]);
+        'todaysUser' => $users, 'todaysProduct' => $products, 'topProducts' => $topProduct,
+        'trxStatus' => $trxStatus]);
     }
 }

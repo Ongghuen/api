@@ -44,6 +44,12 @@ Route::put('/order-tolak-custom/{id}', [OrderController::class, 'tolakCustom'])-
 Route::put('/order-custom-confirm/{id}', [OrderController::class, 'customConfirm'])->middleware('auth');
 Route::put('/order-custom-send/{id}', [OrderController::class, 'customSend'])->middleware('auth');
 Route::delete('/order-custom-delete/{id}', [OrderController::class, 'customDelete'])->middleware('auth');
+Route::get('/order-pending', [OrderController::class, 'pending'])->middleware('auth');
+Route::get('/order-belumBayar', [OrderController::class, 'belumBayar'])->middleware('auth');
+Route::get('/order-mKonfirmasi', [OrderController::class, 'mKonfirmasi'])->middleware('auth');
+Route::get('/order-terkonfirmasi', [OrderController::class, 'terkonfirmasi'])->middleware('auth');
+Route::get('/order-dikirim', [OrderController::class, 'dikirim'])->middleware('auth');
+Route::get('/order-selesai', [OrderController::class, 'selesai'])->middleware('auth');
 
 # ========================== PRODUCT =========================
 Route::get('/product', [ProductController::class, 'index'])->middleware('auth');

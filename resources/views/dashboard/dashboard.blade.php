@@ -305,78 +305,119 @@
         <div class="col-lg-5">
         <div class="card">
             <div class="card-header pb-0 p-3">
-            <h6 class="mb-0">Categories</h6>
+            <h6 class="mb-0">Transactions Status</h6>
             </div>
             <div class="card-body p-3">
-            <ul class="list-group">
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                    <i class="ni ni-mobile-button text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Devices</h6>
-                    <span class="text-xs">250 in stock,
-                        <span class="font-weight-bold">346+ sold</span></span>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-                    <i class="ni ni-bold-right" aria-hidden="true"></i>
-                    </button>
-                </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                    <i class="ni ni-tag text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Tickets</h6>
-                    <span class="text-xs">123 closed,
-                        <span class="font-weight-bold">15 open</span></span>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-                    <i class="ni ni-bold-right" aria-hidden="true"></i>
-                    </button>
-                </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                    <i class="ni ni-box-2 text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Error logs</h6>
-                    <span class="text-xs">1 is active,
-                        <span class="font-weight-bold">40 closed</span></span>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-                    <i class="ni ni-bold-right" aria-hidden="true"></i>
-                    </button>
-                </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-                <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                    <i class="ni ni-satisfied text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-dark text-sm">Happy users</h6>
-                    <span class="text-xs font-weight-bold">+ 430</span>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
-                    <i class="ni ni-bold-right" aria-hidden="true"></i>
-                    </button>
-                </div>
-                </li>
-            </ul>
+                <ul class="list-group">
+                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape icon-sm me-3 bg-gradient-warning shadow text-center">
+                            <i class="fa fa-pause text-white opacity-10"></i>
+                            </div>
+                            <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm">Pending</h6>
+                            <span class="text-xs">
+                                {{$trxStatus[0]['total']}} Orders
+                            </span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <a href="/order-pending" class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape icon-sm me-3 bg-gradient-danger shadow text-center">
+                            <i class="fa fa-credit-card-alt text-white opacity-10"></i>
+                            </div>
+                            <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm">Belum Bayar</h6>
+                            <span class="text-xs">
+                                {{$trxStatus[1]['total']}} Orders
+                            </span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <a href="/order-belumBayar" class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape icon-sm me-3 bg-gradient-primary shadow text-center">
+                            <i class="fa fa-square-o text-white opacity-10"></i>
+                            </div>
+                            <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm">Menunggu Konfirmasi</h6>
+                            <span class="text-xs">
+                                {{$trxStatus[2]['total']}} Orders
+                            </span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <a href="/order-mKonfirmasi" class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape icon-sm me-3 bg-gradient-secondary shadow text-center">
+                            <i class="fa fa-check-square-o text-white opacity-10"></i>
+                            </div>
+                            <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm">Terkonfirmasi</h6>
+                            <span class="text-xs font-weight-bold">
+                                {{$trxStatus[3]['total']}} Orders
+                            </span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <a href="/order-terkonfirmasi" class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape icon-sm me-3 bg-gradient-info shadow text-center">
+                            <i class="fa fa-truck text-white opacity-10"></i>
+                            </div>
+                            <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm">Dikirim</h6>
+                            <span class="text-xs font-weight-bold">
+                                {{$trxStatus[4]['total']}} Orders
+                            </span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <a href="/order-dikirim" class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-1 border-radius-lg">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape icon-sm me-3 bg-gradient-success shadow text-center">
+                                <i class="fa fa-check text-white opacity-10"></i>
+                            </div>
+                            <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm">Selesai</h6>
+                            <span class="text-xs font-weight-bold">
+                                {{$trxStatus[5]['total']}} Orders
+                            </span>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <a href="/order-selesai" class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto">
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
         </div>
