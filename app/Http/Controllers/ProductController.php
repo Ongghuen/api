@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use Illuminate\Support\Facades\File;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductExport;
 
 
 class ProductController extends Controller
@@ -80,6 +83,25 @@ class ProductController extends Controller
       Session::flash('status', 'success');
       Session::flash('message', 'hapus produk sukses.');
     }
+
+    return redirect('/product');
+  }
+
+  public function pdf()
+  {
+    $product = Product::sortable()
+              ->paginate(1000);
+
+    view()->share(['productList' => $product]);
+    $pdf = PDF::loadview('dashboard.pdfproduct')->setPaper('a4', 'landscape');
+    return $pdf->download('products report ' . date('Y-m-d') . '.pdf');
+
+    return redirect('/product');
+  }
+
+  public function excel(){
+    return Excel::download(new ProductExport(), 
+    'products report ' . date('Y-m-d') . '.xlsx');
 
     return redirect('/product');
   }
