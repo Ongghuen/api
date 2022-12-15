@@ -76,6 +76,45 @@
                         <i class="fa fa-refresh" aria-hidden="true"></i>
                     </a>
                 </div>
+                <div class="dropdown col-auto">
+                    <button class="btn bg-gradient-dark btn-sm ms-auto my-1" onclick="getInputValue()" data-bs-toggle="modal" data-bs-target="#exportModal">
+                        Export
+                    </button>
+                </div>
+        
+                {{-- export modal --}}
+                <div class="modal fade bd-example-modal-sm" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Export Report</h5>
+                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                                <b>X</b>
+                            </a>
+                        </div>
+                        <div class="modal-body d-flex">
+                            <form class="mx-3" action="/user-pdf" method="get">
+                                <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate1" id="i-date1" />
+                                <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate2" id="i-date2" />
+                                <button type="submit" class="btn bg-gradient-dark btn-sm ms-auto my-1">
+                                    <i class="fa fa-file-pdf-o me-1" aria-hidden="true"></i>
+                                    PDF
+                                </button>
+                            </form>
+                            <form class="mx-3" action="/user-excel" method="get">
+                                <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate3" id="i-date3" />
+                                <input hidden class="form-control btn btn-sm bg-gradient-secondary mb-1 px-3 my-1" type="date" name="iDate4" id="i-date4" />
+                                <button type="submit" class="btn bg-gradient-dark btn-sm ms-auto my-1">
+                                  <i class="fa fa-file-excel-o me-1" aria-hidden="true"></i>
+                                  Excel
+                                </button>
+                            </form>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                {{-- end export modal --}}
+
                 <div class="col-lg-4 col-md-6 me-sm-0 mx-auto">
                     <div class="nav-wrapper position-relative end-0">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">

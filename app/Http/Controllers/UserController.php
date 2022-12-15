@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Support\Facades\File; 
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UserExport;
 
 class UserController extends Controller
 {
@@ -110,6 +113,28 @@ class UserController extends Controller
     return back();
   }
 
+  public function pdf()
+  {
+    $user = User::with('roles')
+              ->whereHas('roles', function($query){
+                $query->where('name', 'User');
+              })
+              ->sortable()
+              ->paginate(15);
+
+    view()->share(['userList' => $user]);
+    $pdf = PDF::loadview('dashboard.pdfuser')->setPaper('a4', 'landscape');
+    return $pdf->download('users report ' . date('Y-m-d') . '.pdf');
+
+    return redirect('/user');
+  }
+
+  public function excel(){
+    return Excel::download(new UserExport(), 
+    'users report ' . date('Y-m-d') . '.xlsx');
+
+    return redirect('/user');
+  }
   // public function create() {
   //   return view('users.register');
   // }

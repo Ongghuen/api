@@ -95,6 +95,7 @@
             </button>
         </div>
 
+        {{-- export modal --}}
         <div class="modal fade bd-example-modal-sm" id="exportModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
               <div class="modal-content">
@@ -125,6 +126,7 @@
               </div>
             </div>
         </div>
+        {{-- end export modal --}}
         
         <div class="col-lg-4 col-md-6 me-sm-0 mx-auto">
             <div class="nav-wrapper position-relative end-0">
