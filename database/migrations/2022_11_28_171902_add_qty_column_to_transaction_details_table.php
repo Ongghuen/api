@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('transaction_details', function (Blueprint $table) {
-            $table->integer('qty')->nullable()->after('product_id');
-            $table->integer('sub_total')->nullable()->after('qty');
+            $table->integer('qty')->after('product_id')->default(1);
+            $table->integer('sub_total')->after('qty')->default(0);
         });
     }
 
