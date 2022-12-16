@@ -39,8 +39,17 @@ class DashboardController extends Controller
                 ->selectRaw('count(*) as total, status')
                 ->get();
 
+        $chart = Transaction::selectRaw('month(tgl_selesai) as month')
+                ->selectRaw('year(tgl_selesai) as year')
+                ->selectRaw('sum(total_harga) as price')
+                ->where('status', 'selesai')
+                ->groupBy(['year','month'])
+                ->get();
+                
+        $cart = [$chart[0]['price'], $chart[1]['price'], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
         return view('dashboard.dashboard', ['todaysMoney' => $tm, 'sales' => $sales, 
         'todaysUser' => $users, 'todaysProduct' => $products, 'topProducts' => $topProduct,
-        'trxStatus' => $trxStatus]);
+        'trxStatus' => $trxStatus, 'cart' => $cart]);
     }
 }
