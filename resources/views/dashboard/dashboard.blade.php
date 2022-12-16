@@ -78,9 +78,9 @@
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">
                                     Today's Money
                                 </p>
-                                <h5 class="font-weight-bolder">
+                                <h6 class="font-weight-bolder">
                                     {{"Rp " . number_format($todaysMoney, 0, ".", '.')}}
-                                </h5>
+                                </h6>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -99,11 +99,11 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                Sales
+                                Total Sales
                                 </p>
-                                <h5 class="font-weight-bolder">
+                                <h6 class="font-weight-bolder">
                                     {{"Rp " . number_format($sales, 0, ".", '.')}}
-                                </h5>
+                                </h6>
                                 <p class="mb-0">
                             </div>
                         </div>
@@ -123,11 +123,11 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                    Today's Users
+                                    Total Users
                                 </p>
-                                <h5 class="font-weight-bolder">
+                                <h6 class="font-weight-bolder">
                                     {{$todaysUser}}
-                                </h5>
+                                </h6>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -146,11 +146,11 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-uppercase font-weight-bold">
-                                Today's Products
+                                Total Products
                                 </p>
-                                <h5 class="font-weight-bolder">
+                                <h6 class="font-weight-bolder">
                                     {{$todaysProduct}}
-                                </h5>
+                                </h6>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -168,10 +168,6 @@
             <div class="card z-index-2 h-100">
                 <div class="card-header pb-0 pt-3 bg-transparent">
                     <h6 class="text-capitalize">Sales overview</h6>
-                    <p class="text-sm mb-0">
-                        <i class="fa fa-arrow-up text-success"></i>
-                        <span class="font-weight-bold">4% more</span> in 2021
-                    </p>
                 </div>
                 <div class="card-body p-3">
                     <div class="chart">
@@ -185,53 +181,53 @@
                 <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
                 <div class="carousel-inner border-radius-lg h-100">
                     <div class="carousel-item h-100 active" style="
-                        background-image: url('../assets/img/carousel-1.jpg');
+                        background-image: url('../../images/nv-bg.jpg');
                         background-size: cover;
                         ">
-                    <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                        <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                        <i class="ni ni-camera-compact text-dark opacity-10"></i>
+                        <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                            <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                            <i class="ni ni-camera-compact text-dark opacity-10"></i>
+                            </div>
+                            <h5 class="text-white mb-1">Get started with Argon</h5>
+                            <p>
+                            There’s nothing I really wanted to do in life that I
+                            wasn’t able to get good at.
+                            </p>
                         </div>
-                        <h5 class="text-white mb-1">Get started with Argon</h5>
-                        <p>
-                        There’s nothing I really wanted to do in life that I
-                        wasn’t able to get good at.
-                        </p>
-                    </div>
                     </div>
                     <div class="carousel-item h-100" style="
                         background-image: url('../assets/img/carousel-2.jpg');
                         background-size: cover;
                         ">
-                    <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                        <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                        <i class="ni ni-bulb-61 text-dark opacity-10"></i>
+                        <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                            <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                            <i class="ni ni-bulb-61 text-dark opacity-10"></i>
+                            </div>
+                            <h5 class="text-white mb-1">
+                            Faster way to create web pages
+                            </h5>
+                            <p>
+                            That’s my skill. I’m not really specifically talented at
+                            anything except for the ability to learn.
+                            </p>
                         </div>
-                        <h5 class="text-white mb-1">
-                        Faster way to create web pages
-                        </h5>
-                        <p>
-                        That’s my skill. I’m not really specifically talented at
-                        anything except for the ability to learn.
-                        </p>
-                    </div>
                     </div>
                     <div class="carousel-item h-100" style="
                         background-image: url('../assets/img/carousel-3.jpg');
                         background-size: cover;
                         ">
-                    <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                        <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                        <i class="ni ni-trophy text-dark opacity-10"></i>
+                        <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                            <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                            <i class="ni ni-trophy text-dark opacity-10"></i>
+                            </div>
+                            <h5 class="text-white mb-1">
+                            Share with us your design tips!
+                            </h5>
+                            <p>
+                            Don’t be afraid to be wrong because you can’t learn
+                            anything from a compliment.
+                            </p>
                         </div>
-                        <h5 class="text-white mb-1">
-                        Share with us your design tips!
-                        </h5>
-                        <p>
-                        Don’t be afraid to be wrong because you can’t learn
-                        anything from a compliment.
-                        </p>
-                    </div>
                     </div>
                 </div>
                 <button class="carousel-control-prev w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -432,8 +428,9 @@
     <script src="{{asset('js/plugins/chartjs.min.js')}}"></script>
     <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
-
+    var data = {!! json_encode($cart) !!};;
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+
 
     gradientStroke1.addColorStop(1, "rgba(94, 114, 228, 0.2)");
     gradientStroke1.addColorStop(0.2, "rgba(94, 114, 228, 0.0)");
@@ -442,15 +439,18 @@
         type: "line",
         data: {
         labels: [
+            "Nov",
+            "Dec",
+            "Jan",
+            "Feb",
+            "Mar",
             "Apr",
             "May",
             "Jun",
             "Jul",
             "Aug",
             "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
+            "Oct"
         ],
         datasets: [{
             label: "Mobile apps",
@@ -461,7 +461,7 @@
             backgroundColor: gradientStroke1,
             borderWidth: 3,
             fill: true,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            data: data,
             maxBarThickness: 6,
         }, ],
         },
@@ -489,7 +489,7 @@
             ticks: {
                 display: true,
                 padding: 10,
-                color: "#fbfbfb",
+                color: "#ccc",
                 font: {
                 size: 11,
                 family: "Open Sans",

@@ -91,7 +91,7 @@
                         </ul>
                     </div>
                 </form>
-                <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                     <div class="nav-wrapper position-relative end-0">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                             <form class="input-group" action="" method="get">
@@ -159,17 +159,17 @@
                             </td>
                             <td class="align-middle text-center text-sm pe-3">
                                 @if ($data->status == "Pending")
-                                        <span class="badge badge-sm bg-gradient-warning w-80">Pending</span>
+                                        <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
                                 @elseif ($data->status == "Belum_Bayar")
-                                        <span class="badge badge-sm bg-gradient-danger w-80">B. Bayar</span>
+                                        <span class="badge badge-sm bg-gradient-danger w-100">B. Bayar</span>
                                 @elseif ($data->status == "Menunggu_Konfirmasi")
-                                        <span class="badge badge-sm bg-gradient-primary w-80">M. Konfirmasi</span>
+                                        <span class="badge badge-sm bg-gradient-primary w-100">M. Konfirmasi</span>
                                 @elseif ($data->status == "Terkonfirmasi")
-                                        <span class="badge badge-sm bg-gradient-secondary w-80">Terkonfirmasi</span>
+                                        <span class="badge badge-sm bg-gradient-secondary w-100">Terkonfirmasi</span>
                                 @elseif ($data->status == "Dikirim")
-                                        <span class="badge badge-sm bg-gradient-info w-80">Dikirim</span>
+                                        <span class="badge badge-sm bg-gradient-info w-100">Dikirim</span>
                                 @elseif ($data->status == "Selesai")
-                                        <span class="badge badge-sm bg-gradient-success w-80">Selesai</span>   
+                                        <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>   
                                 @endif
                             </td>
                             <td class="align-middle text-center">
@@ -479,19 +479,19 @@
                             </td>
                             <td class="align-middle text-center text-sm pe-3">
                                 @if ($data->status == "Pending")
-                                        <span class="badge badge-sm bg-gradient-warning w-80">Pending</span>
+                                        <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
                                 @elseif ($data->status == "Belum_Bayar")
-                                        <span class="badge badge-sm bg-gradient-danger w-80">B. Bayar</span>
+                                        <span class="badge badge-sm bg-gradient-danger w-100">B. Bayar</span>
                                 @elseif ($data->status == "Menunggu_Konfirmasi")
-                                        <span class="badge badge-sm bg-gradient-primary w-80">M. Konfirmasi</span>
+                                        <span class="badge badge-sm bg-gradient-primary w-100">M. Konfirmasi</span>
                                 @elseif ($data->status == "Terkonfirmasi")
-                                        <span class="badge badge-sm bg-gradient-secondary w-80">Terkonfirmasi</span>
+                                        <span class="badge badge-sm bg-gradient-secondary w-100">Terkonfirmasi</span>
                                 @elseif ($data->status == "Dikirim")
-                                        <span class="badge badge-sm bg-gradient-info w-80">Dikirim</span>
+                                        <span class="badge badge-sm bg-gradient-info w-100">Dikirim</span>
                                 @elseif ($data->status == "Selesai")
-                                        <span class="badge badge-sm bg-gradient-success w-80">Selesai</span>
+                                        <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>
                                 @elseif ($data->status == "Gagal")
-                                        <span class="badge badge-sm bg-gradient-dark w-80">Gagal</span>   
+                                        <span class="badge badge-sm bg-gradient-dark w-100">Gagal</span>   
                                 @endif
                             </td>
                             <td class="align-middle text-center">
