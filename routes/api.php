@@ -41,6 +41,10 @@ Route::get('/products/{id}', [ApiProductController::class, 'show']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
+  // user
+  Route::put('/user', [ApiAuthController::class, 'update']);
+  Route::post('/user/upload', [ApiAuthController::class, 'upload']);
+
   // products manipulation
   Route::post('/products', [ApiProductController::class, 'store']);
   Route::put('/products/{id}', [ApiProductController::class, 'update']);

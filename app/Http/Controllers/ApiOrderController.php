@@ -40,9 +40,12 @@ class ApiOrderController extends Controller
     $transaction = Transaction::find($id);
 
     // update stuff di transaksi
-    if ($request->bukti_bayar) {
+    if ($request->image) {
       File::delete(storage_path('app/public/' . $transaction->image));
-      $transaction['bukti_bayar'] = $request->bukti_bayar->store('bukti_pembayaran', 'public');
+      $transaction['bukti_bayar'] = $request->image->store('bukti_pembayaran', 'public');
+    }
+    if ($request->alamat){
+      $transaction->address = $request->alamat;
     }
 
     return response()->json(['results' => $transaction->update()]);

@@ -6,6 +6,7 @@ use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\File;
 
 class ApiAuthController extends Controller
 {
@@ -59,6 +60,45 @@ class ApiAuthController extends Controller
       'token' => $token,
       'cart' => $new
     ], 201);
+  }
+
+  public function update(Request $request)
+  {
+    $user = auth()->user();
+
+    if ($request->name) {
+      $user->name = $request->name;
+    }
+    if ($request->phone) {
+      $user->phone = $request->phone;
+    }
+    if ($request->email) {
+      $user->email = $request->email;
+    }
+    if ($request->alamat) {
+      $user->address = $request->alamat;
+    }
+    $user->update();
+
+    return response([
+      'user' => $user,
+      'token' => $request->bearerToken(),
+    ]);
+  }
+
+  public function upload(Request $request)
+  {
+    $user = auth()->user();
+    if ($request->image) {
+      File::delete(storage_path('app/public/' . $user->image));
+      $user->image = $request->image->store('avatar', 'public');
+    }
+    $user->update();
+
+    return response([
+      'user' => $user,
+      'token' => $request->bearerToken(),
+    ]);
   }
 
   public function logout(Request $request)
