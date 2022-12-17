@@ -66,6 +66,12 @@ class ApiAuthController extends Controller
   {
     $user = auth()->user();
 
+    $request->validate([
+      'name' => 'min:3',
+      'phone' => 'unique:users,phone|max:10',
+      'email' => 'email|unique:users,email',
+    ]);
+
     if ($request->name) {
       $user->name = $request->name;
     }
