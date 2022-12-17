@@ -33,7 +33,10 @@ class ApiDetailOrderController extends Controller
 
   public function update(Request $request)
   {
-    $data = ['qty' => $request->qty];
+    $data = [
+      'qty' => $request->qty, 
+      'sub_total' => $request->sub_total
+    ];
 
     return response()->json(['results' => Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->updateExistingPivot($request->product_id, $data)]);
   }

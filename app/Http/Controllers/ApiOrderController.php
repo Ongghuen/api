@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -24,6 +25,8 @@ class ApiOrderController extends Controller
     $orders = auth()->user()->transactions()->where('status', "Pending")->latest('id')->first();
     $orders->status = "Belum_Bayar";
     $orders->alamat = auth()->user()->address;
+    $orders->total_harga = $request->total_harga;
+    $orders->tgl_transaksi = Carbon::now()->toDateTimeString();
     $orders->save();
 
     // buat "transaksi" baru buat keranjang
@@ -51,6 +54,10 @@ class ApiOrderController extends Controller
     // update stuff di transaksi
     if ($req->status) {
       $transaction['status'] = $req->status;
+    }
+
+    if ($req->status == "Selesai") {
+      $transaction->tgl_selesai = Carbon::now()->toDateTimeString();
     }
 
     return response()->json(['results' => $transaction->update()]);
