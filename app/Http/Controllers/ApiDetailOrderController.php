@@ -12,7 +12,10 @@ class ApiDetailOrderController extends Controller
   {
     $id = auth()->user()->id;
 
-    $ongoing = Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->get();
+    $ongoing = Transaction::find(auth()->user()->transactions()
+      ->where('status', "Pending")
+      ->where('categories', "Product")
+      ->latest('id')->first()->id)->products()->get();
     $details = Transaction::with('products')->where('user_id', auth()->user()->id)->get();
 
     return response()->json([
@@ -23,7 +26,11 @@ class ApiDetailOrderController extends Controller
 
   public function store(Request $request)
   {
-    return response()->json(['results' => Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->attach($request->product_id)]);
+    $ongoing = Transaction::find(auth()->user()->transactions()
+      ->where('status', "Pending")
+      ->where('categories', "Product")
+      ->latest('id')->first()->id);
+    return response()->json(['results' => $ongoing->products()->attach($request->product_id)]);
   }
 
   public function show($id)
@@ -34,15 +41,24 @@ class ApiDetailOrderController extends Controller
   public function update(Request $request)
   {
     $data = [
-      'qty' => $request->qty, 
+      'qty' => $request->qty,
       'sub_total' => $request->sub_total
     ];
 
-    return response()->json(['results' => Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->updateExistingPivot($request->product_id, $data)]);
+    $ongoing = Transaction::find(auth()->user()->transactions()
+      ->where('status', "Pending")
+      ->where('categories', "Product")
+      ->latest('id')->first()->id);
+
+    return response()->json(['results' => $ongoing->products()->updateExistingPivot($request->product_id, $data)]);
   }
 
   public function destroy(Request $request)
   {
-    return response()->json(['results' => Transaction::find(auth()->user()->transactions()->where('status', "Pending")->latest('id')->first()->id)->products()->detach($request->product_id)]);
+    $ongoing = Transaction::find(auth()->user()->transactions()
+      ->where('status', "Pending")
+      ->where('categories', "Product")
+      ->latest('id')->first()->id);
+    return response()->json(['results' => $ongoing->products()->detach($request->product_id)]);
   }
 }

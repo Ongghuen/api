@@ -12,20 +12,24 @@ class ApiOrderController extends Controller
   // index cart
   public function index()
   {
-    $ongoing = auth()->user()->transactions()->where('status', "Pending")->latest('id')->first();
     $ongoing = auth()->user()->transactions()->where('status', "Pending")
+      ->where('categories', "Product")
+      ->latest('id')->first();
+    $ongoingCustom = auth()->user()->transactions()->where('status', "Pending")
       ->where('categories', "Custom")
       ->latest('id')->first();
     $orders = auth()->user()->transactions()->where('categories', "Product")->latest('id')->get();
     $customs = auth()->user()->transactions()->where('categories', "Custom")->latest('id')->get();
-    return response()->json(['ongoing' => $ongoing, 'orders' => $orders, 'customs' => $customs]);
+    return response()->json(['ongoing' => $ongoing, 'ongoingCustom' => $ongoingCustom, 'orders' => $orders, 'customs' => $customs]);
   }
 
   public function store(Request $request)
   {
     // anggep aja checkout
     // check latest transaksi -> update ke belum bayar
-    $orders = auth()->user()->transactions()->where('status', "Pending")->latest('id')->first();
+    $orders = auth()->user()->transactions()->where('status', "Pending")
+      ->where('categories', "Product")
+      ->latest('id')->first();
     $orders->status = "Belum_Bayar";
     $orders->alamat = auth()->user()->address;
     $orders->total_harga = $request->total_harga;

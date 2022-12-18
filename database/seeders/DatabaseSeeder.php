@@ -52,6 +52,11 @@ class DatabaseSeeder extends Seeder
       'user_id' => 1,
     ]);
 
+    Transaction::create([
+      'user_id' => 1,
+      'categories' => "Custom"
+    ]);
+
     TransactionDetail::create([
       'transaction_id' => 1,
       'product_id' => 1,
