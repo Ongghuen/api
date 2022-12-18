@@ -13,6 +13,9 @@ class ApiOrderController extends Controller
   public function index()
   {
     $ongoing = auth()->user()->transactions()->where('status', "Pending")->latest('id')->first();
+    $ongoing = auth()->user()->transactions()->where('status', "Pending")
+      ->where('categories', "Custom")
+      ->latest('id')->first();
     $orders = auth()->user()->transactions()->where('categories', "Product")->latest('id')->get();
     $customs = auth()->user()->transactions()->where('categories', "Custom")->latest('id')->get();
     return response()->json(['ongoing' => $ongoing, 'orders' => $orders, 'customs' => $customs]);
@@ -44,7 +47,7 @@ class ApiOrderController extends Controller
       File::delete(storage_path('app/public/' . $transaction->image));
       $transaction['bukti_bayar'] = $request->image->store('bukti_pembayaran', 'public');
     }
-    if ($request->alamat){
+    if ($request->alamat) {
       $transaction->address = $request->alamat;
     }
 

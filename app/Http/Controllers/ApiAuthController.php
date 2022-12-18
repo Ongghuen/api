@@ -40,7 +40,7 @@ class ApiAuthController extends Controller
     $formField = $request->validate([
       'name' => ['required', 'min:3'],
       'username' => 'required|unique:users,username',
-      'phone' => 'required|unique:users,phone',
+      'phone' => 'required|unique:users,phone|max:13',
       'email' => 'required|email|unique:users,email',
       'password' => 'required|confirmed|min:6'
     ]);
@@ -53,6 +53,10 @@ class ApiAuthController extends Controller
 
     $new = Transaction::create([
       'user_id' => $user->id,
+    ]);
+    Transaction::create([
+      'user_id' => $user->id,
+      'categories' => "Custom"
     ]);
 
     return response([
@@ -68,7 +72,7 @@ class ApiAuthController extends Controller
 
     $request->validate([
       'name' => 'min:3',
-      'phone' => 'unique:users,phone|max:10',
+      'phone' => 'unique:users,phone|max:13',
       'email' => 'email|unique:users,email',
     ]);
 
