@@ -266,7 +266,7 @@
                                                 <li><b>{{$error}}</b></li>
                                             @endforeach
                                         </ul>
-                                    </div>    
+                                    </div> 
                                 @endif
                                 <form action="/user/{{$item->id}}" method="POST" enctype="multipart/form-data">
                                     @method('PUT')
