@@ -433,32 +433,47 @@
     <script src="{{asset('js/plugins/chartjs.min.js')}}"></script>
     <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
-    var data = {!! json_encode($cart) !!};;
+    var data = {!! json_encode($cart) !!};
+    var month = {!! json_encode($chart) !!};
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
-
     gradientStroke1.addColorStop(1, "rgba(94, 114, 228, 0.2)");
     gradientStroke1.addColorStop(0.2, "rgba(94, 114, 228, 0.0)");
     gradientStroke1.addColorStop(0, "rgba(94, 114, 228, 0)");
+    var label = [];
+    for ($i=0; $i < month.length; $i++) { 
+        if(month[$i]['month'] == 11){
+            label.push('Nov')
+        } else if(month[$i]['month'] == 12){
+            label.push('Des')
+        } else if(month[$i]['month'] == 1){
+            label.push('Jan')
+        } else if(month[$i]['month'] == 2){
+            label.push('Feb')
+        } else if(month[$i]['month'] == 3){
+            label.push('Mar')
+        } else if(month[$i]['month'] == 4){
+            label.push('Apr')
+        } else if(month[$i]['month'] == 5){
+            label.push('Mei')
+        } else if(month[$i]['month'] == 6){
+            label.push('Jun')
+        } else if(month[$i]['month'] == 7){
+            label.push('Jul')
+        } else if(month[$i]['month'] == 8){
+            label.push('Aug')
+        } else if(month[$i]['month'] == 9){
+            label.push('Sep')
+        } else if(month[$i]['month'] == 10){
+            label.push('Okt')
+        }
+    }
     new Chart(ctx1, {
         type: "line",
         data: {
-        labels: [
-            "Nov",
-            "Dec",
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct"
-        ],
+        labels: label
+        ,
         datasets: [{
-            label: "Mobile apps",
+            label: "Sales",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,

@@ -151,6 +151,11 @@
                         {{Session::get('message')}}
                     </div>
                 @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger ms-1 my-3 font-weight-bold" role="alert">
+                        tambah / update pengguna gagal!
+                    </div>  
+                @endif
                 <div class="table-responsive p-0">
                 <table class="table align-items-center mb-0">
                     <thead>

@@ -46,10 +46,13 @@ class DashboardController extends Controller
                 ->groupBy(['year','month'])
                 ->get();
                 
-        $cart = [$chart[0]['price'], $chart[1]['price'], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        $cart = [];
+        for ($i=0; $i < count($chart); $i++) { 
+                array_push($cart, $chart[$i]->price);
+        }
 
         return view('dashboard.dashboard', ['todaysMoney' => $tm, 'sales' => $sales, 
         'todaysUser' => $users, 'todaysProduct' => $products, 'topProducts' => $topProduct,
-        'trxStatus' => $trxStatus, 'cart' => $cart]);
+        'trxStatus' => $trxStatus, 'cart' => $cart, 'chart' => $chart]);
     }
 }
