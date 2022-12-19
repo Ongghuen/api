@@ -24,7 +24,7 @@
       <div class="formBox">
         <h2>Sign In</h2>
         @if(Session::has('status'))
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <div class="alert alert-danger alert-dismissible fade show font-weight-bold" role="alert">
               {{Session::get('message')}}
           </div>
         @endif

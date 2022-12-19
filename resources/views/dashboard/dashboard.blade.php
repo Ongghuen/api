@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('aside')
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-0 fixed-start ms-0 my-lg-0 ms-lg-0 my-md-0 ms-md-0 my-sm-0 ms-sm-0 my-xl-3 ms-xl-4" id="sidenav-main">
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href="./dashboard">
@@ -68,6 +68,11 @@
 @endsection
 
 @section('content')
+    @if(Session::has('status'))
+        <div class="alert alert-success alert-dismissible fade show mb-4 font-weight-bold" role="alert">
+            {{Session::get('message')}}
+        </div>
+    @endif
     <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
             <div class="card">

@@ -3,7 +3,7 @@
 @section('title', 'Report')
 
 @section('aside')
-<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
+<aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-0 fixed-start ms-0 my-lg-0 ms-lg-0 my-md-0 ms-md-0 my-sm-0 ms-sm-0 my-xl-3 ms-xl-4" id="sidenav-main">
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
     <a class="navbar-brand m-0" href="/dashboard">
@@ -71,24 +71,24 @@
 <div class="card shadow-lg mx-4 mt-3">
     <div class="card-body">
         <div class="row gx-4">
-        <div class="dropdown col-auto">
-            <a href="/report" class="btn bg-gradient-dark btn-sm ms-auto px-3 my-1" type="submit">
-            <i class="fa fa-refresh" aria-hidden="true"></i>
-            </a>
-        </div>
-        <form class="row gx-4 dropdown col-auto" action="/report-date" method="get">
-            <div class="dropdown col-auto">
-                <input class="form-control btn btn-sm bg-gradient-dark mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date1" id="date1" />
-            </div>
-            <div class="dropdown col-auto">
-                <input class="form-control btn btn-sm bg-gradient-dark mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date2" id="date2" />
-            </div>
-            <div class="dropdown col-auto">
-                <button class="btn bg-gradient-dark btn-sm ms-auto my-1" type="submit">
-                    Cari
-                </button>
-            </div>
-        </form>
+          <form class="row gx-4 dropdown col-auto" action="/report-date" method="get">
+              <div class="dropdown col-auto">
+                  <a href="/report" class="btn bg-gradient-dark btn-sm ms-auto px-3 my-1" type="submit">
+                  <i class="fa fa-refresh" aria-hidden="true"></i>
+                  </a>
+              </div>
+              <div class="dropdown col-auto">
+                  <input class="form-control btn btn-sm bg-gradient-dark mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date1" id="date1" />
+              </div>
+              <div class="dropdown col-auto">
+                  <input class="form-control btn btn-sm bg-gradient-dark mb-1 px-3 my-1" value="{{ date('Y-m-d') }}" type="date" name="date2" id="date2" />
+              </div>
+              <div class="dropdown col-auto">
+                  <button class="btn bg-gradient-dark px-3 pt-2 pb-1 my-1" type="submit">
+                    <i class="fa fa-filter" aria-hidden="true"></i>
+                  </button>
+              </div>
+          </form>
         <div class="dropdown col-auto">
             <button class="btn bg-gradient-dark btn-sm ms-auto my-1" onclick="getInputValue()" data-bs-toggle="modal" data-bs-target="#exportModal">
                 Export
@@ -128,12 +128,12 @@
         </div>
         {{-- end export modal --}}
         
-        <div class="col-lg-4 col-md-6 me-sm-0 mx-auto">
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12 me-sm-0 mx-auto mt-sm-3 mt-lg-0 mt-md-3 mt-3">
             <div class="nav-wrapper position-relative end-0">
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="ms-md-auto d-flex align-items-center">
                 <form class="input-group" action="" method="get">
                 <div class="input-group">
-                    <input type="text" class="form-control ms-4" name="keyword" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
+                    <input type="text" class="form-control" name="keyword" placeholder="Type here..." aria-label="Type here..." aria-describedby="button-addon2">
                     <button class="btn bg-gradient-dark  mb-0" name="caridata" type="submit" id="button-addon2">
                     <i class="fas fa-search" aria-hidden="true"></i>
                     </button>
