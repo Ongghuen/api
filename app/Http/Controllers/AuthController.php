@@ -15,30 +15,28 @@ class AuthController extends Controller
     }
 
     public function authenticating(Request $request){
-        $user = User::where("email",$request->email)->first();
-
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        
-        if($user->role_id == 1){
-            if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user()->role_id;
+            if($user == 1){
                 $request->session()->regenerate();
 
                 Session::flash('status','success');
-                Session::flash('message', 'Selamat anda berhasil login!');
+                Session::flash('message', 'Selamat anda berhasil login sebagai admin!');
 
                 return redirect()->intended('/dashboard');
-            }
-        }else{
-            Session::flash('status','failed');
-            Session::flash('message', 'Maaf hanya admin yang boleh masuk!');
+            }else{
+                dd('kontol kontol');
+                // Session::flash('status','failed');
+                // Session::flash('message', 'Maaf hanya admin yang boleh masuk!');
 
-            return back();
+                // return back();
+            }
         }
-        
 
         Session::flash('status','failed');
         Session::flash('message', 'Login gagal!');
