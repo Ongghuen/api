@@ -169,80 +169,15 @@
         </div>
     </div>
     <div class="row mt-4">
-        <div class="col-lg-7 mb-lg-0 mb-4">
+        <div class="col-lg-12 mb-lg-0 mb-4">
             <div class="card z-index-2 h-100">
                 <div class="card-header pb-0 pt-3 bg-transparent">
-                    <h6 class="text-capitalize">Sales overview</h6>
+                    <h6 class="text-capitalize">Chart Penjualan</h6>
                 </div>
-                <div class="card-body p-3">
+                <div class="card-body pt-0">
                     <div class="chart">
                         <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="card card-carousel overflow-hidden h-100 p-0">
-                <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
-                <div class="carousel-inner border-radius-lg h-100">
-                    <div class="carousel-item h-100 active" style="
-                        background-image: url('../../images/nv-bg.jpg');
-                        background-size: cover;
-                        ">
-                        <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                            <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                            <i class="ni ni-camera-compact text-dark opacity-10"></i>
-                            </div>
-                            <h5 class="text-white mb-1">Get started with Argon</h5>
-                            <p>
-                            There’s nothing I really wanted to do in life that I
-                            wasn’t able to get good at.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="carousel-item h-100" style="
-                        background-image: url('../assets/img/carousel-2.jpg');
-                        background-size: cover;
-                        ">
-                        <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                            <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                            <i class="ni ni-bulb-61 text-dark opacity-10"></i>
-                            </div>
-                            <h5 class="text-white mb-1">
-                            Faster way to create web pages
-                            </h5>
-                            <p>
-                            That’s my skill. I’m not really specifically talented at
-                            anything except for the ability to learn.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="carousel-item h-100" style="
-                        background-image: url('../assets/img/carousel-3.jpg');
-                        background-size: cover;
-                        ">
-                        <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                            <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                            <i class="ni ni-trophy text-dark opacity-10"></i>
-                            </div>
-                            <h5 class="text-white mb-1">
-                            Share with us your design tips!
-                            </h5>
-                            <p>
-                            Don’t be afraid to be wrong because you can’t learn
-                            anything from a compliment.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
                 </div>
             </div>
         </div>
@@ -442,29 +377,29 @@
     var label = [];
     for ($i=0; $i < month.length; $i++) { 
         if(month[$i]['month'] == 11){
-            label.push('Nov')
+            label.push('Nov, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 12){
-            label.push('Des')
+            label.push('Des, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 1){
-            label.push('Jan')
+            label.push('Jan, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 2){
-            label.push('Feb')
+            label.push('Feb, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 3){
-            label.push('Mar')
+            label.push('Mar, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 4){
-            label.push('Apr')
+            label.push('Apr, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 5){
-            label.push('Mei')
+            label.push('Mei, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 6){
-            label.push('Jun')
+            label.push('Jun, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 7){
-            label.push('Jul')
+            label.push('Jul, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 8){
-            label.push('Aug')
+            label.push('Aug, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 9){
-            label.push('Sep')
+            label.push('Sep, ' + month[$i]['year'])
         } else if(month[$i]['month'] == 10){
-            label.push('Okt')
+            label.push('Okt, ' + month[$i]['year'])
         }
     }
     new Chart(ctx1, {
@@ -473,7 +408,7 @@
         labels: label
         ,
         datasets: [{
-            label: "Sales",
+            label: "Pemasukan",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
