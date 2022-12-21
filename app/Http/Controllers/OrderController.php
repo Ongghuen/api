@@ -77,8 +77,7 @@ class OrderController extends Controller
     $order->total_harga = $request->total_harga;
     $order->update();
 
-    $custom->DP = $request->DP;
-    $custom->total_harga = $request->total_harga;
+    $custom->dp = $request->DP;
     $custom->update();
 
     if ($custom) {
@@ -137,6 +136,12 @@ class OrderController extends Controller
 
   public function customDelete($id){
     $order = Transaction::findOrFail($id);
+    $custom = Custom::where('transaction_id', $order->id)->get();
+    if(count($custom) != 0){
+      for ($i=0; $i < count($custom); $i++) { 
+        $custom[$i]->delete();
+      }
+    }
     $order->delete();
 
     if ($order) {

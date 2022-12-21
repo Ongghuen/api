@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('jenis_custom', ['Kursi', 'Meja', 'Pagar', 'Pintu', 'Rak']);
             $table->enum('bahan', ['Kayu Jati', 'Kayu Mahoni', 'Besi', 'Kaca', 'Alumunium']);
             $table->string('desc', 255);
-            $table->integer('dp');
+            $table->integer('dp')->default(0);
             $table->timestamps();
         });
     }

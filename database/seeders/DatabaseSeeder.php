@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Custom;
 use App\Models\TransactionDetail;
 use App\Models\Product;
 use App\Models\Role;

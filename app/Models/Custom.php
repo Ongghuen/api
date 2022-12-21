@@ -11,12 +11,12 @@ class Custom extends Model
     use HasFactory, Sortable;
 
     protected $fillable = [
+        'transaction_id',
         'name',
         'status',
         'desc',
         'jenis_custom',
         'bahan',
-        'desc',
         'desc',
         'dp',
     ];

@@ -16,6 +16,7 @@ class Transaction extends Model
     'total_harga',
     'tgl_transaksi',
     'tgl_selesai',
+    'categories',
     'status'
   ];
 

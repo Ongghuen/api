@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApiAuthController;
+use App\Http\Controllers\ApiCustomController;
 use App\Http\Controllers\ApiDetailOrderController;
 use App\Http\Controllers\ApiOrderController;
 use App\Http\Controllers\ApiProductController;
@@ -55,16 +56,23 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::post('/wishlists', [ApiWishlistController::class, 'store']);
   Route::delete('/wishlists/{product_id}', [ApiWishlistController::class, 'destroy']);
 
+  // typical orders or customs
+  Route::post('/orders/upload/{id}', [ApiOrderController::class, 'upload']);
+  Route::post('/orders/status/{id}', [ApiOrderController::class, 'changeStatus']);
+
   // orders & details
   Route::get('/orders', [ApiOrderController::class, 'index']);
   Route::post('/orders/create', [ApiOrderController::class, 'store']);
-  Route::post('/orders/upload/{id}', [ApiOrderController::class, 'upload']);
-  Route::post('/orders/status/{id}', [ApiOrderController::class, 'changeStatus']);
   Route::get('/orders/detail', [ApiDetailOrderController::class, 'index']);
   Route::post('/orders/detail', [ApiDetailOrderController::class, 'store']);
   Route::put('/orders/detail', [ApiDetailOrderController::class, 'update']);
   Route::delete('/orders/detail', [ApiDetailOrderController::class, 'destroy']);
   Route::get('/orders/detail/{id}', [ApiDetailOrderController::class, 'show']);
+
+  // customs & details
+  Route::get('/customs', [ApiCustomController::class, 'index']);
+  Route::post('/customs/create', [ApiCustomController::class, 'store']);
+  Route::get('/customs/detail', [ApiCustomController::class, 'index']);
 
   // check token
   Route::get('/checktoken', [ApiAuthController::class, 'token']);
