@@ -152,78 +152,84 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orderList as $data)
-                        <tr>
-                            <td class="align-middle text-center py-4">
-                                <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $orderList->firstItem() - 1}}</span>
-                            </td>
-                            <td class="align-middle text-center text-sm pe-3">
-                                @if ($data->status == "Pending")
-                                        <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
-                                @elseif ($data->status == "Belum_Bayar")
-                                        <span class="badge badge-sm bg-gradient-danger w-100">B. Bayar</span>
-                                @elseif ($data->status == "Menunggu_Konfirmasi")
-                                        <span class="badge badge-sm bg-gradient-primary w-100">M. Konfirmasi</span>
-                                @elseif ($data->status == "Terkonfirmasi")
-                                        <span class="badge badge-sm bg-gradient-secondary w-100">Terkonfirmasi</span>
-                                @elseif ($data->status == "Dikirim")
-                                        <span class="badge badge-sm bg-gradient-info w-100">Dikirim</span>
-                                @elseif ($data->status == "Selesai")
-                                        <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>   
-                                @endif
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">
-                                    @if ($data->tgl_selesai != null)
-                                        {{$data->tgl_selesai}}
-                                    @else
-                                        On Progress
-                                    @endif
-                                </span>
-                            </td>
-                            <td class="align-middle text-center text-sm ms-auto">
-                                <form action="dtOrder/{{$data->id}}" method="get">
-                                    <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
-                                        <i class="fas fa-eye text-green-300 pe-2"></i>
-                                    </a>
+                        @if (count($orderList) > 0)
+                            @foreach ($orderList as $data)
+                            <tr>
+                                <td class="align-middle text-center py-4">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $orderList->firstItem() - 1}}</span>
+                                </td>
+                                <td class="align-middle text-center text-sm pe-3">
                                     @if ($data->status == "Pending")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalPending{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
+                                            <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
                                     @elseif ($data->status == "Belum_Bayar")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalBB{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
+                                            <span class="badge badge-sm bg-gradient-danger w-100">B. Bayar</span>
                                     @elseif ($data->status == "Menunggu_Konfirmasi")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalMK{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
+                                            <span class="badge badge-sm bg-gradient-primary w-100">M. Konfirmasi</span>
                                     @elseif ($data->status == "Terkonfirmasi")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalTerkonfirmasi{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
+                                            <span class="badge badge-sm bg-gradient-secondary w-100">Terkonfirmasi</span>
                                     @elseif ($data->status == "Dikirim")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalDikirim{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
+                                            <span class="badge badge-sm bg-gradient-info w-100">Dikirim</span>
                                     @elseif ($data->status == "Selesai")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalSelesai{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
+                                            <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>   
                                     @endif
-                                </form>
-                            </td>
-                        </tr> 
-                        @endforeach
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">
+                                        @if ($data->tgl_selesai != null)
+                                            {{$data->tgl_selesai}}
+                                        @else
+                                            On Progress
+                                        @endif
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center text-sm ms-auto">
+                                    <form action="dtOrder/{{$data->id}}" method="get">
+                                        <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
+                                            <i class="fas fa-eye text-green-300 pe-2"></i>
+                                        </a>
+                                        @if ($data->status == "Pending")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalPending{{$data->id}}">
+                                                <i class="fas fa-edit text-green-300"></i>
+                                            </a>
+                                        @elseif ($data->status == "Belum_Bayar")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalBB{{$data->id}}">
+                                                <i class="fas fa-edit text-green-300"></i>
+                                            </a>
+                                        @elseif ($data->status == "Menunggu_Konfirmasi")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalMK{{$data->id}}">
+                                                <i class="fas fa-edit text-green-300"></i>
+                                            </a>
+                                        @elseif ($data->status == "Terkonfirmasi")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalTerkonfirmasi{{$data->id}}">
+                                                <i class="fas fa-edit text-green-300"></i>
+                                            </a>
+                                        @elseif ($data->status == "Dikirim")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalDikirim{{$data->id}}">
+                                                <i class="fas fa-edit text-green-300"></i>
+                                            </a>
+                                        @elseif ($data->status == "Selesai")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalSelesai{{$data->id}}">
+                                                <i class="fas fa-edit text-green-300"></i>
+                                            </a>
+                                        @endif
+                                    </form>
+                                </td>
+                            </tr> 
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="7" class="align-middle text-center mt-3">Transaksi tidak ditemukan!</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
                 </div>
@@ -472,96 +478,102 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($customList as $data)
-                        <tr>
-                            <td class="align-middle text-center py-4">
-                                <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
-                            </td>
-                            <td class="align-middle text-center text-sm pe-3">
-                                @if ($data->status == "Pending")
-                                        <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
-                                @elseif ($data->status == "Belum_Bayar")
-                                        <span class="badge badge-sm bg-gradient-danger w-100">B. Bayar</span>
-                                @elseif ($data->status == "Menunggu_Konfirmasi")
-                                        <span class="badge badge-sm bg-gradient-primary w-100">M. Konfirmasi</span>
-                                @elseif ($data->status == "Terkonfirmasi")
-                                        <span class="badge badge-sm bg-gradient-secondary w-100">Terkonfirmasi</span>
-                                @elseif ($data->status == "Dikirim")
-                                        <span class="badge badge-sm bg-gradient-info w-100">Dikirim</span>
-                                @elseif ($data->status == "Selesai")
-                                        <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>
-                                @elseif ($data->status == "Gagal")
-                                        <span class="badge badge-sm bg-gradient-dark w-100">Gagal</span>   
-                                @endif
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
-                            </td>
-                            @if ($data->total_harga == null)
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">On Progress</span>
+                        @if (count($customList) > 0)
+                            @foreach ($customList as $data)
+                            <tr>
+                                <td class="align-middle text-center py-4">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
                                 </td>
-                            @else
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
-                                </td>
-                            @endif
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">
-                                    @if ($data->tgl_selesai != null)
-                                        {{$data->tgl_selesai}}
-                                    @else
-                                        On Progress
-                                    @endif
-                                </span>
-                            </td>
-                            <td class="align-middle text-center text-sm ms-auto">
-                                <form action="dtOrder/{{$data->id}}" method="get">
-                                    <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
-                                        <i class="fas fa-eye text-green-300 pe-2"></i>
-                                    </a>
+                                <td class="align-middle text-center text-sm pe-3">
                                     @if ($data->status == "Pending")
-                                        @if ($data->total_harga == null)
-                                            <a data-bs-toggle="modal" data-bs-target="#updateModalPending1{{$data->id}}">
+                                            <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
+                                    @elseif ($data->status == "Belum_Bayar")
+                                            <span class="badge badge-sm bg-gradient-danger w-100">B. Bayar</span>
+                                    @elseif ($data->status == "Menunggu_Konfirmasi")
+                                            <span class="badge badge-sm bg-gradient-primary w-100">M. Konfirmasi</span>
+                                    @elseif ($data->status == "Terkonfirmasi")
+                                            <span class="badge badge-sm bg-gradient-secondary w-100">Terkonfirmasi</span>
+                                    @elseif ($data->status == "Dikirim")
+                                            <span class="badge badge-sm bg-gradient-info w-100">Dikirim</span>
+                                    @elseif ($data->status == "Selesai")
+                                            <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>
+                                    @elseif ($data->status == "Gagal")
+                                            <span class="badge badge-sm bg-gradient-dark w-100">Gagal</span>   
+                                    @endif
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
+                                </td>
+                                @if ($data->total_harga == null)
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">On Progress</span>
+                                    </td>
+                                @else
+                                    <td class="align-middle text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
+                                    </td>
+                                @endif
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">
+                                        @if ($data->tgl_selesai != null)
+                                            {{$data->tgl_selesai}}
+                                        @else
+                                            On Progress
+                                        @endif
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center text-sm ms-auto">
+                                    <form action="dtOrder/{{$data->id}}" method="get">
+                                        <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
+                                            <i class="fas fa-eye text-green-300 pe-2"></i>
+                                        </a>
+                                        @if ($data->status == "Pending")
+                                            @if ($data->total_harga == null)
+                                                <a data-bs-toggle="modal" data-bs-target="#updateModalPending1{{$data->id}}">
+                                                    <i class="fas fa-edit text-green-300"></i>
+                                                </a>
+                                            @else
+                                                <a data-bs-toggle="modal" data-bs-target="#updateModalPending2{{$data->id}}">
+                                                    <i class="fas fa-edit text-green-300"></i>
+                                                </a>
+                                            @endif
+                                        @elseif ($data->status == "Belum_Bayar")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalBB{{$data->id}}">
                                                 <i class="fas fa-edit text-green-300"></i>
                                             </a>
-                                        @else
-                                            <a data-bs-toggle="modal" data-bs-target="#updateModalPending2{{$data->id}}">
+                                        @elseif ($data->status == "Menunggu_Konfirmasi")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalMK{{$data->id}}">
+                                                <i class="fas fa-edit text-green-300"></i>
+                                            </a>
+                                        @elseif ($data->status == "Terkonfirmasi")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalTerkonfirmasi{{$data->id}}">
+                                                <i class="fas fa-edit text-green-300"></i>
+                                            </a>
+                                        @elseif ($data->status == "Dikirim")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalDikirim{{$data->id}}">
+                                                <i class="fas fa-edit text-green-300"></i>
+                                            </a>
+                                        @elseif ($data->status == "Selesai")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalSelesai{{$data->id}}">
+                                                <i class="fas fa-edit text-green-300"></i>
+                                            </a>
+                                        @elseif ($data->status == "Gagal")
+                                            <a data-bs-toggle="modal" data-bs-target="#updateModalGagal{{$data->id}}">
                                                 <i class="fas fa-edit text-green-300"></i>
                                             </a>
                                         @endif
-                                    @elseif ($data->status == "Belum_Bayar")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalBB{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
-                                    @elseif ($data->status == "Menunggu_Konfirmasi")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalMK{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
-                                    @elseif ($data->status == "Terkonfirmasi")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalTerkonfirmasi{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
-                                    @elseif ($data->status == "Dikirim")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalDikirim{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
-                                    @elseif ($data->status == "Selesai")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalSelesai{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
-                                    @elseif ($data->status == "Gagal")
-                                        <a data-bs-toggle="modal" data-bs-target="#updateModalGagal{{$data->id}}">
-                                            <i class="fas fa-edit text-green-300"></i>
-                                        </a>
-                                    @endif
-                                </form>
-                            </td>
-                        </tr> 
-                        @endforeach
+                                    </form>
+                                </td>
+                            </tr> 
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="7" class="align-middle text-center mt-3">Transaksi tidak ditemukan!</td>
+                            </tr>
+                        @endif
                     </tbody>
                 </table>
                 </div>
@@ -581,57 +593,61 @@
                         </a>
                         </div>
                         <div class="modal-body">
-                            <div class="row d-flex">
-                                <div class="col-10">
-                                    <span class="font-weight-bold">Customer :</span> {{$item->users->name}} <br>
-                                    <span class="font-weight-bold">Alamat pengiriman :</span> {{$item->alamat}} <br>
-                                    @if ($item->status == "Pending")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-warning">Pending</span>
-                                    @elseif ($item->status == "Belum_Bayar")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-danger">B. Bayar</span>
-                                    @elseif ($item->status == "Menunggu_Konfirmasi")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-primary">M. Konfirmasi</span>
-                                    @elseif ($item->status == "Terkonfirmasi")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-secondary">Terkonfirmasi</span>
-                                    @elseif ($item->status == "Dikirim")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-info">Dikirim</span>
-                                    @elseif ($item->status == "Selesai")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-success">Selesai</span>   
-                                    @endif
+                            @if ($item->total_harga == null)
+                                <div class="alert alert-info font-weight-bold" role="alert">User belum melakukan request!</div>
+                            @else
+                                <div class="row d-flex">
+                                    <div class="col-10">
+                                        <span class="font-weight-bold">Customer :</span> {{$item->users->name}} <br>
+                                        <span class="font-weight-bold">Alamat pengiriman :</span> {{$item->alamat}} <br>
+                                        @if ($item->status == "Pending")
+                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-warning">Pending</span>
+                                        @elseif ($item->status == "Belum_Bayar")
+                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-danger">B. Bayar</span>
+                                        @elseif ($item->status == "Menunggu_Konfirmasi")
+                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-primary">M. Konfirmasi</span>
+                                        @elseif ($item->status == "Terkonfirmasi")
+                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-secondary">Terkonfirmasi</span>
+                                        @elseif ($item->status == "Dikirim")
+                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-info">Dikirim</span>
+                                        @elseif ($item->status == "Selesai")
+                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-success">Selesai</span>   
+                                        @endif
+                                    </div>
+                                    <div class="col-2">
+                                        {{$item->tgl_transaksi}}
+                                    </div>
                                 </div>
-                                <div class="col-2">
-                                    {{$item->tgl_transaksi}}
-                                </div>
-                            </div>
-                            <br>
-                            <table class="table table-hover table-responsive table-sm text-center">
-                                <thead>
-                                    <tr>
-                                        <th>Custom</th>
-                                        <th>Status</th>
-                                        <th>DP</th>
-                                        <th>Harga Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($item->customs as $list)
-                                    <tr>
-                                        <td>{{$list->name}}</td>
-                                        <td>{{$list->status}}</td>
-                                        <td>{{"Rp " . number_format($list->dp, 0, ".", '.')}}</td>
-                                        <td>{{"Rp " . number_format($list->total_harga, 0, ".", '.')}}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <div class="row d-flex">
-                                <div class="col-7">
+                                <br>
+                                <table class="table table-hover table-responsive table-sm text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Custom</th>
+                                            <th>Status</th>
+                                            <th>DP</th>
+                                            <th>Harga Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($item->customs as $list)
+                                        <tr>
+                                            <td>{{$list->name}}</td>
+                                            <td>{{$list->status}}</td>
+                                            <td>{{"Rp " . number_format($list->dp, 0, ".", '.')}}</td>
+                                            <td>{{"Rp " . number_format($list->total_harga, 0, ".", '.')}}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                <div class="row d-flex">
+                                    <div class="col-7">
 
+                                    </div>
+                                    <div class="col-5">
+                                        <span class="font-weight-bold">&emsp;&ensp;&ensp;&ensp;Total Harga :</span> {{"Rp " . number_format($item->total_harga, 0, ".", '.')}}
+                                    </div>
                                 </div>
-                                <div class="col-5">
-                                    <span class="font-weight-bold">&emsp;&ensp;&ensp;&ensp;Total Harga :</span> {{"Rp " . number_format($item->total_harga, 0, ".", '.')}}
-                                </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                     </div>

@@ -170,47 +170,53 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($customList as $data)
-                    <tr>
-                        <td class="align-middle text-center py-4">
-                            <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
-                        </td>
-                        <td class="align-middle text-center text-sm pe-3">
-                            @if ($data->status == "Pending")
-                                    <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
-                            @elseif ($data->status == "Pengerjaan")
-                                    <span class="badge badge-sm bg-gradient-primary w-100">Pengerjaan</span>
-                            @elseif ($data->status == "Disetujui")
-                                    <span class="badge badge-sm bg-gradient-info w-100">Disetujui</span>
-                            @elseif ($data->status == "Selesai")
-                                    <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>
+                    @if (count($customList) > 0)
+                        @foreach ($customList as $data)
+                        <tr>
+                            <td class="align-middle text-center py-4">
+                                <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
+                            </td>
+                            <td class="align-middle text-center text-sm pe-3">
+                                @if ($data->status == "Pending")
+                                        <span class="badge badge-sm bg-gradient-warning w-100">Pending</span>
+                                @elseif ($data->status == "Pengerjaan")
+                                        <span class="badge badge-sm bg-gradient-primary w-100">Pengerjaan</span>
+                                @elseif ($data->status == "Disetujui")
+                                        <span class="badge badge-sm bg-gradient-info w-100">Disetujui</span>
+                                @elseif ($data->status == "Selesai")
+                                        <span class="badge badge-sm bg-gradient-success w-100">Selesai</span>
+                                @endif
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate">{{$data->jenis_custom}}</span>
+                            </td>
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold text-truncate">{{$data->bahan}}</span>
+                            </td>
+                            @if ($data->dp == null)
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold text-truncate">On Progress</span>
+                                </td>
+                            @else
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->dp, 0, ".", '.')}}</span>
+                                </td>
                             @endif
-                        </td>
-                        <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
-                        </td>
-                        <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold text-truncate">{{$data->jenis_custom}}</span>
-                        </td>
-                        <td class="align-middle text-center">
-                            <span class="text-secondary text-xs font-weight-bold text-truncate">{{$data->bahan}}</span>
-                        </td>
-                        @if ($data->dp == null)
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold text-truncate">On Progress</span>
+                            <td class="align-middle text-center text-sm ms-auto">
+                                <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
+                                    <i class="fas fa-eye text-green-300 pe-2"></i>
+                                </a>
                             </td>
-                        @else
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{"Rp " . number_format($data->dp, 0, ".", '.')}}</span>
-                            </td>
-                        @endif
-                        <td class="align-middle text-center text-sm ms-auto">
-                            <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
-                                <i class="fas fa-eye text-green-300 pe-2"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    @endforeach
+                        </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="7" class="align-middle text-center mt-3">Custom tidak ditemukan!</td>
+                        </tr>
+                    @endif
                 </tbody>
                 </table>
             </div>

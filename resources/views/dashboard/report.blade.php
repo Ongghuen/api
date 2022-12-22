@@ -215,46 +215,52 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($orderList as $data)
-                <tr>
-                  <td class="align-middle text-center py-4">
-                    <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $orderList->firstItem() - 1}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
-                      @foreach ($data->products as $item)
-                      {{$item->name}}<br>
-                      @endforeach
-                    </span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
-                      @foreach ($data->products as $item)
-                      {{$item->pivot->qty}}<br>
-                      @endforeach
-                    </span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
-                      @foreach ($data->products as $item)
-                      {{"Rp " . number_format($item->pivot->sub_total, 0, ".", '.')}}<br>
-                      @endforeach
-                    </span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
-                  </td>
-                </tr>
-                @endforeach
+                @if (count($orderList) > 0)
+                  @foreach ($orderList as $data)
+                  <tr>
+                    <td class="align-middle text-center py-4">
+                      <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $orderList->firstItem() - 1}}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
+                        @foreach ($data->products as $item)
+                        {{$item->name}}<br>
+                        @endforeach
+                      </span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
+                        @foreach ($data->products as $item)
+                        {{$item->pivot->qty}}<br>
+                        @endforeach
+                      </span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
+                        @foreach ($data->products as $item)
+                        {{"Rp " . number_format($item->pivot->sub_total, 0, ".", '.')}}<br>
+                        @endforeach
+                      </span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
+                    </td>
+                  </tr>
+                  @endforeach
+                @else
+                  <tr>
+                    <td colspan="8" class="align-middle text-center mt-3">Transaksi tidak ditemukan!</td>
+                  </tr>
+                @endif
               </tbody>
             </table>
           </div>
@@ -342,32 +348,38 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($customList as $data)
-                <tr>
-                  <td class="align-middle text-center py-4">
-                    <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
-                      @foreach ($data->customs as $item)
-                      {{$item->name}}<br>
-                      @endforeach
-                    </span>
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
-                  </td>
-                </tr>
-                @endforeach
+                @if (count($customList) > 0)
+                  @foreach ($customList as $data)
+                  <tr>
+                    <td class="align-middle text-center py-4">
+                      <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $customList->firstItem() - 1}}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">{{$data->users['name']}}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_transaksi}}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold">{{$data->tgl_selesai}}</span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold text-truncate text-left">
+                        @foreach ($data->customs as $item)
+                        {{$item->name}}<br>
+                        @endforeach
+                      </span>
+                    </td>
+                    <td class="align-middle text-center">
+                      <span class="text-secondary text-xs font-weight-bold text-truncate">{{"Rp " . number_format($data->total_harga, 0, ".", '.')}}</span>
+                    </td>
+                  </tr>
+                  @endforeach
+                @else
+                  <tr>
+                    <td colspan="6" class="align-middle text-center mt-3">Transaksi tidak ditemukan!</td>
+                  </tr>
+                @endif
               </tbody>
             </table>
           </div>

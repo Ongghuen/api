@@ -139,12 +139,23 @@
         <div class="col-12">
         <div class="card mb-4">
             <div class="card-header pb-0">
-            <div class="d-flex align-items-center">
-                <h6>Users table</h6>
-                <button class="btn btn-success btn-sm ms-auto " data-bs-toggle="modal" data-bs-target="#createModal">
-                New User
-                </button>
-            </div>
+                <div class="row gx-4 mb-3">
+                    <div class="dropdown col-auto">
+                       <h6>Users Table</h6>
+                    </div> 
+                    <div class="col-lg-4 col-md-6 col-sm-7 col-12 ms-0 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+                        <div class="nav-wrapper position-relative end-0">
+                            <div class="ms-md-auto d-flex align-items-center">
+                                <button class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#createModal">
+                                    Tambah
+                                </button>
+                                <button class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div class="card-body px-0 pt-0 pb-2">
                 @if(Session::has('status'))
                     <div class="alert alert-success ms-1 my-3 font-weight-bold" role="alert">
@@ -184,39 +195,46 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if (count($userList) > 0)
                         @foreach ($userList as $data)
-                        <tr>
-                            <td class="align-middle text-center py-4">
-                                <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $userList->firstItem() - 1}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <img src="{{ $data->image ? asset('storage/' . $data->image) : asset('/images/profile.jpg') }}" class="avatar avatar-sm me-2" alt="{{$data->name}}" />
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{$data->phone}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{$data->username}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold">{{$data->email}}</span>
-                            </td>
-                            <td class="align-middle text-center">
-                                <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
-                                    <i class="fas fa-eye text-green-300"></i>
-                                </a>
-                                <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
-                                    <i class="fas fa-edit text-green-300 px-2"></i>
-                                </a>
-                                <a data-bs-toggle="modal" data-bs-target="#deleteModal{{$data->id}}">
-                                    <i class="fas fa-trash text-green-300"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
+                            <tr>
+                                <td class="align-middle text-center py-4">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$loop->iteration + $userList->firstItem() - 1}}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <img src="{{ $data->image ? asset('storage/' . $data->image) : asset('/images/profile.jpg') }}" class="avatar avatar-sm me-2" alt="{{$data->name}}" />
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$data->name}}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$data->phone}}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$data->username}}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$data->email}}</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
+                                        <i class="fas fa-eye text-green-300"></i>
+                                    </a>
+                                    <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
+                                        <i class="fas fa-edit text-green-300 px-2"></i>
+                                    </a>
+                                    <a data-bs-toggle="modal" data-bs-target="#deleteModal{{$data->id}}">
+                                        <i class="fas fa-trash text-green-300"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="7" class="align-middle text-center mt-3">User tidak ditemukan!</td>
+                            </tr>
+                        @endif
+                        
                     </tbody>
                 </table>
                 </div>
@@ -423,10 +441,10 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{asset('js/argon-dashboard.min.js')}}"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function(){
           // Show the Modal on load
           $("#createModal").modal("show");
         });
-    </script>
+    </script> --}}
 @endsection

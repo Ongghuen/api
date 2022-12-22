@@ -11,6 +11,8 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="{{asset('css/nucleo-svg.css')}}" rel="stylesheet" />
     <link id="pagestyle" href="{{asset('css/argon-dashboard.css')}}" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    @livewireStyles
 </head>
 <body class="g-sidenav-show bg-gray-100">
     <div class="position-absolute w-100 min-height-300 top-0 position-fixed" style="
@@ -60,15 +62,6 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
                                 <li class="dropdown-item d-flex align-items-center">
-                                    <a class="text-black px-2">
-                                        <i class="fa fa-info-circle fixed-plugin-button-nav cursor-pointer"></i>
-                                    </a>
-                                    <a href="/setting" class="ps-2">
-                                        About Us
-                                    </a>
-                                </li>
-                                <div class="dropdown-divider"></div>
-                                <li class="dropdown-item d-flex align-items-center">
                                     <a href="/profile" class="text-black">
                                         <i class="fa fa-user fixed-plugin-button-nav cursor-pointer px-2"></i>
                                     </a>
@@ -102,17 +95,14 @@
         <div class="container-fluid pt-0 pb-4">
             <footer class="footer pt-3">
                 <div class="container-fluid">
-                    <div class="row align-items-center justify-content-lg-between">
+                    <div class="row justify-content-between">
                         <div class="col-lg-6 mb-lg-0 mb-4">
                             <div class="copyright text-center text-sm text-muted text-lg-start">
-                            ©
+                            Copyright©
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>
-                            , made with <i class="fa fa-heart"></i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Ongghuen Tim</a>
-                            for Sumber Rezeki II.
-                            </div>
+                            Sumber Rezeki II, All rights reserved.
                         </div>
                     </div>
                 </div>
