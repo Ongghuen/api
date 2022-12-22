@@ -59,23 +59,30 @@ class ApiCustomController extends Controller
     return response()->json(['results' => $new]);
   }
 
-  public function show($id)
-  {
-    //
-  }
-
-  public function edit($id)
-  {
-    //
-  }
-
   public function update(Request $request, $id)
   {
     //
   }
 
-  public function destroy($id)
+  public function updateCustom(Request $req, $id)
   {
-    //
+    $transaction = Transaction::find($id);
+    $custom = Custom::where('transaction_id', $id)->get()->first();
+
+    // update stuff di transaksi
+    if ($req->status) {
+      $transaction['status'] = $req->status;
+    }
+
+    if ($req->status == "Belum_Bayar") {
+      $custom->status = "Disetujui";
+      $custom->update();
+    }
+
+    if ($req->status == "Selesai") {
+      $transaction->tgl_selesai = Carbon::now()->toDateTimeString();
+    }
+
+    return response()->json(['results' => $transaction->update()]);
   }
 }

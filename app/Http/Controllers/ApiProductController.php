@@ -14,8 +14,19 @@ class ApiProductController extends Controller
    */
   public function index()
   {
+    $topProduct = Product::withSum(
+      ['transactions' => fn ($query) => $query
+        ->where('status', 'Selesai')],
+      'transaction_details.qty'
+    )
+      ->orderBy('transactions_sum_transaction_detailsqty', 'DESC')
+      ->limit(5)
+      ->get();
     //
-    return response()->json(['results' => Product::all()]);
+    return response()->json([
+      'results' => Product::all(),
+      'topProduct' => $topProduct
+    ]);
   }
 
   /**

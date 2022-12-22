@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   // customs & details
   Route::get('/customs', [ApiCustomController::class, 'index']);
   Route::post('/customs/create', [ApiCustomController::class, 'store']);
-  Route::get('/customs/detail', [ApiCustomController::class, 'index']);
+  Route::post('/customs/status/{id}', [ApiCustomController::class, 'updateCustom']);
 
   // check token
   Route::get('/checktoken', [ApiAuthController::class, 'token']);
