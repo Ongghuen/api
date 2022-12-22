@@ -52,7 +52,7 @@ class UserController extends Controller
     $user->update();
     if($user){
       Session::flash('status','failed');
-      Session::flash('message', 'update data pengguna success!');
+      Session::flash('message', 'Update data pengguna success!');
     }
     return redirect('/user');
   }
@@ -75,21 +75,33 @@ class UserController extends Controller
 
     if($newUser){
         Session::flash('status','success');
-        Session::flash('message', 'tambah pengguna baru sukses!');
+        Session::flash('message', 'Tambah pengguna baru sukses!');
     }
     return redirect('/user');
   }
 
-  public function destroy($id){
-    $delete = User::findOrFail($id);
-    $delete->delete();
+  public function destroy(Request $request){
+    $ids = $request->ids;
 
-    if($delete){
-        Session::flash('status','success');
-        Session::flash('message', 'hapus data pengguna sukses.');
+    if($ids != null){
+      foreach($ids as $data) {
+        File::delete(storage_path('app/public/' . User::find($data)->image));
+      }
+      $delete = User::whereIn('id', $ids);
+      $delete->delete();
+
+      if($delete){
+          Session::flash('status','success');
+          Session::flash('message', 'Hapus data pengguna sukses.');
+      }
+
+      return redirect('/user');
+    } else{
+      Session::flash('failed','fail');
+      Session::flash('message', 'Hapus data pengguna gagal, belum ada data yang dipilih!');
+
+      return redirect('/user');
     }
-
-    return redirect('/user');
   }
 
   public function profile(UserUpdateRequest $request, $id){

@@ -137,7 +137,32 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-        <div class="card mb-4">
+        <div class="card mb-4 rounded">
+            <form action="/user-destroy" method="POST" class="rounded">
+                @csrf
+            <!-- Delete Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Hapus Pengguna</h5>
+                        <a type="button" data-bs-dismiss="modal" aria-label="Close">
+                            <b>X</b>
+                        </a>
+                    </div>
+                    <div class="modal-body text-center">
+                        <i class="fa fa-exclamation-circle merah fa-8x mb-2" aria-hidden="true"></i>
+                        <div class="font-weight-bold fs-6">Apakah anda yakin akan menghapus data pengguna ini?</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- End Delete Modal -->
+
             <div class="card-header pb-0">
                 <div class="row gx-4 mb-3">
                     <div class="dropdown col-auto">
@@ -146,12 +171,12 @@
                     <div class="col-lg-4 col-md-6 col-sm-7 col-12 ms-0 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                         <div class="nav-wrapper position-relative end-0">
                             <div class="ms-md-auto d-flex align-items-center">
-                                <button class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#createModal">
+                                <a class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#createModal">
                                     Tambah
-                                </button>
-                                <button class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                </a>
+                                <a class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                     Delete
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -159,6 +184,12 @@
             <div class="card-body px-0 pt-0 pb-2">
                 @if(Session::has('status'))
                     <div class="alert alert-success ms-1 my-3 font-weight-bold" role="alert">
+                        <i class="fa fa-check-circle" aria-hidden="true"></i>
+                        {{Session::get('message')}}
+                    </div>
+                @elseif(Session::has('failed'))
+                    <div class="alert alert-danger ms-1 my-3 font-weight-bold" role="alert">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                         {{Session::get('message')}}
                     </div>
                 @endif
@@ -190,7 +221,10 @@
                                 @sortablelink('email', 'Email')
                             </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Actions
+                                Actions
+                            </th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Delete
                             </th>
                         </tr>
                     </thead>
@@ -218,14 +252,14 @@
                                 </td>
                                 <td class="align-middle text-center">
                                     <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
-                                        <i class="fas fa-eye text-green-300"></i>
+                                        <i class="fas fa-eye text-green-300 px-1"></i>
                                     </a>
                                     <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
-                                        <i class="fas fa-edit text-green-300 px-2"></i>
+                                        <i class="fas fa-edit text-green-300 px-1"></i>
                                     </a>
-                                    <a data-bs-toggle="modal" data-bs-target="#deleteModal{{$data->id}}">
-                                        <i class="fas fa-trash text-green-300"></i>
-                                    </a>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <input id="delete" type="checkbox" name="ids[{{$data->id}}]" value="{{$data->id}}">
                                 </td>
                             </tr>
                             @endforeach
@@ -242,6 +276,7 @@
                     {!! $userList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
                 </div>
             </div>
+            </form>
             @foreach ($userList as $item)
 
                 <!-- Detail Modal -->
@@ -327,32 +362,6 @@
                     </div>
                 </div>
                 <!-- End Update Modal -->
-
-                <!-- Delete Modal -->
-                <div class="modal fade" id="deleteModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">Hapus Pengguna</h4>
-                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
-                                <b>X</b>
-                            </a>
-                        </div>
-                        <div class="modal-body">
-                            <div class="alert alert-danger font-weight-bold" role="alert">Apakah anda yakin akan menghapus data pengguna {{$item->name}}?</div>
-                        </div>
-                        <div class="modal-footer">
-                            <form action="/user-destroy/{{$item->id}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-danger" >Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <!-- End Delete Modal -->
             @endforeach
 
             <!-- Create Modal -->
@@ -418,7 +427,7 @@
             </div>
             <!-- End Create Modal -->
             </div>
-        </div>
+        </div></div>
         </div>
     </div>
 @endsection
@@ -447,4 +456,10 @@
           $("#createModal").modal("show");
         });
     </script> --}}
+    <script>
+        function getName(){
+            var name = $("#delete").attr("name");
+            alert(name);
+        }
+    </script>
 @endsection

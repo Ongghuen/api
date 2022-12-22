@@ -55,7 +55,7 @@ Route::get('/order-selesai', [OrderController::class, 'selesai'])->middleware('a
 Route::get('/product', [ProductController::class, 'index'])->middleware('auth');
 Route::put('/product/{id}', [ProductController::class, 'update'])->middleware('auth');
 Route::post('/product', [ProductController::class, 'store'])->middleware('auth');
-Route::delete('/product-destroy/{id}', [ProductController::class, 'destroy'])->middleware('auth');
+Route::post('/product-destroy', [ProductController::class, 'destroy'])->middleware('auth');
 Route::get('/product-pdf', [ProductController::class, 'pdf'])->middleware('auth');
 Route::get('/product-excel', [ProductController::class, 'excel'])->middleware('auth');
 
@@ -63,7 +63,7 @@ Route::get('/product-excel', [ProductController::class, 'excel'])->middleware('a
 Route::get('/user', [UserController::class, 'index'])->middleware('auth');
 Route::put('/user/{id}', [UserController::class, 'update'])->middleware('auth');
 Route::post('/user', [UserController::class, 'store'])->middleware('auth');
-Route::delete('/user-destroy/{id}', [UserController::class, 'destroy'])->middleware('auth');
+Route::post('/user-destroy', [UserController::class, 'destroy'])->middleware('auth');
 Route::put('/profile/{id}', [UserController::class, 'profile'])->middleware('auth');
 Route::get('/user-pdf', [UserController::class, 'pdf'])->middleware('auth');
 Route::get('/user-excel', [UserController::class, 'excel'])->middleware('auth');

@@ -73,18 +73,29 @@ class ProductController extends Controller
     return redirect('/product');
   }
 
-  public function destroy($id)
+  public function destroy(Request $request)
   {
-    File::delete(storage_path('app/public/' . Product::find($id)->image));
-    $delete = Product::findOrFail($id);
-    $delete->delete();
+    $ids = $request->ids;
 
-    if ($delete) {
-      Session::flash('status', 'success');
-      Session::flash('message', 'hapus produk sukses.');
+    if($ids != null){
+      foreach($ids as $data) {
+        File::delete(storage_path('app/public/' . Product::find($data)->image));
+      }
+      $delete = Product::whereIn('id', $ids);
+      $delete->delete();
+
+      if($delete){
+          Session::flash('status','success');
+          Session::flash('message', 'Hapus data produk sukses.');
+      }
+
+      return redirect('/product');
+    } else{
+      Session::flash('failed','fail');
+      Session::flash('message', 'Hapus data produk gagal, belum ada data yang dipilih!');
+
+      return redirect('/product');
     }
-
-    return redirect('/product');
   }
 
   public function pdf()
