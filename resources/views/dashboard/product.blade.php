@@ -303,10 +303,10 @@
                         </div>
                         <div class="modal-body">
                             <div class="row d-flex">
-                                <div class="col-4">
+                                <div class="col-12 col-sm-4 text-center sm-text-center">
                                     <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('/images/box.png') }}" class="rounded" width="150px" alt="{{$item->name}}" />
                                 </div>
-                                <div class="col-8">
+                                <div class="col-12 col-sm-8">
                                     <span class="font-weight-bold">Nama produk :</span> {{$item->name}} <br>
                                     <span class="font-weight-bold">Deskripsi produk :</span> {{$item->desc}}
                                 </div>

@@ -291,10 +291,10 @@
                         </div>
                         <div class="modal-body">
                             <div class="row d-flex">
-                                <div class="col-4">
+                                <div class="col-12 col-sm-4 text-center sm-text-center">
                                     <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('/images/profile.jpg') }}" class="rounded" width="150px" alt="{{$item->name}}" />
                                 </div>
-                                <div class="col-8">
+                                <div class="col-12 col-sm-8">
                                     <span class="font-weight-bold">Nama pengguna :</span> {{$item->name}} <br>
                                     <span class="font-weight-bold">Role :</span> {{$item->roles->name}} <br>
                                     <span class="font-weight-bold">Alamat :</span> {{$item->address}}
