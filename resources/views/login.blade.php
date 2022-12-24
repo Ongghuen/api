@@ -13,6 +13,11 @@
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="{{asset('css/nucleo-svg.css')}}" rel="stylesheet" />
   <link id="pagestyle" href="{{asset('css/argon-dashboard.css')}}" rel="stylesheet" />
+  <link rel="icon" href="../images/icon.png" sizes="32x32" />
+  <link rel="icon" href="../images/icon.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="../images/icon.png" />
+  <meta name="msapplication-TileImage" content="../images/icon.png" />
+  @livewireStyles
 </head>
 
 <body>

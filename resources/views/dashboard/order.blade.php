@@ -250,57 +250,58 @@
                         </div>
                         <div class="modal-body">
                             <div class="row d-flex">
-                                <div class="col-10">
+                                <div class="col-9">
                                     <span class="font-weight-bold">Customer :</span> {{$item->users->name}} <br>
                                     <span class="font-weight-bold">Alamat pengiriman :</span> {{$item->alamat}} <br>
-                                    @if ($item->status == "Pending")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-warning">Pending</span>
-                                    @elseif ($item->status == "Belum_Bayar")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-danger">B. Bayar</span>
-                                    @elseif ($item->status == "Menunggu_Konfirmasi")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-primary">M. Konfirmasi</span>
-                                    @elseif ($item->status == "Terkonfirmasi")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-secondary">Terkonfirmasi</span>
-                                    @elseif ($item->status == "Dikirim")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-info">Dikirim</span>
-                                    @elseif ($item->status == "Selesai")
-                                    <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-success">Selesai</span>   
+                                    <span class="font-weight-bold">Total Pembayaran : </span> {{"Rp " . number_format($item->total_harga, 0, ".", '.')}} <br>
+                                    <span class="font-weight-bold">Bukti Pembayaran :</span>
+                                    @if ($item->bukti_bayar)
+                                        <br><img src="{{ asset('storage/' . $item->bukti_bayar)}}" class="rounded" width="300px" alt="Bukti Pembayaran {{$item->name}}" /> <br>
+                                    @else
+                                        <span>-</span>
                                     @endif
                                 </div>
-                                <div class="col-2">
-                                    {{$item->tgl_transaksi}}
+                                <div class="col-3 text-end">
+                                    {{\Carbon\Carbon::parse($item->tgl_transaksi)->format('D')}}, {{$item->tgl_transaksi}} <br>
+                                    @if ($item->status == "Pending")
+                                    <span class="badge badge-sm bg-gradient-warning">Pending</span> <br>
+                                    @elseif ($item->status == "Belum_Bayar")
+                                    <span class="badge badge-sm bg-gradient-danger">B. Bayar</span> <br>
+                                    @elseif ($item->status == "Menunggu_Konfirmasi")
+                                    <span class="badge badge-sm bg-gradient-primary">M. Konfirmasi</span> <br>
+                                    @elseif ($item->status == "Terkonfirmasi")
+                                    <span class="badge badge-sm bg-gradient-secondary">Terkonfirmasi</span> <br>
+                                    @elseif ($item->status == "Dikirim")
+                                    <span class="badge badge-sm bg-gradient-info">Dikirim</span> <br>
+                                    @elseif ($item->status == "Selesai")
+                                    <span class="badge badge-sm bg-gradient-success">Selesai</span> <br> 
+                                    @endif
                                 </div>
                             </div>
                             <br>
-                            <table class="table table-hover table-responsive table-sm text-center">
-                                <thead>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Produk</th>
-                                        <th>Harga</th>
-                                        <th>Qty</th>
-                                        <th>Subtotal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($item->products as $list)
-                                    <tr>
-                                        <td><img src="{{ $list->image ? asset('storage/' . $list->image) : asset('/images/box.png') }}" class="rounded" width="50px" alt="{{$list->name}}" /></td>
-                                        <td>{{$list->name}}</td>
-                                        <td>{{"Rp " . number_format($list->harga, 0, ".", '.')}}</td>
-                                        <td>{{$list->pivot->qty}}</td>
-                                        <td>{{"Rp " . number_format($list->pivot->sub_total, 0, ".", '.')}}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <div class="row d-flex">
-                                <div class="col-8">
-
-                                </div>
-                                <div class="col-4">
-                                    <span class="font-weight-bold">Total Harga : </span> {{"Rp " . number_format($item->total_harga, 0, ".", '.')}}
-                                </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-sm text-center align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Image</th>
+                                            <th>Produk</th>
+                                            <th>Harga</th>
+                                            <th>Qty</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($item->products as $list)
+                                        <tr>
+                                            <td><img src="{{ $list->image ? asset('storage/' . $list->image) : asset('/images/box.png') }}" class="rounded" width="50px" alt="{{$list->name}}" /></td>
+                                            <td>{{$list->name}}</td>
+                                            <td>{{"Rp " . number_format($list->harga, 0, ".", '.')}}</td>
+                                            <td>{{$list->pivot->qty}}</td>
+                                            <td>{{"Rp " . number_format($list->pivot->sub_total, 0, ".", '.')}}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -597,55 +598,55 @@
                                 <div class="alert alert-info font-weight-bold" role="alert">User belum melakukan request!</div>
                             @else
                                 <div class="row d-flex">
-                                    <div class="col-10">
+                                    <div class="col-9">
                                         <span class="font-weight-bold">Customer :</span> {{$item->users->name}} <br>
                                         <span class="font-weight-bold">Alamat pengiriman :</span> {{$item->alamat}} <br>
-                                        @if ($item->status == "Pending")
-                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-warning">Pending</span>
-                                        @elseif ($item->status == "Belum_Bayar")
-                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-danger">B. Bayar</span>
-                                        @elseif ($item->status == "Menunggu_Konfirmasi")
-                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-primary">M. Konfirmasi</span>
-                                        @elseif ($item->status == "Terkonfirmasi")
-                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-secondary">Terkonfirmasi</span>
-                                        @elseif ($item->status == "Dikirim")
-                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-info">Dikirim</span>
-                                        @elseif ($item->status == "Selesai")
-                                        <span class="font-weight-bold">Status : </span><span class="badge badge-sm bg-gradient-success">Selesai</span>   
+                                        <span class="font-weight-bold">Bukti Pembayaran :</span>
+                                        @if ($item->bukti_bayar)
+                                            <br><img src="{{ asset('storage/' . $item->bukti_bayar)}}" class="rounded" width="300px" alt="Bukti Pembayaran {{$item->name}}" /> <br>
+                                        @else
+                                            <span>-</span>
                                         @endif
                                     </div>
-                                    <div class="col-2">
-                                        {{$item->tgl_transaksi}}
+                                    <div class="col-3 text-end">
+                                        {{\Carbon\Carbon::parse($item->tgl_transaksi)->format('D')}}, {{$item->tgl_transaksi}} <br>
+                                        @if ($item->status == "Pending")
+                                        <span class="badge badge-sm bg-gradient-warning">Pending</span> <br>
+                                        @elseif ($item->status == "Belum_Bayar")
+                                        <span class="badge badge-sm bg-gradient-danger">B. Bayar</span> <br>
+                                        @elseif ($item->status == "Menunggu_Konfirmasi")
+                                        <span class="badge badge-sm bg-gradient-primary">M. Konfirmasi</span> <br>
+                                        @elseif ($item->status == "Terkonfirmasi")
+                                        <span class="badge badge-sm bg-gradient-secondary">Terkonfirmasi</span> <br>
+                                        @elseif ($item->status == "Dikirim")
+                                        <span class="badge badge-sm bg-gradient-info">Dikirim</span> <br>
+                                        @elseif ($item->status == "Selesai")
+                                        <span class="badge badge-sm bg-gradient-success">Selesai</span> <br> 
+                                        @endif
                                     </div>
                                 </div>
                                 <br>
-                                <table class="table table-hover table-responsive table-sm text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>Custom</th>
-                                            <th>Status</th>
-                                            <th>DP</th>
-                                            <th>Harga Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($item->customs as $list)
-                                        <tr>
-                                            <td>{{$list->name}}</td>
-                                            <td>{{$list->status}}</td>
-                                            <td>{{"Rp " . number_format($list->dp, 0, ".", '.')}}</td>
-                                            <td>{{"Rp " . number_format($list->total_harga, 0, ".", '.')}}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                                <div class="row d-flex">
-                                    <div class="col-7">
-
-                                    </div>
-                                    <div class="col-5">
-                                        <span class="font-weight-bold">&emsp;&ensp;&ensp;&ensp;Total Harga :</span> {{"Rp " . number_format($item->total_harga, 0, ".", '.')}}
-                                    </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered text-center align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>Custom</th>
+                                                <th>Status</th>
+                                                <th>DP</th>
+                                                <th>Harga Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($item->customs as $list)
+                                            <tr>
+                                                <td>{{$list->name}}</td>
+                                                <td>{{$list->status}}</td>
+                                                <td>{{"Rp " . number_format($list->dp, 0, ".", '.')}}</td>
+                                                <td>{{"Rp " . number_format($list->total_harga, 0, ".", '.')}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             @endif
                         </div>

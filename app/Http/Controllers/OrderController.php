@@ -74,10 +74,16 @@ class OrderController extends Controller
     $order = Transaction::findOrFail($id);
     $custom = Custom::where('transaction_id', $id)->first();
 
-    $order->total_harga = $request->total_harga;
+    $dp = $request->DP;
+    $numberDp = str_replace('.', '', $dp);
+    $th = $request->total_harga;
+    $numberTh = str_replace('.', '', $th);
+
+    $order->total_harga = $numberTh;
     $order->update();
 
-    $custom->dp = $request->DP;
+    $custom->dp = $numberDp;
+    $custom->total_harga = $numberTh;
     $custom->update();
 
     if ($custom) {

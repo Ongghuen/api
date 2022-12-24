@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\File;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductExport;
-
+use Illuminate\Support\Integer;
 
 class ProductController extends Controller
 {
@@ -38,9 +38,12 @@ class ProductController extends Controller
       $product->image = $request->image->store('product_image', 'public');
     }
 
+    $price = $request->harga;
+    $number = str_replace('.', '', $price);
+
     $product->name = $request->name;
     $product->desc = $request->desc;
-    $product->harga = $request->harga;
+    $product->harga = $number;
     $product->qty = $request->qty;
     $product->categories = $request->categories;
     $product->update();
@@ -59,9 +62,12 @@ class ProductController extends Controller
       $newProduct->image = $request->image->store('product_image', 'public');
     }
 
+    $price = $request->harga;
+    $number = str_replace('.', '', $price);
+
     $newProduct->name = $request->name;
     $newProduct->desc = $request->desc;
-    $newProduct->harga = $request->harga;
+    $newProduct->harga = $number;
     $newProduct->qty = $request->qty;
     $newProduct->categories = $request->categories;
     $newProduct->save();
