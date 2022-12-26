@@ -16,12 +16,17 @@ class AuthController extends Controller
 
     public function authenticating(Request $request){
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'username' => ['required'],
             'password' => ['required'],
         ]);
 
-        $user = User::where('email', $credentials['email'])->first();
-        $userLogin = $user->role_id;
+        $user = User::where('username', $credentials['username'])->first();
+        if($user){
+            $userLogin = $user->role_id;
+        } else{
+            $userLogin = 3;
+        }
+        
         if($userLogin == 1){
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
@@ -35,11 +40,17 @@ class AuthController extends Controller
             Session::flash('message', 'Login gagal!');
     
             return back();
+        } elseif($userLogin == 2){
+            Session::flash('status','failed');
+            Session::flash('message', 'Maaf hanya admin yang boleh masuk!');
+    
+            return back();
+        } elseif($userLogin ==3){
+            Session::flash('status','failed');
+            Session::flash('message', 'Login gagal!');
+    
+            return back();
         }
-        Session::flash('status','failed');
-        Session::flash('message', 'Maaf hanya admin yang boleh masuk!');
-
-        return back();
     }
 
     public function logout(Request $request){

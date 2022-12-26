@@ -36,8 +36,8 @@
         <form action="/login" method="post">
           @csrf
           <div class="inputBox">
-            <span>Email</span>
-            <input type="email" class="border border-gray-200 rounded p-2 w-full" name="email" autofocus required/>
+            <span>Username</span>
+            <input type="text" class="border border-gray-200 rounded p-2 w-full" name="username" autofocus required/>
           </div>
           <div class="inputBox">
             <span>Password</span>
