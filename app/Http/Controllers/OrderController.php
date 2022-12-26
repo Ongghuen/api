@@ -16,28 +16,46 @@ class OrderController extends Controller
     $keyword = $request->keyword;
 
     $order = Transaction::with(['users', 'products'])
-      ->where(function ($query) use ($keyword) {
-        $query->where('status', $keyword)
-          ->orWhereHas('users', function ($query) use ($keyword) {
-            $query->where('name', 'LIKE', '%' . $keyword . '%');
+          ->where(function ($query){
+            $query->where('status', 'Belum_Bayar')
+              ->orWhere('status', 'Menunggu_Konfirmasi')
+              ->orWhere('status', 'Terkonfirmasi')
+              ->orWhere('status', 'Dikirim')
+              ->orWhere('status', 'Selesai');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
-      })
+          ->where(function ($query) use ($keyword) {
+            $query->where('status', 'LIKE', '%' . $keyword . '%')
+              ->orWhereHas('users', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', '%' . $keyword . '%');
+              })
+              ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+              ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+              ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
+          })
       ->where('categories', 'Product')
       ->sortable()
       ->paginate(10);
 
     $custom = Transaction::with(['users', 'customs'])
+      ->where(function ($query){
+        $query->where('status', 'Belum_Bayar')
+          ->orWhere('status', 'Menunggu_Konfirmasi')
+          ->orWhere('status', 'Terkonfirmasi')
+          ->orWhere('status', 'Dikirim')
+          ->orWhere('status', 'Selesai')
+          ->orWhere(function ($query){
+            $query->where('status', 'Pending')
+            ->where('total_harga', '!=', 0);
+          });
+      })
       ->where(function ($query) use ($keyword) {
-        $query->where('status', $keyword)
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('categories', 'Custom')
       ->sortable()
@@ -162,31 +180,38 @@ class OrderController extends Controller
     $keyword = $request->keyword;
 
     $order = Transaction::with(['users', 'products'])
-      ->where(function ($query) use ($keyword) {
-        $query->where('status', $keyword)
-          ->orWhereHas('users', function ($query) use ($keyword) {
-            $query->where('name', 'LIKE', '%' . $keyword . '%');
+          ->where(function ($query){
+            $query->where('status', 'p');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
-      })
-      ->where('status', 'Pending')
+          ->where(function ($query) use ($keyword) {
+            $query->where('status', 'LIKE', '%' . $keyword . '%')
+              ->orWhereHas('users', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', '%' . $keyword . '%');
+              })
+              ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+              ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+              ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
+          })
       ->where('categories', 'Product')
       ->sortable()
       ->paginate(10);
 
     $custom = Transaction::with(['users', 'customs'])
+      ->where(function ($query){
+        $query->where(function ($query){
+            $query->where('status', 'Pending')
+            ->where('total_harga', '!=', 0);
+          });
+      })
       ->where(function ($query) use ($keyword) {
-        $query->where('status', $keyword)
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
-      ->where('status', 'Pending')
       ->where('categories', 'Custom')
       ->sortable()
       ->paginate(10);
@@ -200,13 +225,13 @@ class OrderController extends Controller
 
     $order = Transaction::with(['users', 'products'])
       ->where(function ($query) use ($keyword) {
-        $query->where('status', 'belumBayar')
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('status', 'Belum_Bayar')
       ->where('categories', 'Product')
@@ -215,13 +240,13 @@ class OrderController extends Controller
 
     $custom = Transaction::with(['users', 'customs'])
       ->where(function ($query) use ($keyword) {
-        $query->where('status', 'belumBayar')
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('status', 'Belum_Bayar')
       ->where('categories', 'Custom')
@@ -237,13 +262,13 @@ class OrderController extends Controller
 
     $order = Transaction::with(['users', 'products'])
       ->where(function ($query) use ($keyword) {
-        $query->where('status', 'Menunggu_Konfirmasi')
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('status', 'Menunggu_Konfirmasi')
       ->where('categories', 'Product')
@@ -252,13 +277,13 @@ class OrderController extends Controller
 
     $custom = Transaction::with(['users', 'customs'])
       ->where(function ($query) use ($keyword) {
-        $query->where('status', 'Menunggu_Konfirmasi')
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('status', 'Menunggu_Konfirmasi')
       ->where('categories', 'Custom')
@@ -274,13 +299,13 @@ class OrderController extends Controller
 
     $order = Transaction::with(['users', 'products'])
       ->where(function ($query) use ($keyword) {
-        $query->where('status', 'Terkonfirmasi')
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('status', 'Terkonfirmasi')
       ->where('categories', 'Product')
@@ -289,13 +314,13 @@ class OrderController extends Controller
 
     $custom = Transaction::with(['users', 'customs'])
       ->where(function ($query) use ($keyword) {
-        $query->where('status', 'Terkonfirmasi')
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('status', 'Terkonfirmasi')
       ->where('categories', 'Custom')
@@ -311,13 +336,13 @@ class OrderController extends Controller
 
     $order = Transaction::with(['users', 'products'])
       ->where(function ($query) use ($keyword) {
-        $query->where('status', 'Dikirim')
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('status', 'Dikirim')
       ->where('categories', 'Product')
@@ -326,13 +351,13 @@ class OrderController extends Controller
 
     $custom = Transaction::with(['users', 'customs'])
       ->where(function ($query) use ($keyword) {
-        $query->where('status', 'Dikirim')
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('status', 'Dikirim')
       ->where('categories', 'Custom')
@@ -348,13 +373,13 @@ class OrderController extends Controller
 
     $order = Transaction::with(['users', 'products'])
       ->where(function ($query) use ($keyword) {
-        $query->where('status', 'Selesai')
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('status', 'Selesai')
       ->where('categories', 'Product')
@@ -363,13 +388,13 @@ class OrderController extends Controller
 
     $custom = Transaction::with(['users', 'customs'])
       ->where(function ($query) use ($keyword) {
-        $query->where('status', 'Selesai')
+        $query->where('status', 'LIKE', '%' . $keyword . '%')
           ->orWhereHas('users', function ($query) use ($keyword) {
             $query->where('name', 'LIKE', '%' . $keyword . '%');
           })
-          ->orWhere('total_harga', $keyword)
-          ->orWhere('tgl_transaksi', $keyword)
-          ->orWhere('tgl_selesai', $keyword);
+          ->orWhere('total_harga', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_transaksi', 'LIKE', '%' . $keyword . '%')
+          ->orWhere('tgl_selesai', 'LIKE', '%' . $keyword . '%');
       })
       ->where('status', 'Selesai')
       ->where('categories', 'Custom')
