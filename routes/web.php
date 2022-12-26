@@ -61,9 +61,6 @@ Route::get('/product-excel', [ProductController::class, 'excel'])->middleware('a
 
 # ========================== USER =========================
 Route::get('/user', [UserController::class, 'index'])->middleware('auth');
-Route::put('/user/{id}', [UserController::class, 'update'])->middleware('auth');
-Route::post('/user', [UserController::class, 'store'])->middleware('auth');
-Route::post('/user-destroy', [UserController::class, 'destroy'])->middleware('auth');
 Route::put('/profile/{id}', [UserController::class, 'profile'])->middleware('auth');
 Route::get('/user-pdf', [UserController::class, 'pdf'])->middleware('auth');
 Route::get('/user-excel', [UserController::class, 'excel'])->middleware('auth');

@@ -138,47 +138,10 @@
     <div class="row">
         <div class="col-12">
         <div class="card mb-4 rounded">
-            <form action="/user-destroy" method="POST" class="rounded">
-                @csrf
-            <!-- Delete Modal -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Hapus Pengguna</h5>
-                        <a type="button" data-bs-dismiss="modal" aria-label="Close">
-                            <b>X</b>
-                        </a>
-                    </div>
-                    <div class="modal-body text-center">
-                        <i class="fa fa-exclamation-circle merah fa-8x mb-2" aria-hidden="true"></i>
-                        <div class="font-weight-bold fs-6">Apakah anda yakin akan menghapus data pengguna ini?</div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <!-- End Delete Modal -->
-
             <div class="card-header pb-0">
                 <div class="row gx-4 mb-3">
                     <div class="dropdown col-auto">
                        <h6>Users Table</h6>
-                    </div> 
-                    <div class="col-lg-4 col-md-6 col-sm-7 col-12 ms-0 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                        <div class="nav-wrapper position-relative end-0">
-                            <div class="ms-md-auto d-flex align-items-center">
-                                <a class="btn btn-success btn-sm ms-auto" data-bs-toggle="modal" data-bs-target="#createModal">
-                                    Tambah
-                                </a>
-                                <a class="btn btn-danger btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                                    Delete
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             <div class="card-body px-0 pt-0 pb-2">
@@ -223,9 +186,6 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 Actions
                             </th>
-                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                Delete
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -254,12 +214,6 @@
                                     <a data-bs-toggle="modal" data-bs-target="#detailModal{{$data->id}}">
                                         <i class="fas fa-eye text-green-300 px-1"></i>
                                     </a>
-                                    <a data-bs-toggle="modal" data-bs-target="#updateModal{{$data->id}}">
-                                        <i class="fas fa-edit text-green-300 px-1"></i>
-                                    </a>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <input id="delete" type="checkbox" name="ids[{{$data->id}}]" value="{{$data->id}}">
                                 </td>
                             </tr>
                             @endforeach
@@ -276,7 +230,6 @@
                     {!! $userList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
                 </div>
             </div>
-            </form>
             @foreach ($userList as $item)
 
                 <!-- Detail Modal -->
@@ -305,127 +258,7 @@
                     </div>
                 </div>
                 <!-- End Detail Modal -->
-
-                <!-- Update Modal -->
-                <div class="modal fade" id="updateModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Edit User</h4>
-                                <a type="button" data-bs-dismiss="modal" aria-label="Close">
-                                    <b>X</b>
-                                </a>
-                            </div>
-                            <div class="modal-body">
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li><b>{{$error}}</b></li>
-                                            @endforeach
-                                        </ul>
-                                    </div> 
-                                @endif
-                                <form action="/user/{{$item->id}}" method="POST" enctype="multipart/form-data">
-                                    @method('PUT')
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="name">Nama User</label>
-                                        <input class="form-control" type="text" name="name" id="name" value="{{$item->name}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="image">Upload Foto</label> <br>
-                                        <img src="{{ $item->image ? asset('storage/' . $item->image) : asset('/images/profile.jpg') }}" class="rounded pb-3" width="100px" alt="{{$item->name}}" /> <br>
-                                        <div class="input-group">
-                                            <input type="file" name="image" class="form-control" id="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload" value="{{$item->image}}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input class="form-control" type="email" name="email" id="email" value="{{$item->email}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="phone">No. Telepon</label>
-                                        <input class="form-control" type="text" name="phone" id="phone" value="{{$item->phone}}" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="address">Alamat</label>
-                                        <textarea class="form-control" type="text" name="address" id="address" rows="3" required>{{$item->address}}</textarea>
-                                    </div>
-                                    <div class="d-flex justify-content-between mt-2">
-                                        <button type="submit" class="btn btn-success">Update</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Update Modal -->
             @endforeach
-
-            <!-- Create Modal -->
-            <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title pe-1">Pengguna Baru</h4>
-                            <a type="button" data-bs-dismiss="modal" aria-label="Close">
-                                <b>X</b>
-                            </a>
-                        </div>
-                        <div class="modal-body">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li><b>{{$error}}</b></li>
-                                        @endforeach
-                                    </ul>
-                                </div>    
-                            @endif
-                            <form action="user" method="POST" enctype="multipart/form-data" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="name">Nama Pengguna</label>
-                                    <input class="form-control" type="text" name="name" id="name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="image">Upload Foto</label>
-                                    <div class="input-group">
-                                        <input type="file" name="image" class="form-control" id="image" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input class="form-control" type="email" name="email" id="email" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input class="form-control" type="text" name="username" id="username" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input class="form-control" type="text" name="password" id="password" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">No. Telepon</label>
-                                    <input class="form-control" type="text" name="phone" id="phone" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Alamat</label>
-                                    <textarea class="form-control" type="text" name="address" id="address" rows="3" required></textarea>
-                                </div>
-                                <div class="d-flex justify-content-between mt-2">
-                                    <button type="submit" class="btn btn-success">Save</button>
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Create Modal -->
             </div>
         </div></div>
         </div>
