@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('desc', 255);
             $table->integer('harga')->default(0);
             $table->integer('qty');
-            $table->string('categories');
+            $table->enum('categories', ['Kursi', 'Meja', 'Pagar', 'Pintu', 'Rak', 'Kanopi', 'Lemari']);
             $table->timestamps();
         });
     }

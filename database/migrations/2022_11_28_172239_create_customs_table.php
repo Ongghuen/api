@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name', 100);
             $table->enum('status', ['Pending', 'Disetujui', 'Pengerjaan', 'Selesai'])->default('Pending');
-            $table->enum('jenis_custom', ['Kursi', 'Meja', 'Pagar', 'Pintu', 'Rak']);
-            $table->enum('bahan', ['Kayu Jati', 'Kayu Mahoni', 'Besi', 'Kaca', 'Alumunium']);
+            $table->enum('jenis_custom', ['Kursi', 'Meja', 'Pagar', 'Pintu', 'Rak', 'Kanopi', 'Lemari']);
+            $table->enum('bahan', ['Kayu', 'Baja_Ringan', 'Kaca', 'Stainless']);
             $table->string('desc', 255);
             $table->integer('dp')->default(0);
             $table->timestamps();

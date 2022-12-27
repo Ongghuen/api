@@ -21,8 +21,8 @@ class CustomFactory extends Factory
         return [
             'name' => $this->faker->company(),
             'status' => Arr::random(['Pending','Pengerjaan', 'Selesai']),
-            'jenis_custom' => Arr::random(['Kursi', 'Meja', 'Pagar', 'Pintu', 'Rak']),
-            'bahan' => Arr::random(['Kayu Jati', 'Kayu Mahoni', 'Kaca', 'Besi', 'Alumunium']),
+            'jenis_custom' => Arr::random(['Kursi', 'Meja', 'Pagar', 'Pintu', 'Rak', 'Kanopi', 'Lemari']),
+            'bahan' => Arr::random(['Kayu', 'Stainless', 'Kaca', 'Baja_Ringan']),
             'desc' => $this->faker->paragraph($nb =2),
             'dp' => Arr::random(['500000', '600000', '700000', '800000', '900000', '1000000', '15000000', '2000000',]),
             'total_harga' => Arr::random(['500000', '600000', '700000', '800000', '900000', '1000000', '15000000', '2000000',]),

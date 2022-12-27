@@ -233,8 +233,8 @@
                     </tbody>
                 </table>
                 </div>
-                <div class="my-4 ms-2 me-2">
-                    {!! $orderList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
+                <div class="my-4 d-flex justify-content-center">
+                    {!! $orderList->appends(Request::except('page')) !!}
                 </div>
             </div>
             @foreach ($orderList as $item)
@@ -578,8 +578,8 @@
                     </tbody>
                 </table>
                 </div>
-                <div class="my-4 ms-2 me-2">
-                    {!! $customList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
+                <div class="my-4 d-flex justify-content-center">
+                    {!! $customList->appends(Request::except('page')) !!}
                 </div>
             </div>
             @foreach ($customList as $item)

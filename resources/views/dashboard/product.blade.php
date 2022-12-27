@@ -86,6 +86,9 @@
                             <button class="dropdown-item" value="Pagar" name="keyword" type="submit">Pagar</button>
                             <button class="dropdown-item" value="Meja" name="keyword" type="submit">Meja</button>
                             <button class="dropdown-item" value="Pintu" name="keyword" type="submit">Pintu</button>
+                            <button class="dropdown-item" value="Kanopi" name="keyword" type="submit">Kanopi</button>
+                            <button class="dropdown-item" value="Rak" name="keyword" type="submit">Rak</button>
+                            <button class="dropdown-item" value="Lemari" name="keyword" type="submit">Lemari</button>
                         </ul>
                     </div>
                 </form>
@@ -284,8 +287,8 @@
                 </tbody>
                 </table>
             </div>
-            <div class="my-4 ms-2 me-2">
-                {!! $productList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
+            <div class="my-4 d-flex justify-content-center">
+                {!! $productList->appends(Request::except('page')) !!}
             </div>
             </div>
             </form>
@@ -366,7 +369,59 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="categories">Kategory</label>
-                                        <input class="form-control" type="text" name="categories" id="categories" value="{{$item->categories}}" required>
+                                        <select name="categories" id="categories" class="form-control">
+                                            <option value="{{$item->categories}}">{{$item->categories}}</option>
+                                            @if ($item->categories == "Pagar")
+                                                <option value="Kanopi">Kanopi</option>
+                                                <option value="Rak">Rak</option>
+                                                <option value="Meja">Meja</option>
+                                                <option value="Kursi">Kursi</option>
+                                                <option value="Lemari">Lemari</option>
+                                                <option value="Pintu">Pintu</option>
+                                            @elseif ($item->categories == "Kanopi")
+                                                <option value="Pagar">Pagar</option>
+                                                <option value="Rak">Rak</option>
+                                                <option value="Meja">Meja</option>
+                                                <option value="Kursi">Kursi</option>
+                                                <option value="Lemari">Lemari</option>
+                                                <option value="Pintu">Pintu</option>
+                                            @elseif ($item->categories == "Rak")
+                                                <option value="Pagar">Pagar</option>
+                                                <option value="Kanopi">Kanopi</option>
+                                                <option value="Meja">Meja</option>
+                                                <option value="Kursi">Kursi</option>
+                                                <option value="Lemari">Lemari</option>
+                                                <option value="Pintu">Pintu</option>
+                                            @elseif ($item->categories == "Meja")
+                                                <option value="Pagar">Pagar</option>
+                                                <option value="Kanopi">Kanopi</option>
+                                                <option value="Rak">Rak</option>
+                                                <option value="Kursi">Kursi</option>
+                                                <option value="Lemari">Lemari</option>
+                                                <option value="Pintu">Pintu</option>
+                                            @elseif ($item->categories == "Kursi")
+                                                <option value="Pagar">Pagar</option>
+                                                <option value="Kanopi">Kanopi</option>
+                                                <option value="Rak">Rak</option>
+                                                <option value="Meja">Meja</option>
+                                                <option value="Lemari">Lemari</option>
+                                                <option value="Pintu">Pintu</option>
+                                            @elseif ($item->categories == "Lemari")
+                                                <option value="Pagar">Pagar</option>
+                                                <option value="Kanopi">Kanopi</option>
+                                                <option value="Rak">Rak</option>
+                                                <option value="Meja">Meja</option>
+                                                <option value="Kursi">Kursi</option>
+                                                <option value="Pintu">Pintu</option>
+                                            @elseif ($item->categories == "Pintu")
+                                                <option value="Pagar">Pagar</option>
+                                                <option value="Kanopi">Kanopi</option>
+                                                <option value="Rak">Rak</option>
+                                                <option value="Meja">Meja</option>
+                                                <option value="Kursi">Kursi</option>
+                                                <option value="Lemari">Lemari</option>
+                                            @endif
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="desc">Deskripsi</label>
@@ -431,7 +486,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="categories">Kategory</label>
-                                    <input class="form-control" type="text" name="categories" id="categories" required>
+                                    <select name="categories" id="categories" class="form-control">
+                                        <option value="">Select One</option>
+                                        <option value="Pagar">Pagar</option>
+                                        <option value="Kanopi">Kanopi</option>
+                                        <option value="Rak">Rak</option>
+                                        <option value="Meja">Meja</option>
+                                        <option value="Kursi">Kursi</option>
+                                        <option value="Lemari">Lemari</option>
+                                        <option value="Pintu">Pintu</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="desc">Deskripsi</label>

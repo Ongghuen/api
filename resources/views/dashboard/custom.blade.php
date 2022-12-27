@@ -98,7 +98,9 @@
                             <button class="dropdown-item" value="Pagar" name="keyword" type="submit">Pagar</button>
                             <button class="dropdown-item" value="Meja" name="keyword" type="submit">Meja</button>
                             <button class="dropdown-item" value="Pintu" name="keyword" type="submit">Pintu</button>
-                            <button class="dropdown-item" value="rak" name="keyword" type="submit">rak</button>
+                            <button class="dropdown-item" value="Kanopi" name="keyword" type="submit">Kanopi</button>
+                            <button class="dropdown-item" value="Rak" name="keyword" type="submit">Rak</button>
+                            <button class="dropdown-item" value="Lemari" name="keyword" type="submit">Lemari</button>
                         </ul>
                     </div>
                     <div class="dropdown col-auto">
@@ -106,11 +108,10 @@
                         Bahan
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <button class="dropdown-item" value="Kayu Jati" name="keyword" type="submit">Kayu Jati</button>
-                            <button class="dropdown-item" value="Kayu Mahoni" name="keyword" type="submit">Kayu Mahoni</button>
-                            <button class="dropdown-item" value="Besi" name="keyword" type="submit">Besi</button>
+                            <button class="dropdown-item" value="Kayu" name="keyword" type="submit">Kayu</button>
+                            <button class="dropdown-item" value="Stainless" name="keyword" type="submit">Stainless</button>
+                            <button class="dropdown-item" value="Baja_Ringan" name="keyword" type="submit">Baja Ringan</button>
                             <button class="dropdown-item" value="Kaca" name="keyword" type="submit">Kaca</button>
-                            <button class="dropdown-item" value="Alumunium" name="keyword" type="submit">Alumunium</button>
                         </ul>
                     </div>
                 </form>
@@ -220,8 +221,8 @@
                 </tbody>
                 </table>
             </div>
-            <div class="my-4 ms-2 me-2">
-                {!! $customList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
+            <div class="my-4 d-flex justify-content-center">
+                {!! $customList->appends(Request::except('page')) !!}
             </div>
             </div>
             @foreach ($customList as $item)

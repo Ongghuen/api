@@ -226,8 +226,8 @@
                     </tbody>
                 </table>
                 </div>
-                <div class="my-4 ms-2 me-2">
-                    {!! $userList->appends(Request::except('page'))->render('pagination::bootstrap-5') !!}
+                <div class="my-4 d-flex justify-content-center">
+                    {!! $userList->appends(Request::except('page')) !!}
                 </div>
             </div>
             @foreach ($userList as $item)
