@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Suki | Sumber Rezeki</title>
+    <title>Suki | Sumber Rejeki</title>
     <link rel="icon" href="images/icon.png" sizes="32x32" />
     <link rel="icon" href="images/icon.png" sizes="192x192" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
@@ -28,7 +28,7 @@
     </nav>
     <section class="hero" id="beranda">
         <div class="content">
-            <h1 class="anim">Mabel Sumber Rezeki</h1>
+            <h1 class="anim">Mabel Sumber Rejeki</h1>
             <p>
                 Suki merupakan aplikasi berbasis android yang kami kembangkan untuk
                 membuat sebuah sistem informasi toko mabel.<br>
@@ -118,32 +118,32 @@
                     </div>
                     <div class="text-contact">
                         <h3>Address</h3>
-                        <p>Jl. Pahlawan 1 No.228 Jember - Sumberasih</p>
+                        <p>Jl. Gajah Mada No.31, Kelurahan Jember Kidul,<br> Jember Kidul, Kec. Kaliwates, Kabupaten Jember, Jawa Timur 68131</p>
                     </div>
                 </div>
                 <div class="box">
                     <div class="icon-contact"><i class="fa-solid fa-phone"></i></div>
                     <div class="text-contact">
                         <h3>Phone</h3>
-                        <p>081 231 897 839</p>
+                        <p>085231309312 - 081234536797</p>
                     </div>
                 </div>
                 <div class="box">
                     <div class="icon-contact"><i class="fa-solid fa-envelope"></i></div>
                     <div class="text-contact">
                         <h3>Email</h3>
-                        <p>suki@com.id</p>
+                        <p>sumberejeki2@gmail.com</p>
                     </div>
                 </div>
                 <div class="box">
                     <div class="icon-contact"><i class="fa-solid fa-link"></i></div>
                     <div class="text-contact">
                         <h3>Web</h3>
-                        <p>sukuapp.co.id</p>
+                        <p>suki2.com</p>
                     </div>
                 </div>
             </div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.4235048790615!2d113.7209983146976!3d-8.160015494126558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd695b617d8f623%3A0xf6c4437632474338!2sState%20Polytechnic%20of%20Jember!5e0!3m2!1sen!2sid!4v1666341633806!5m2!1sen!2sid" width="500" height="375" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.301220814402!2d113.6937147!3d-8.172378199999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6943d36b35f91%3A0xd9d016759c9b1c!2sJl.%20Gajah%20Mada%20No.31%2C%20Kelurahan%20Jember%20Kidu%2C%20Jember%20Kidul%2C%20Kec.%20Kaliwates%2C%20Kabupaten%20Jember%2C%20Jawa%20Timur%2068131!5e0!3m2!1sen!2sid!4v1672149725675!5m2!1sen!2sid" width="500" height="375" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </section>
 
