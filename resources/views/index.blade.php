@@ -23,7 +23,7 @@
             <a href="#beranda" class="login-btn">Home</a>
             <a href="#services" class="login-btn">Services</a>
             <a href="#contact" class="login-btn">Contact Us</a>
-            <a href="/login" class="login-btn">Login</a>
+            <a href="/login" class="login-btn btn-login">Login</a>
         </div>
     </nav>
     <section class="hero" id="beranda">
@@ -48,8 +48,10 @@
             <br />
             <br>
             <a href="#" class="btn">
-                Download Apk&nbsp;
-                <i class="fa fa-mobile" aria-hidden="true"></i>
+                Download Apk
+            </a>&nbsp;&nbsp;
+            <a href="/login" class="btn">
+                Login
             </a>
         </div>
     </section>

@@ -6,8 +6,9 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
 .hero {
-  padding: 200px 0 100px 0;
+  padding: 180px 0 100px 0;
   width: 100%;
   min-height: 100vh;
   background-image: url(../images/nv-bg.jpg);
@@ -31,8 +32,7 @@
   color: rgb(46, 46, 46);
   background: #fff;
   font-size: 14px;
-  border-radius: 30px;
-  border-bottom-right-radius: 0;
+  border-radius: 10px;
   transition: 0.5s;
 }
 .content {
@@ -64,7 +64,6 @@
 }
 
 .btn:hover {
-  border-bottom-right-radius: 30px;
   opacity: 1;
 }
 
@@ -1418,8 +1417,7 @@ label:hover {
     color: #000;
     background: #fff;
     font-size: 11px;
-    border-radius: 30px;
-    border-bottom-right-radius: 0;
+    border-radius: 10px;
     transition: 0.5s;
   }
   .feature-img {
@@ -1689,6 +1687,10 @@ label:hover {
     padding: 0;
   }
 
+  .container-contact {
+    display: contents;
+  }
+
   .footer-input-wrap {
     max-width: 300px;
     margin: 0.95rem auto 0 auto;
@@ -1719,9 +1721,44 @@ label:hover {
   .followme-wrap {
     margin-top: 0.8rem;
   }
+
+  .container-contact .contactinfo {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 720px) {
+  .container-contact .contactinfo {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .container-contact {
+    display: contents;
+  }
+
+  .hero {
+    padding: 100px 0 100px 0;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url(../images/nv-bg.jpg);
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+    color: white;
+    text-align: center;
+  }
+
+  .header-right {
+    display: none;
+  }
+  
   .btn {
     display: inline-block;
     text-decoration: none;
@@ -1729,8 +1766,7 @@ label:hover {
     color: #000;
     background: #fff;
     font-size: 11px;
-    border-radius: 20px;
-    border-bottom-right-radius: 0;
+    border-radius: 10px;
     transition: 0.5s;
   }
   .feature-img {
@@ -1752,9 +1788,25 @@ label:hover {
 }
 
 @media (max-width: 560px) {
-  .btn {
+  .container-contact .contactinfo {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .header-right {
     display: none;
   }
+
+  /* .btn {
+    display: none;
+  } */
+
+  .btn-login {
+    display: inline;
+  }
+
   .feature-img {
     display: none;
   }

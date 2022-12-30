@@ -17,7 +17,6 @@
   <link rel="icon" href="../images/icon.png" sizes="192x192" />
   <link rel="apple-touch-icon" href="../images/icon.png" />
   <meta name="msapplication-TileImage" content="../images/icon.png" />
-  @livewireStyles
 </head>
 
 <body>
