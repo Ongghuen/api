@@ -255,7 +255,7 @@
                                     <div class="d-flex flex-column">
                                     <h6 class="mb-1 text-dark text-sm">Pending</h6>
                                     <span class="text-xs">
-                                        {{$trxStatus[$i]['total']}} Orders
+                                        {{$trxStatus[$i]['total']}} Keranjang
                                     </span>
                                     </div>
                                 </div>

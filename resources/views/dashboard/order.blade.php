@@ -594,9 +594,6 @@
                         </a>
                         </div>
                         <div class="modal-body">
-                            @if ($item->total_harga == null)
-                                <div class="alert alert-info font-weight-bold" role="alert">User belum melakukan request!</div>
-                            @else
                                 <div class="row d-flex">
                                     <div class="col-9">
                                         <span class="font-weight-bold">Customer :</span> {{$item->users->name}} <br>
@@ -642,13 +639,12 @@
                                                 <td>{{$list->name}}</td>
                                                 <td>{{$list->status}}</td>
                                                 <td>{{"Rp " . number_format($list->dp, 0, ".", '.')}}</td>
-                                                <td>{{"Rp " . number_format($list->total_harga, 0, ".", '.')}}</td>
+                                                <td>{{"Rp " . number_format($list->transactions->total_harga, 0, ".", '.')}}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
-                            @endif
                         </div>
                     </div>
                     </div>

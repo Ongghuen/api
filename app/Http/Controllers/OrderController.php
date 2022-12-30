@@ -46,6 +46,12 @@ class OrderController extends Controller
           ->orWhere(function ($query){
             $query->where('status', 'Pending')
             ->where('total_harga', '!=', 0);
+          })
+          ->orWhere(function ($query){
+            $query->where('status', 'Pending')
+            ->whereHas('customs', function ($query){
+              $query->where('name', '!=', null);
+            });
           });
       })
       ->where(function ($query) use ($keyword) {
@@ -101,7 +107,6 @@ class OrderController extends Controller
     $order->update();
 
     $custom->dp = $numberDp;
-    $custom->total_harga = $numberTh;
     $custom->update();
 
     if ($custom) {
