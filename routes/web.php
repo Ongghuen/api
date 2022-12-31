@@ -8,6 +8,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CustomController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,19 +80,7 @@ Route::get('/report-excel', [ReportController::class, 'excel'])->middleware('aut
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 # register
 Route::post('/users/create', [UserController::class, 'store']);
-# show all
-/* Route::get('/listings', [ListingController::class, 'index'])->name('home'); */
-/* # show form create */
-/* Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth'); */
-/* # store data buat listing */
-/* Route::post('/listings', [ListingController::class, 'store'])->middleware('auth'); */
-/* # show edit form  */
-/* Route::get('/listing/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth'); */
-/* # manage listings */
-/* Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth'); */
-/* # update listing */
-/* Route::put('/listing/{listing}', [ListingController::class, 'update'])->middleware('auth'); */
-/* # delete listing */
-/* Route::delete('/listing/{listing}', [ListingController::class, 'destroy'])->middleware('auth'); */
-/* # single listing */
-/* Route::get('/listing/{listing}', [ListingController::class, 'show']); */
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
