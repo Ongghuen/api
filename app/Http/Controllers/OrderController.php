@@ -206,6 +206,12 @@ class OrderController extends Controller
         $query->where(function ($query){
             $query->where('status', 'Pending')
             ->where('total_harga', '!=', 0);
+          })
+          ->orWhere(function ($query){
+            $query->where('status', 'Pending')
+            ->whereHas('customs', function ($query){
+              $query->where('name', '!=', null);
+            });
           });
       })
       ->where(function ($query) use ($keyword) {
