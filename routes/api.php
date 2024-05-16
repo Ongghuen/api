@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::put('/user', [ApiAuthController::class, 'update']);
   Route::post('/user/upload', [ApiAuthController::class, 'upload']);
 
-  // products manipulation
+  // products manipulation (not use)
   Route::post('/products', [ApiProductController::class, 'store']);
   Route::put('/products/{id}', [ApiProductController::class, 'update']);
   Route::delete('/products/{id}', [ApiProductController::class, 'destroy']);
@@ -74,8 +74,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::post('/customs/create', [ApiCustomController::class, 'store']);
   Route::post('/customs/status/{id}', [ApiCustomController::class, 'updateCustom']);
 
-  // check token
+  // auth
   Route::get('/checktoken', [ApiAuthController::class, 'token']);
-  // logout
   Route::post('/logout', [ApiAuthController::class, 'logout']);
 });

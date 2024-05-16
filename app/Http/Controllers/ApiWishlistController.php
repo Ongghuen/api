@@ -8,35 +8,39 @@ use Illuminate\Http\Request;
 
 class ApiWishlistController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\Response
-   */
+  // function untuk menampilkan wishlist
   public function index()
   {
-    return response()->json(['results' => auth()->user()->wishlists()->get()]);
+    try {
+      return response()->json(['results' => auth()->user()->wishlists()->get()]);
+    } catch (\Throwable $th) {
+      return response([
+        'message' => 'An error occurred during showing wishlist'
+      ], 500);
+    }
   }
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
+  // function untuk menambahkan wishlist
   public function store(Request $request)
   {
-    return auth()->user()->wishlists()->attach($request->product_id);
+    try {
+      return auth()->user()->wishlists()->attach($request->product_id);
+    } catch (\Throwable $th) {
+      return response([
+        'message' => 'An error occurred during create wishlist'
+      ], 500);
+    }
   }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
+  // function untuk menghapus wishlist
   public function destroy(Request $request)
   {
-    return auth()->user()->wishlists()->detach($request->product_id);
+    try {
+      return auth()->user()->wishlists()->detach($request->product_id);
+    } catch (\Throwable $th) {
+      return response([
+        'message' => 'An error occurred during delete wishlist'
+      ], 500);
+    }
   }
 }
